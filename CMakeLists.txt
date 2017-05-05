@@ -148,3 +148,7 @@ ADD_CUSTOM_TARGET(${_UNINST_TGT_NAME} "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BIN
 # Configure CPack.
 INCLUDE(cmake/packagemaker.cmake)
 
+add_custom_target(install_speed-dreams-2
+		$(MAKE) install
+		DEPENDS speed-dreams-2
+		COMMENT "Installing speed-dreams-2")
