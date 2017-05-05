@@ -129,7 +129,7 @@ rmControlsHookActivate(void * /* dummy */)
 	GfuiScreenActivate(PlayerConfigMenuInit(hscreen));
 #else
 	void *prHandle;
-	char buf[100];
+	char buf[1024];
 	const char *str;
 	tGearChangeMode gearChangeMode;
 
@@ -305,7 +305,7 @@ RmStopRaceMenu()
 	int j;
 	void *grHandle;
 	void *hdHandle;
-	char buf[100];
+	char buf[1024];
 	const char *cur_name;
 	const char *test_name;
 
