@@ -246,6 +246,7 @@ grLoadScene(tTrack *track)
 void
 grDrawScene()
 {
+    GLenum const rc = glGetError();
     TRACE_GL("refresh: ssgCullAndDraw start");
     ssgCullAndDraw(TheScene);
     TRACE_GL("refresh: ssgCullAndDraw");
