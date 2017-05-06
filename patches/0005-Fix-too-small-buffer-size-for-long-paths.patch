@@ -1,0 +1,34 @@
+From 2c0b7596252b83f3c398143e8654e102a47451cc Mon Sep 17 00:00:00 2001
+From: Andre <andre.netzeband@hm.edu>
+Date: Fri, 5 May 2017 23:37:44 +0200
+Subject: [PATCH] Fix too small buffer size for long paths.
+
+---
+ src/modules/userinterface/legacymenu/racescreens/racestopmenu.cpp | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/modules/userinterface/legacymenu/racescreens/racestopmenu.cpp b/src/modules/userinterface/legacymenu/racescreens/racestopmenu.cpp
+index d1ed53e..03cc905 100644
+--- a/src/modules/userinterface/legacymenu/racescreens/racestopmenu.cpp
++++ b/src/modules/userinterface/legacymenu/racescreens/racestopmenu.cpp
+@@ -129,7 +129,7 @@ rmControlsHookActivate(void * /* dummy */)
+ 	GfuiScreenActivate(PlayerConfigMenuInit(hscreen));
+ #else
+ 	void *prHandle;
+-	char buf[100];
++	char buf[1024];
+ 	const char *str;
+ 	tGearChangeMode gearChangeMode;
+ 
+@@ -305,7 +305,7 @@ RmStopRaceMenu()
+ 	int j;
+ 	void *grHandle;
+ 	void *hdHandle;
+-	char buf[100];
++	char buf[1024];
+ 	const char *cur_name;
+ 	const char *test_name;
+ 
+-- 
+2.11.1.windows.1
+

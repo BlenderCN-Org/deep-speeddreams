@@ -1,0 +1,141 @@
+From 6c1714607913c67c957a8920ed83ee863bf28785 Mon Sep 17 00:00:00 2001
+From: Andre <andre.netzeband@hm.edu>
+Date: Sat, 6 May 2017 16:34:52 +0200
+Subject: [PATCH] Added patches for 3rd party source.
+
+---
+ packaging/3rdParty-devel/CMakeLists.txt            | 17 +++++++++-
+ .../patches/add-missing-msvc2015-libs.patch        | 12 ++++++++
+ .../fix_msvc2015_build_error_with_openal.patch     | 36 ++++++++++++++++++++++
+ .../patches/sdl-1.2.15.CMakeLists.txt              |  6 +++-
+ 4 files changed, 69 insertions(+), 2 deletions(-)
+ create mode 100644 packaging/3rdParty-devel/patches/add-missing-msvc2015-libs.patch
+ create mode 100644 packaging/3rdParty-devel/patches/fix_msvc2015_build_error_with_openal.patch
+
+diff --git a/packaging/3rdParty-devel/CMakeLists.txt b/packaging/3rdParty-devel/CMakeLists.txt
+index 5612a16..42b945d 100644
+--- a/packaging/3rdParty-devel/CMakeLists.txt
++++ b/packaging/3rdParty-devel/CMakeLists.txt
+@@ -32,6 +32,7 @@ project(3rdParty-2.2)
+ include(ExternalProject)
+ include(CMakeDependentOption)
+ 
++find_package(Git)
+ 
+ # Setup some defualts...
+ 
+@@ -127,19 +128,33 @@ endif(OPTION_SDL_1x)
+ if(OPTION_SDL_2x)
+ set(SDL2_ARGS ${EXTERNALS_CMAKE_ARGS} -DSDL_STATIC=Off)
+ message(STATUS "CMAKE_SOURCE_DIR = ${CMAKE_SOURCE_DIR}")
++
++if(NOT GIT_FOUND)
++  MESSAGE(FATAL_ERROR "Cannot find git for applying patches!")
++endif()
++
+ ExternalProject_Add(SDL2-2.0.3 
+    URL https://www.libsdl.org/release/SDL2-2.0.3.tar.gz 
+    URL_HASH SHA256=A5A69A6ABF80BCCE713FA873607735FE712F44276A7F048D60A61BB2F6B3C90C 
+    CMAKE_ARGS ${SDL2_ARGS}
+    DEPENDS OpenGL-headers
++   PATCH_COMMAND pwd && git apply -p1 "${CMAKE_SOURCE_DIR}/patches/add-missing-msvc2015-libs.patch"
+    )
++      
+ endif(OPTION_SDL_2x)
+ 
+ if(OPTION_OPENAL)
++
++if(NOT GIT_FOUND)
++  MESSAGE(FATAL_ERROR "Cannot find git for applying patches!")
++endif()
++
+ ExternalProject_Add(openal-soft-1.16.0 
+    URL http://kcat.strangesoft.net/openal-releases/openal-soft-1.16.0.tar.bz2 
+    URL_HASH SHA256=2F3DCD313FE26391284FBF8596863723F99C65D6C6846DCCB48E79CADAF40D5F
+-   CMAKE_ARGS ${EXTERNALS_CMAKE_ARGS})
++   CMAKE_ARGS ${EXTERNALS_CMAKE_ARGS}
++   PATCH_COMMAND pwd && git apply -p1 "${CMAKE_SOURCE_DIR}/patches/fix_msvc2015_build_error_with_openal.patch"
++   )
+ endif(OPTION_OPENAL)
+ 
+ if(OPTION_PLIB)
+diff --git a/packaging/3rdParty-devel/patches/add-missing-msvc2015-libs.patch b/packaging/3rdParty-devel/patches/add-missing-msvc2015-libs.patch
+new file mode 100644
+index 0000000..57b2c94
+--- /dev/null
++++ b/packaging/3rdParty-devel/patches/add-missing-msvc2015-libs.patch
+@@ -0,0 +1,12 @@
++diff -ur a/CMakeLists.txt b/CMakeLists.txt
++--- a/CMakeLists.txt	2014-03-16 02:31:41 +0000
+++++ b/CMakeLists.txt	2017-05-04 11:44:46 +0000
++@@ -877,7 +877,7 @@
++   endif()
++ 
++   # Libraries for Win32 native and MinGW
++-  list(APPEND EXTRA_LIBS user32 gdi32 winmm imm32 ole32 oleaut32 version uuid)
+++  list(APPEND EXTRA_LIBS user32 gdi32 winmm imm32 ole32 oleaut32 version uuid msvcrtd vcruntimed ucrtd)
++ 
++   # TODO: in configure.in the check for timers is set on
++   # cygwin | mingw32* - does this include mingw32CE?
+diff --git a/packaging/3rdParty-devel/patches/fix_msvc2015_build_error_with_openal.patch b/packaging/3rdParty-devel/patches/fix_msvc2015_build_error_with_openal.patch
+new file mode 100644
+index 0000000..d670a66
+--- /dev/null
++++ b/packaging/3rdParty-devel/patches/fix_msvc2015_build_error_with_openal.patch
+@@ -0,0 +1,36 @@
++diff -ur a/CMakeLists.txt b/CMakeLists.txt
++--- a/CMakeLists.txt	2017-05-06 08:35:10 +0000
+++++ b/CMakeLists.txt	2017-05-06 08:36:52 +0000
++@@ -432,14 +432,16 @@
++     ADD_DEFINITIONS(-Dstrncasecmp=_strnicmp)
++ ENDIF()
++ 
++-CHECK_FUNCTION_EXISTS(snprintf HAVE_SNPRINTF)
+++CHECK_SYMBOL_EXISTS(snprintf stdio.h HAVE_SNPRINTF)
++ IF(NOT HAVE_SNPRINTF)
++     CHECK_FUNCTION_EXISTS(_snprintf HAVE__SNPRINTF)
++-    IF(NOT HAVE__SNPRINTF)
++-        MESSAGE(FATAL_ERROR "No snprintf function found, please report!")
+++# Unfortunately even this is failing for MSVC2015 x64
+++# thus the error-message should just be ignored, it will
+++# compile anyway!
+++    IF(HAVE__SNPRINTF)
+++		ADD_DEFINITIONS(-Dsnprintf=_snprintf)
++     ENDIF()
++ 
++-    ADD_DEFINITIONS(-Dsnprintf=_snprintf)
++ ENDIF()
++ 
++ CHECK_SYMBOL_EXISTS(isfinite math.h HAVE_ISFINITE)
++diff -ur a/include/threads.h b/include/threads.h
++--- a/include/threads.h	2014-08-15 07:06:59 +0000
+++++ b/include/threads.h	2017-05-04 11:47:47 +0000
++@@ -33,7 +33,7 @@
++ #include <windows.h>
++ 
++ 
++-#ifndef _TIMESPEC_DEFINED
+++#if !defined(_TIMESPEC_DEFINED) && !(defined(_MSC_VER) && (_MSC_VER >= 1900))
++ #define _TIMESPEC_DEFINED
++ struct timespec {
++     time_t tv_sec;
+diff --git a/packaging/3rdParty-devel/patches/sdl-1.2.15.CMakeLists.txt b/packaging/3rdParty-devel/patches/sdl-1.2.15.CMakeLists.txt
+index 8b8a691..6a8487a 100644
+--- a/packaging/3rdParty-devel/patches/sdl-1.2.15.CMakeLists.txt
++++ b/packaging/3rdParty-devel/patches/sdl-1.2.15.CMakeLists.txt
+@@ -34,7 +34,11 @@ if(WIN32)
+    if("$ENV{DXSDK_DIR}" STREQUAL "")
+       message(WARNING " \$DXSDK_DIR environment variable NOT set")
+    else()
+-      link_directories($ENV{DXSDK_DIR}/lib/x86)
++      if(CMAKE_SIZEOF_VOID_P GREATER 4)
++         link_directories($ENV{DXSDK_DIR}/lib/x64)
++	  else()
++	     link_directories($ENV{DXSDK_DIR}/lib/x86)
++	  endif()
+       include_directories($ENV{DXSDK_DIR}/Include)
+    endif()
+ endif(WIN32)
+-- 
+2.11.1.windows.1
+
