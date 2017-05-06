@@ -32,6 +32,7 @@ project(3rdParty-2.2)
 include(ExternalProject)
 include(CMakeDependentOption)
 
+find_package(Git)
 
 # Setup some defualts...
 
@@ -127,19 +128,33 @@ endif(OPTION_SDL_1x)
 if(OPTION_SDL_2x)
 set(SDL2_ARGS ${EXTERNALS_CMAKE_ARGS} -DSDL_STATIC=Off)
 message(STATUS "CMAKE_SOURCE_DIR = ${CMAKE_SOURCE_DIR}")
+
+if(NOT GIT_FOUND)
+  MESSAGE(FATAL_ERROR "Cannot find git for applying patches!")
+endif()
+
 ExternalProject_Add(SDL2-2.0.3 
    URL https://www.libsdl.org/release/SDL2-2.0.3.tar.gz 
    URL_HASH SHA256=A5A69A6ABF80BCCE713FA873607735FE712F44276A7F048D60A61BB2F6B3C90C 
    CMAKE_ARGS ${SDL2_ARGS}
    DEPENDS OpenGL-headers
+   PATCH_COMMAND pwd && git apply -p1 "${CMAKE_SOURCE_DIR}/patches/add-missing-msvc2015-libs.patch"
    )
+      
 endif(OPTION_SDL_2x)
 
 if(OPTION_OPENAL)
+
+if(NOT GIT_FOUND)
+  MESSAGE(FATAL_ERROR "Cannot find git for applying patches!")
+endif()
+
 ExternalProject_Add(openal-soft-1.16.0 
    URL http://kcat.strangesoft.net/openal-releases/openal-soft-1.16.0.tar.bz2 
    URL_HASH SHA256=2F3DCD313FE26391284FBF8596863723F99C65D6C6846DCCB48E79CADAF40D5F
-   CMAKE_ARGS ${EXTERNALS_CMAKE_ARGS})
+   CMAKE_ARGS ${EXTERNALS_CMAKE_ARGS}
+   PATCH_COMMAND pwd && git apply -p1 "${CMAKE_SOURCE_DIR}/patches/fix_msvc2015_build_error_with_openal.patch"
+   )
 endif(OPTION_OPENAL)
 
 if(OPTION_PLIB)

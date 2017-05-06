@@ -1,0 +1,36 @@
+diff -ur a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt	2017-05-06 08:35:10 +0000
++++ b/CMakeLists.txt	2017-05-06 08:36:52 +0000
+@@ -432,14 +432,16 @@
+     ADD_DEFINITIONS(-Dstrncasecmp=_strnicmp)
+ ENDIF()
+ 
+-CHECK_FUNCTION_EXISTS(snprintf HAVE_SNPRINTF)
++CHECK_SYMBOL_EXISTS(snprintf stdio.h HAVE_SNPRINTF)
+ IF(NOT HAVE_SNPRINTF)
+     CHECK_FUNCTION_EXISTS(_snprintf HAVE__SNPRINTF)
+-    IF(NOT HAVE__SNPRINTF)
+-        MESSAGE(FATAL_ERROR "No snprintf function found, please report!")
++# Unfortunately even this is failing for MSVC2015 x64
++# thus the error-message should just be ignored, it will
++# compile anyway!
++    IF(HAVE__SNPRINTF)
++		ADD_DEFINITIONS(-Dsnprintf=_snprintf)
+     ENDIF()
+ 
+-    ADD_DEFINITIONS(-Dsnprintf=_snprintf)
+ ENDIF()
+ 
+ CHECK_SYMBOL_EXISTS(isfinite math.h HAVE_ISFINITE)
+diff -ur a/include/threads.h b/include/threads.h
+--- a/include/threads.h	2014-08-15 07:06:59 +0000
++++ b/include/threads.h	2017-05-04 11:47:47 +0000
+@@ -33,7 +33,7 @@
+ #include <windows.h>
+ 
+ 
+-#ifndef _TIMESPEC_DEFINED
++#if !defined(_TIMESPEC_DEFINED) && !(defined(_MSC_VER) && (_MSC_VER >= 1900))
+ #define _TIMESPEC_DEFINED
+ struct timespec {
+     time_t tv_sec;

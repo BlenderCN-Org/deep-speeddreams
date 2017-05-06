@@ -1,0 +1,12 @@
+diff -ur a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt	2014-03-16 02:31:41 +0000
++++ b/CMakeLists.txt	2017-05-04 11:44:46 +0000
+@@ -877,7 +877,7 @@
+   endif()
+ 
+   # Libraries for Win32 native and MinGW
+-  list(APPEND EXTRA_LIBS user32 gdi32 winmm imm32 ole32 oleaut32 version uuid)
++  list(APPEND EXTRA_LIBS user32 gdi32 winmm imm32 ole32 oleaut32 version uuid msvcrtd vcruntimed ucrtd)
+ 
+   # TODO: in configure.in the check for timers is set on
+   # cygwin | mingw32* - does this include mingw32CE?
