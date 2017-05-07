@@ -53,14 +53,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9761ed18-0676-4744-81f8-8805a908d55c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake/config.h.in.cmake" afterPath="$PROJECT_DIR$/cmake/config.h.in.cmake" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cmake/macros.cmake" afterPath="$PROJECT_DIR$/cmake/macros.cmake" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packaging/3rdParty-devel/CMakeLists.txt" afterPath="$PROJECT_DIR$/packaging/3rdParty-devel/CMakeLists.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/tgf/modinfo.cpp" afterPath="$PROJECT_DIR$/src/libs/tgf/modinfo.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/libs/tgf/windowsspec.cpp" afterPath="$PROJECT_DIR$/src/libs/tgf/windowsspec.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/main.cpp" afterPath="$PROJECT_DIR$/src/main/main.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modules/userinterface/legacymenu/racescreens/racestopmenu.cpp" afterPath="$PROJECT_DIR$/src/modules/userinterface/legacymenu/racescreens/racestopmenu.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/tracks/CMakeLists.txt" afterPath="$PROJECT_DIR$/data/tracks/CMakeLists.txt" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/build/win64-vc2015/debug/" />
@@ -74,12 +68,107 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="ssg.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../../../../CPP/libs/sd/install/win64/dbg/3rdParty/include/plib/ssg.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="69">
+              <caret line="1114" column="6" lean-forward="false" selection-start-line="1114" selection-start-column="6" selection-end-line="1114" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="grbackground.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grbackground.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="486">
+              <caret line="898" column="4" lean-forward="false" selection-start-line="898" selection-start-column="4" selection-end-line="898" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="grCloudLayer.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grCloudLayer.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="282">
+              <caret line="440" column="2" lean-forward="false" selection-start-line="440" selection-start-column="2" selection-end-line="440" selection-end-column="2" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="grscene.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grscene.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="367">
+              <caret line="254" column="0" lean-forward="false" selection-start-line="254" selection-start-column="0" selection-end-line="254" selection-end-column="0" />
+              <folding>
+                <marker date="1494086985517" expanded="true" signature="3161:3307" ph="..." />
+                <marker date="1494086985517" expanded="true" signature="3356:3514" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/tracks/us-lanes/CMakeLists.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="19" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CMakeLists.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/tracks/us-lanes/aalborg/CMakeLists.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="16" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="install.cmake" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/cmake/install.cmake">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="622">
+              <caret line="533" column="28" lean-forward="true" selection-start-line="533" selection-start-column="28" selection-end-line="533" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="grutil.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grutil.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="282">
+              <caret line="27" column="51" lean-forward="false" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="57" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="grSky.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grSky.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="282">
+              <caret line="235" column="2" lean-forward="false" selection-start-line="235" selection-start-column="2" selection-end-line="235" selection-end-column="2" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>config</find>
       <find>settings</find>
+      <find>ssgCullAndDraw</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -94,6 +183,10 @@
         <option value="$PROJECT_DIR$/cmake/macros.cmake" />
         <option value="$PROJECT_DIR$/src/modules/userinterface/legacymenu/legacymenu.cpp" />
         <option value="$PROJECT_DIR$/src/main/main.cpp" />
+        <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/grbackground.cpp" />
+        <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/grCloudLayer.cpp" />
+        <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/grSky.cpp" />
+        <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/grscene.cpp" />
       </list>
     </option>
   </component>
@@ -103,6 +196,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+  <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
@@ -139,6 +233,32 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="build" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="speed-dreams-2" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="speed-dreams-2" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="tracks" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="speed-dreams-2" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="tracks" type="462c0819:PsiDirectoryNode" />
+              <item name="us-lanes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="speed-dreams-2" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+              <item name="tracks" type="462c0819:PsiDirectoryNode" />
+              <item name="us-lanes" type="462c0819:PsiDirectoryNode" />
+              <item name="aalborg" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -146,7 +266,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="CMakeSettings" />
+    <property name="settings.editor.selected.configurable" value="PyConsoleConfigurable.Python Console" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/build/win64-vc2015/debug/bin/speed-dreams-2.exe" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -531,25 +651,28 @@
       <workItem from="1494014541978" duration="6000" />
       <workItem from="1494015033120" duration="805000" />
       <workItem from="1494015856966" duration="1552000" />
+      <workItem from="1494082147670" duration="7761000" />
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13057000" />
+    <option name="totallyTimeSpent" value="20818000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12148438" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32924962" sideWeight="0.4984375" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4486983" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.5015625" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32924962" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.4984375" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12148438" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -559,7 +682,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -571,7 +693,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -787,20 +909,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cmake/macros.cmake">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="726">
-          <caret line="280" column="0" lean-forward="true" selection-start-line="280" selection-start-column="0" selection-end-line="280" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cmake/install.cmake">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1605">
-          <caret line="65" column="6" lean-forward="false" selection-start-line="65" selection-start-column="6" selection-end-line="65" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="707">
@@ -854,6 +962,89 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="658">
           <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grbackground.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="898" column="4" lean-forward="false" selection-start-line="898" selection-start-column="4" selection-end-line="898" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grCloudLayer.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="440" column="2" lean-forward="false" selection-start-line="440" selection-start-column="2" selection-end-line="440" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grSky.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="235" column="2" lean-forward="false" selection-start-line="235" selection-start-column="2" selection-end-line="235" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../CPP/libs/sd/install/win64/dbg/3rdParty/include/plib/ssg.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="1114" column="6" lean-forward="false" selection-start-line="1114" selection-start-column="6" selection-end-line="1114" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grutil.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="27" column="51" lean-forward="false" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grscene.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="367">
+          <caret line="254" column="0" lean-forward="false" selection-start-line="254" selection-start-column="0" selection-end-line="254" selection-end-column="0" />
+          <folding>
+            <marker date="1494086985517" expanded="true" signature="3161:3307" ph="..." />
+            <marker date="1494086985517" expanded="true" signature="3356:3514" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmake/macros.cmake">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="174" column="6" lean-forward="false" selection-start-line="174" selection-start-column="6" selection-end-line="174" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/tracks/us-lanes/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="19" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/tracks/us-lanes/aalborg/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="16" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmake/install.cmake">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="622">
+          <caret line="533" column="28" lean-forward="true" selection-start-line="533" selection-start-column="28" selection-end-line="533" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
