@@ -139,6 +139,7 @@ GetTrackHeader(void *TrackHandle) {
     theTrack->authors = GfParmGetStr(TrackHandle, TRK_SECT_HDR, TRK_ATT_AUTHOR, "none");
     theTrack->category = GfParmGetStr(TrackHandle, TRK_SECT_HDR, TRK_ATT_CAT, "road");
     theTrack->subcategory = GfParmGetStr(TrackHandle, TRK_SECT_HDR, TRK_ATT_SUBCAT, "none");
+	theTrack->lanes = (int)GfParmGetNum(TrackHandle, TRK_SECT_HDR, TRK_ATT_LANES, (char*)NULL, 0);
 
     // Read Local Info section
     tTrackLocalInfo *local = &theTrack->local;

@@ -46,6 +46,7 @@
 #define TRK_ATT_DESCR               "description"
 #define TRK_ATT_CAT                 "category"
 #define TRK_ATT_SUBCAT              "subcategory"
+#define TRK_ATT_LANES               "lanes"
 
 #define TRK_ATT_NONE                "none"
 #define TRK_ATT_SHORT               "short"
@@ -651,6 +652,8 @@ typedef struct Track
     tTrackPitInfo pits;         /**< Pits information */
     tTrackSeg	  *seg;         /**< Segment list for the main track */
     tTrackSurface *surfaces;	/**< Segment surface list */
+
+    int         lanes;
 
     t3Dd		min;
     t3Dd		max;

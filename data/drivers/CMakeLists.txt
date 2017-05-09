@@ -30,6 +30,8 @@ SD_ADD_SUBDIRECTORY(dandroid_sc)
 SD_ADD_SUBDIRECTORY(dandroid_srw)
 SD_ADD_SUBDIRECTORY(dandroid_trb1)
 
+SD_ADD_SUBDIRECTORY(LaneDriver)
+
 
 # Work-in-progress / unofficial robots.
 IF(NOT OPTION_OFFICIAL_ONLY)
