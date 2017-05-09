@@ -26,6 +26,7 @@
 		<attnum name="version"     val="4"/>
 		<attstr name="author"      val="E. Espie, B. Wymann"/>
 		<attstr name="description" val="Road Course"/>
+		<attnum name="lanes" val="3"/>
 	</section>
 
 	<section name="Graphic">

@@ -215,6 +215,7 @@ the Free Software Foundation; either version 2 of the License, or
     	<attnum name="sky version" val="1"/>
     	<attstr name="author" val="A.Sumner, Milestone, Eckhard M. Jaeger" />
     	<attstr name="description" val="Technically demanding circuit located in South East England." />
+		<attnum name="lanes" val="3"/>
     </section>
 
 	<section name="Local Info">

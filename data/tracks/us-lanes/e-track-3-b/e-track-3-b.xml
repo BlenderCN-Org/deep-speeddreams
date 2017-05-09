@@ -298,6 +298,7 @@
 		<attnum name="version" val="4"/>
 		<attstr name="author" val="B. Wymann, E. Espie"/>
 		<attstr name="description" val="Track with 2 lanes and bright concrete."/>
+		<attnum name="lanes" val="2"/>
 	</section>
 
 	<section name="Graphic">

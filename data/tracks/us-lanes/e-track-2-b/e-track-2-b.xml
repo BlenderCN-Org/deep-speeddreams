@@ -28,6 +28,7 @@
 	<attnum name="sky version" val="1"/>
     <attstr name="author"      val="E. Espie"/>
     <attstr name="description" val="Narrow track"/>
+	<attnum name="lanes" val="2"/>
   </section>  <!-- Header -->
 
   <!-- Surfaces -->

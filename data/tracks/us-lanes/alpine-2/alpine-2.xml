@@ -233,6 +233,7 @@
     <attnum name="version" val="4" />
     <attstr name="author" val="D. Schellhammer" />
     <attstr name="description" val="2 lanes slow mountain road." />
+	<attnum name="lanes" val="2"/>
   </section>
   
   <section name="Graphic">

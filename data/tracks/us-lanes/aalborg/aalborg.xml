@@ -28,6 +28,7 @@
 		<attnum name="sky version" val="1"/>
 		<attstr name="author"      val="T. Thellefsen, E. Espie, B. Wymann, Eckhard M. Jaeger"/>
 		<attstr name="description" val="A racing circuit in the Danish forests"/>
+		<attnum name="lanes" val="2"/>
 	</section>
 
 	<section name="Local Info">
