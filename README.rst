@@ -9,7 +9,7 @@ This is a fork of the SpeedDreams project (version 2.2.1) which works together w
 
 The original DeepDriving implementation is a project from the princeton university (http://deepdriving.cs.princeton.edu/).
 
-If you are simply looking for the original SpeedDreams project, please look at http://www.speed-dreams.org. Since there are some compile issues on windows with the original version, you can also checkout the tag (**ToDo**) from this respository, where several issues are fixed, without containing additional code from the DeepDriving project.
+If you are simply looking for the original SpeedDreams project, please visit http://www.speed-dreams.org. Since there are some compile issues on windows with the original version, you can also checkout the tag (**ToDo**) from this respository, where several issues are fixed, without containing additional code from the DeepDriving project.
 
 Index
 ====================
