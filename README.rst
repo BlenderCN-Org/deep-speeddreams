@@ -9,19 +9,19 @@ This is a fork of the SpeedDreams project (version 2.2.1) which works together w
 
 The original DeepDriving implementation is a project from the princeton university (http://deepdriving.cs.princeton.edu/).
 
-If you are simply looking for the original SpeedDreams project, please visit http://www.speed-dreams.org. Since there are some compile issues on windows with the original version, you can also checkout the tag (**ToDo**) from this respository, where several issues are fixed, without containing additional code from the DeepDriving project.
+If you are simply looking for the original SpeedDreams project, please visit http://www.speed-dreams.org. Since there are some compile issues on windows with the original version, you can also checkout the tag (`original-2.2.1 <https://bitbucket.org/Netzeband/deep-speeddreams/src/original-2.2.1>`_) from this respository, where several issues are fixed, without containing additional code from the DeepDriving project.
 
 Index
 ====================
 
-* Installation
-    * Compiling from Source (Windows)
-    * Compiling from Source (Linux)  
-* Configuration
-* Adapting the Camera
-    * Framebuffer output (current Screen)
-	* Adding a second Camera as Output
-* Accessing the Output with Python
+* `Installation <https://bitbucket.org/Netzeband/deep-speeddreams/wiki/Installation>`_
+    * `Compiling from Source (Windows) <https://bitbucket.org/Netzeband/deep-speeddreams/wiki/InstallationSourceWindows>`_
+    * `Compiling from Source (Linux) <https://bitbucket.org/Netzeband/deep-speeddreams/wiki/InstallationSourceLinux>`_
+* `Configuration <https://bitbucket.org/Netzeband/deep-speeddreams/wiki/Configuration>`_
+* `Adapting the Camera <https://bitbucket.org/Netzeband/deep-speeddreams/wiki/Camera>`_
+    * `Framebuffer output (current Screen) <https://bitbucket.org/Netzeband/deep-speeddreams/wiki/RecordCamera>`_
+    * `Adding a second Camera as Output <https://bitbucket.org/Netzeband/deep-speeddreams/wiki/RecordOwnCamera>`_
+* `Accessing the Output with Python <https://bitbucket.org/Netzeband/deep-speeddreams/wiki/RecordInPython>`_
 
 ====================
 * Licence
