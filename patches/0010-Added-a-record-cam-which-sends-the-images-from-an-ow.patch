@@ -1,0 +1,901 @@
+From 90892bd22bf614e109346e5eb6430a95d2a610da Mon Sep 17 00:00:00 2001
+From: Andre <andre.netzeband@hm.edu>
+Date: Sat, 13 May 2017 13:13:26 +0200
+Subject: [PATCH] Added a record-cam which sends the images from an own cam or
+ from the current framebuffer to a shared memory.
+
+---
+ src/modules/graphic/ssggraph/CMakeLists.txt       |  15 +-
+ src/modules/graphic/ssggraph/CRecordCam.cpp       | 124 ++++++++++++
+ src/modules/graphic/ssggraph/CRecordCam.h         |  75 +++++++
+ src/modules/graphic/ssggraph/CRecordRenderCam.cpp | 231 ++++++++++++++++++++++
+ src/modules/graphic/ssggraph/CRecordRenderCam.h   |  65 ++++++
+ src/modules/graphic/ssggraph/CSharedMemroy.cpp    |  86 ++++++++
+ src/modules/graphic/ssggraph/CSharedMemroy.h      |  85 ++++++++
+ src/modules/graphic/ssggraph/grcam.h              |   2 +
+ src/modules/graphic/ssggraph/grscreen.cpp         |  45 ++++-
+ src/modules/graphic/ssggraph/grscreen.h           |   2 +
+ 10 files changed, 725 insertions(+), 5 deletions(-)
+ create mode 100644 src/modules/graphic/ssggraph/CRecordCam.cpp
+ create mode 100644 src/modules/graphic/ssggraph/CRecordCam.h
+ create mode 100644 src/modules/graphic/ssggraph/CRecordRenderCam.cpp
+ create mode 100644 src/modules/graphic/ssggraph/CRecordRenderCam.h
+ create mode 100644 src/modules/graphic/ssggraph/CSharedMemroy.cpp
+ create mode 100644 src/modules/graphic/ssggraph/CSharedMemroy.h
+
+diff --git a/src/modules/graphic/ssggraph/CMakeLists.txt b/src/modules/graphic/ssggraph/CMakeLists.txt
+index b62dbfe..0825550 100644
+--- a/src/modules/graphic/ssggraph/CMakeLists.txt
++++ b/src/modules/graphic/ssggraph/CMakeLists.txt
+@@ -14,7 +14,10 @@ SET(SSGGRAPH_HEADERS grMoonpos.h grSky.h
+                      grtracklight.h 
+                      grtrackmap.h grutil.h
+                      grvtxtable.h grrain.h
+-                     ssggraph.h)
++                     ssggraph.h
++                     CRecordCam.h
++                     CRecordRenderCam.h
++                     CSharedMemroy.h)
+ SET(SSGGRAPH_SOURCES grMoonpos.cpp
+                      grMoon.cpp grSun.cpp grCloudLayer.cpp grSky.cpp
+                      grSkyDome.cpp grSphere.cpp grStars.cpp
+@@ -30,7 +33,10 @@ SET(SSGGRAPH_SOURCES grMoonpos.cpp
+                      grtracklight.cpp 
+                      grtrackmap.cpp grutil.cpp
+                      grvtxtable.cpp grrain.cpp
+-                     ssggraph.cpp)
++                     ssggraph.cpp
++                     CRecordCam.cpp
++                     CRecordRenderCam.cpp
++                     CSharedMemroy.cpp)
+ 
+ SET(SSGGRAPH_OTHER_SOURCES )
+ 
+@@ -86,3 +92,8 @@ ADD_OPENGL_LIBRARY(ssggraph)
+ ADD_SDLIB_LIBRARY(ssggraph portability tgf tgfclient robottools)
+ 
+ SD_INSTALL_FILES(LIB modules/graphic TARGETS ssggraph)
++
++ADD_DEFINITIONS("-DBOOST_ALL_NO_LIB")
++find_package(Boost 1.55 REQUIRED COMPONENTS date_time thread)
++include_directories(${Boost_INCLUDE_DIRS})
++target_link_libraries(ssggraph Boost::date_time Boost::thread)
+diff --git a/src/modules/graphic/ssggraph/CRecordCam.cpp b/src/modules/graphic/ssggraph/CRecordCam.cpp
+new file mode 100644
+index 0000000..1a42fc2
+--- /dev/null
++++ b/src/modules/graphic/ssggraph/CRecordCam.cpp
+@@ -0,0 +1,124 @@
++/**
++ *  Copyright (C) 2017 Andre Netzeband
++ * 
++ *  This file is part of "DeepDriving for Speed-Dreams".
++ *
++ *  "DeepDriving for Speed-Dreams" is free software: you can redistribute it 
++ *  and/or modify it under the terms of the GNU General Public License as 
++ *  published by the Free Software Foundation, either version 3 of the License, 
++ *  or (at your option) any later version.
++ *
++ *  "DeepDriving for Speed-Dreams" is distributed in the hope that it 
++ *  will be useful, but WITHOUT ANY WARRANTY; without even the implied 
++ *  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
++ *  See the GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with "DeepDriving for Speed-Dreams".  
++ *  If not, see <http://www.gnu.org/licenses/>.  
++ */
++
++/**
++ * @file CRecordCam.cpp
++ * @author Andre Netzeband
++ * @date 11.05.2017
++ *
++ * @brief TODO
++ *
++ */
++
++#include "grcam.h"
++#include "grmain.h"
++#include "grscreen.h"	//cGrScreen
++
++#include "CSharedMemroy.h"
++
++CRecordCam::CRecordCam(cGrScreen * pMyScreen,
++                             int ID,
++                             int DrawCurr,
++                             int DrawBG,
++                             float MyFovY,
++                             float MyFovYMin,
++                             float MyFovYMax,
++                             float MyFNear,
++                             float MyFFar,
++                             float MyFogStart,
++                             float MyFogEnd):
++    cGrCarCamMirror(pMyScreen, ID, DrawCurr, DrawBG, MyFovY, MyFovYMin, MyFovYMax, MyFNear, MyFFar, MyFogStart, MyFogEnd),
++    mpScreen(pMyScreen)
++{
++  mScreenX   = screen->getScrX();
++  mScreenY   = screen->getScrY();
++  mMaxWidth  = screen->getScrW();
++  mMaxHeight = screen->getScrH();
++  mLastTime = GfTimeClock();
++
++  mpSharedMemory = new CSharedMemory();
++}
++
++CRecordCam::~CRecordCam()
++{
++  if (mpSharedMemory)
++  {
++    delete(mpSharedMemory);
++  }
++}
++
++void CRecordCam::setModelView(void)
++{
++  sgMat4 mat;
++  grMakeLookAtMat4(mat, eye, center, up);
++  grContext.setCamera(mat);
++}
++
++void CRecordCam::adaptScreenSize()
++{
++  mScreenX   = screen->getScrX();
++  mScreenY   = screen->getScrY();
++  mMaxWidth  = screen->getScrW();
++  mMaxHeight = screen->getScrH();
++
++  assert(mMaxHeight - mScreenY <= RECORD_MAX_IMAGE_HEIGHT);
++  assert(mMaxWidth  - mScreenX <= RECORD_MAX_IMAGE_WIDTH);
++}
++
++void CRecordCam::storeImage(int X, int Y, int Height, int Width)
++{
++  assert(mpSharedMemory);
++
++  mpSharedMemory->waitOnRead();
++
++  Data_t * const pMemory = mpSharedMemory->getAddress();
++  assert(pMemory);
++
++  int EffectiveHeight = Height - Y;
++  int EffectiveWidth = Width - X;
++
++  assert(EffectiveHeight <= mMaxHeight);
++  assert(EffectiveWidth <= mMaxWidth);
++
++
++  pMemory->Image.ImageHeight = EffectiveHeight;
++  pMemory->Image.ImageWidth = EffectiveWidth;
++  glReadPixels(X, Y, Width, Height, GL_BGR, GL_UNSIGNED_BYTE, (GLvoid*)pMemory->Image.Data);
++
++  mpSharedMemory->indicateWrite();
++}
++
++void CRecordCam::renderImage(tSituation * pSituation, uint64_t FrameNumber)
++{
++  double Time = GfTimeClock();
++  double Difference = Time - mLastTime;
++
++  if (Difference > (1.0/(double)RECORD_FRAME_RATE))
++  {
++    mLastTime = Time;
++    doRender(pSituation);
++  }
++}
++
++
++void CRecordCam::doRender(tSituation * pSituation)
++{
++  storeImage(mScreenX, mScreenY, mMaxHeight, mMaxWidth);
++}
+diff --git a/src/modules/graphic/ssggraph/CRecordCam.h b/src/modules/graphic/ssggraph/CRecordCam.h
+new file mode 100644
+index 0000000..8c5daab
+--- /dev/null
++++ b/src/modules/graphic/ssggraph/CRecordCam.h
+@@ -0,0 +1,75 @@
++/**
++ *  Copyright (C) 2017 Andre Netzeband
++ * 
++ *  This file is part of "DeepDriving for Speed-Dreams".
++ *
++ *  "DeepDriving for Speed-Dreams" is free software: you can redistribute it 
++ *  and/or modify it under the terms of the GNU General Public License as 
++ *  published by the Free Software Foundation, either version 3 of the License, 
++ *  or (at your option) any later version.
++ *
++ *  "DeepDriving for Speed-Dreams" is distributed in the hope that it 
++ *  will be useful, but WITHOUT ANY WARRANTY; without even the implied 
++ *  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
++ *  See the GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with "DeepDriving for Speed-Dreams".  
++ *  If not, see <http://www.gnu.org/licenses/>.  
++ */
++
++/**
++ * @file CRecordCam.h
++ * @author Andre Netzeband
++ * @date 11.05.2017
++ *
++ * @brief Is a camera object to record the current scene.
++ *
++ */
++
++#include "grcam.h"
++
++#ifndef SPEED_DREAMS_2_CRECORDCAM_H
++#define SPEED_DREAMS_2_CRECORDCAM_H
++
++#define RECORD_IMAGE_WIDTH  640
++#define RECORD_IMAGE_HEIGHT 480
++#define RECORD_FRAME_RATE 10
++
++class CSharedMemory;
++
++class CRecordCam : public cGrCarCamMirror
++{
++  public:
++    CRecordCam(cGrScreen * pMyScreen,
++               int ID,
++               int DrawCurr,
++               int DrawBG,
++               float MyFovY,
++               float MyFovYMin,
++               float MyFovYMax,
++               float MyFNear,
++               float MyFFar = 1500.0,
++               float MyFogStart = 1400.0,
++               float MyFogEnd = 1500.0);
++
++    virtual ~CRecordCam();
++
++    virtual void adaptScreenSize();
++    virtual void setModelView();
++    virtual void renderImage(tSituation * pSituation, uint64_t FrameNumber);
++
++  protected:
++    virtual void storeImage(int X, int Y, int Height, int Width);
++    virtual void doRender(tSituation * pSituation);
++
++    cGrScreen * mpScreen;
++    int mScreenX;
++    int mScreenY;
++    int mMaxHeight;
++    int mMaxWidth;
++    CSharedMemory * mpSharedMemory;
++    double mLastTime;
++};
++
++#endif //SPEED_DREAMS_2_CRECORDCAM_H
+diff --git a/src/modules/graphic/ssggraph/CRecordRenderCam.cpp b/src/modules/graphic/ssggraph/CRecordRenderCam.cpp
+new file mode 100644
+index 0000000..9f2a3b6
+--- /dev/null
++++ b/src/modules/graphic/ssggraph/CRecordRenderCam.cpp
+@@ -0,0 +1,231 @@
++/**
++ *  Copyright (C) 2017 Andre Netzeband
++ * 
++ *  This file is part of "DeepDriving for Speed-Dreams".
++ *
++ *  "DeepDriving for Speed-Dreams" is free software: you can redistribute it 
++ *  and/or modify it under the terms of the GNU General Public License as 
++ *  published by the Free Software Foundation, either version 3 of the License, 
++ *  or (at your option) any later version.
++ *
++ *  "DeepDriving for Speed-Dreams" is distributed in the hope that it 
++ *  will be useful, but WITHOUT ANY WARRANTY; without even the implied 
++ *  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
++ *  See the GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with "DeepDriving for Speed-Dreams".  
++ *  If not, see <http://www.gnu.org/licenses/>.  
++ */
++
++/**
++ * @file CRecordRenderCam.cpp
++ * @author Andre Netzeband
++ * @date 12.05.2017
++ *
++ * @brief TODO
++ *
++ */
++
++#include "CRecordRenderCam.h"
++
++#include "grcam.h"
++#include "grmain.h"
++#include "grscreen.h"	//cGrScreen
++
++#include <GL/glext.h>
++
++/// the following definitions are taken from: https://searchcode.com/codesearch/view/8069990/
++/// this code is published by Gregor Kalinik under GPL license
++typedef void (APIENTRY *glGenFramebuffers_t) (GLsizei n, const GLuint *);
++typedef void (APIENTRY *glDeleteFramebuffers_t) (GLsizei, const GLuint *);
++typedef void (APIENTRY *glBindFramebuffer_t) (GLenum target, GLuint framebuffer);
++
++typedef void (APIENTRY *glGenRenderbuffers_t) (GLsizei, GLuint *);
++typedef void (APIENTRY *glDeleteRenderbuffers_t) (GLsizei, const GLuint *);
++typedef void (APIENTRY *glBindRenderbuffer_t) (GLenum, GLuint);
++typedef void (APIENTRY *glRenderbufferStorage_t) (GLenum, GLenum, GLsizei, GLsizei);
++
++typedef void (APIENTRY *glFramebufferRenderbuffer_t) (GLenum, GLenum, GLenum, GLuint);
++typedef void (APIENTRY *glDrawBuffers_t) (GLsizei, const GLenum *);
++typedef GLenum (APIENTRY *glCheckFramebufferStatus_t) (GLenum);
++
++static glGenFramebuffers_t         glGenFramebuffers         = (glGenFramebuffers_t)wglGetProcAddress("glGenFramebuffers");
++static glDeleteFramebuffers_t      glDeleteFramebuffers      = (glDeleteFramebuffers_t)wglGetProcAddress("glDeleteFramebuffers");
++static glBindFramebuffer_t         glBindFramebuffer         = (glBindFramebuffer_t)wglGetProcAddress("glBindFramebuffer");
++
++static glGenRenderbuffers_t        glGenRenderbuffers        = (glGenRenderbuffers_t)wglGetProcAddress("glGenRenderbuffers");
++static glDeleteRenderbuffers_t     glDeleteRenderbuffers     = (glDeleteRenderbuffers_t)wglGetProcAddress("glDeleteRenderbuffers");
++static glBindRenderbuffer_t        glBindRenderbuffer        = (glBindRenderbuffer_t)wglGetProcAddress("glBindRenderbuffer");
++static glRenderbufferStorage_t     glRenderbufferStorage     = (glRenderbufferStorage_t)wglGetProcAddress("glRenderbufferStorage");
++
++static glFramebufferRenderbuffer_t glFramebufferRenderbuffer = (glFramebufferRenderbuffer_t)wglGetProcAddress("glFramebufferRenderbuffer");
++static glDrawBuffers_t             glDrawBuffers             = (glDrawBuffers_t)wglGetProcAddress("glDrawBuffers");
++static glCheckFramebufferStatus_t  glCheckFramebufferStatus  = (glCheckFramebufferStatus_t)wglGetProcAddress("glCheckFramebufferStatus");
++
++static bool setupOpenGLFunctions()
++{
++  glGenFramebuffers         = (glGenFramebuffers_t)wglGetProcAddress("glGenFramebuffers");
++  printf("Found function glGenFramebuffers: %d\n", glGenFramebuffers != NULL);
++  glDeleteFramebuffers      = (glDeleteFramebuffers_t)wglGetProcAddress("glDeleteFramebuffers");
++  printf("Found function glDeleteFramebuffers: %d\n", glDeleteFramebuffers != NULL);
++  glBindFramebuffer         = (glBindFramebuffer_t)wglGetProcAddress("glBindFramebuffer");
++  printf("Found function glBindFramebuffer: %d\n", glBindFramebuffer != NULL);
++
++  glGenRenderbuffers        = (glGenRenderbuffers_t)wglGetProcAddress("glGenRenderbuffers");
++  printf("Found function glGenRenderbuffers: %d\n", glGenRenderbuffers != NULL);
++  glDeleteRenderbuffers     = (glDeleteRenderbuffers_t)wglGetProcAddress("glDeleteRenderbuffers");
++  printf("Found function glDeleteRenderbuffers: %d\n", glDeleteRenderbuffers != NULL);
++  glBindRenderbuffer        = (glBindRenderbuffer_t)wglGetProcAddress("glBindRenderbuffer");
++  printf("Found function glBindRenderbuffer: %d\n", glBindRenderbuffer != NULL);
++  glRenderbufferStorage     = (glRenderbufferStorage_t)wglGetProcAddress("glRenderbufferStorage");
++  printf("Found function glRenderbufferStorage: %d\n", glRenderbufferStorage != NULL);
++
++  glFramebufferRenderbuffer = (glFramebufferRenderbuffer_t)wglGetProcAddress("glFramebufferRenderbuffer");
++  printf("Found function glFramebufferRenderbuffer: %d\n", glFramebufferRenderbuffer != NULL);
++  glDrawBuffers             = (glDrawBuffers_t)wglGetProcAddress("glDrawBuffers");
++  printf("Found function glDrawBuffers: %d\n", glDrawBuffers != NULL);
++  glCheckFramebufferStatus  = (glCheckFramebufferStatus_t)wglGetProcAddress("glCheckFramebufferStatus");
++  printf("Found function glCheckFramebufferStatus: %d\n", glCheckFramebufferStatus != NULL);
++
++  return glGenFramebuffers &&
++         glDeleteFramebuffers &&
++         glBindFramebuffer &&
++         glGenRenderbuffers &&
++         glDeleteRenderbuffers &&
++         glBindRenderbuffer &&
++         glRenderbufferStorage &&
++         glFramebufferRenderbuffer &&
++         glDrawBuffers &&
++         glCheckFramebufferStatus;
++}
++
++CRecordRenderCam::CRecordRenderCam(cGrScreen * pMyScreen,
++                             int ID,
++                             int DrawCurr,
++                             int DrawBG,
++                             float MyFovY,
++                             float MyFovYMin,
++                             float MyFovYMax,
++                             float MyFNear,
++                             float MyFFar,
++                             float MyFogStart,
++                             float MyFogEnd):
++    CRecordCam(pMyScreen, ID, 1, DrawBG, MyFovY, MyFovYMin, MyFovYMax, MyFNear, MyFFar, MyFogStart, MyFogEnd)
++{
++  bool SetupSucessful = setupOpenGLFunctions();
++
++  assert(SetupSucessful);
++
++  // create frame buffer
++  mFramebufferName = 0;
++  glGenFramebuffers(1, &mFramebufferName);
++  glBindFramebuffer(GL_FRAMEBUFFER, mFramebufferName);
++
++  // color renderbuffer
++  mColorBuffer = 0;
++  glGenRenderbuffers(1, &mColorBuffer);
++  glBindRenderbuffer(GL_RENDERBUFFER, mColorBuffer);
++  glRenderbufferStorage(GL_RENDERBUFFER, GL_RGBA8, RECORD_IMAGE_WIDTH, RECORD_IMAGE_HEIGHT);
++  glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_RENDERBUFFER, mColorBuffer);
++
++  // The depth buffer
++  mDepthBuffer = 0;
++  glGenRenderbuffers(1, &mDepthBuffer);
++  glBindRenderbuffer(GL_RENDERBUFFER, mDepthBuffer);
++  glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, RECORD_IMAGE_WIDTH, RECORD_IMAGE_HEIGHT);
++  glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, mDepthBuffer);
++
++  assert(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE);
++
++  glBindFramebuffer(GL_FRAMEBUFFER, 0);
++}
++
++CRecordRenderCam::~CRecordRenderCam()
++{
++  glDeleteRenderbuffers(1, &mDepthBuffer);
++  glDeleteRenderbuffers(1, &mColorBuffer);
++  glDeleteFramebuffers(1, &mFramebufferName);
++}
++
++void CRecordRenderCam::setModelView(void)
++{
++  sgMat4 mat;
++
++  grMakeLookAtMat4(mat, eye, center, up);
++  grContext.setCamera(mat);
++}
++
++
++void CRecordRenderCam::update(tCarElt *car, tSituation *s) {
++  sgVec3 P, p;
++  float offset = 0;
++  float const LookSideAngle = (((-90)*(float)PI)/180.0f);
++  float const LookDownAngle = (((-50)*(float)PI)/180.0f);
++
++  sgVec3 CameraPos;
++
++  CameraPos[0] = car->_drvPos_x;
++  CameraPos[1] = (car->_dimension_y / 2);
++  CameraPos[2] = car->_statGC_z + 1.0f;
++
++  p[0] = CameraPos[0];
++  p[1] = CameraPos[1];
++  p[2] = CameraPos[2];
++  sgXformPnt3(p, car->_posMat);
++
++  eye[0] = p[0];
++  eye[1] = p[1];
++  eye[2] = p[2];
++
++  // Compute offset angle and bezel compensation)
++  if (viewOffset) {
++    //offset += getSpanAngle();
++  }
++
++  P[0] = CameraPos[0] + 30.0f * cos(offset + LookSideAngle) * cos(LookDownAngle);
++  P[1] = CameraPos[1] - 30.0f * sin(offset + LookSideAngle) * cos(LookDownAngle);
++  P[2] = CameraPos[2] + 30.0f * sin(LookDownAngle);
++
++  sgXformPnt3(P, car->_posMat);
++
++  center[0] = P[0];
++  center[1] = P[1];
++  center[2] = P[2];
++
++  up[0] = car->_posMat[2][0];
++  up[1] = car->_posMat[2][1];
++  up[2] = car->_posMat[2][2];
++
++  speed[0] =car->pub.DynGCg.vel.x;
++  speed[1] =car->pub.DynGCg.vel.y;
++  speed[2] =car->pub.DynGCg.vel.z;
++
++  Speed = (int)(car->_speed_x * 3.6f);
++}
++
++
++void CRecordRenderCam::beforeDraw (void)
++{
++  glPushAttrib(GL_VIEWPORT_BIT);
++
++  glBindFramebuffer(GL_FRAMEBUFFER, mFramebufferName);
++  glViewport(0, 0, RECORD_IMAGE_WIDTH, RECORD_IMAGE_HEIGHT);
++
++  // make mirror in front of everything by forcing overdrawing of everything
++  glClear(GL_DEPTH_BUFFER_BIT);
++}
++
++
++void CRecordRenderCam::afterDraw (void)
++{
++  storeImage(0, 0, RECORD_IMAGE_HEIGHT, RECORD_IMAGE_WIDTH);
++
++  glBindFramebuffer(GL_FRAMEBUFFER, 0);
++  glPopAttrib();
++}
++
++void CRecordRenderCam::doRender(tSituation * pSituation)
++{
++  mpScreen->camDraw(pSituation);
++}
+\ No newline at end of file
+diff --git a/src/modules/graphic/ssggraph/CRecordRenderCam.h b/src/modules/graphic/ssggraph/CRecordRenderCam.h
+new file mode 100644
+index 0000000..b9cdd93
+--- /dev/null
++++ b/src/modules/graphic/ssggraph/CRecordRenderCam.h
+@@ -0,0 +1,65 @@
++/**
++ *  Copyright (C) 2017 Andre Netzeband
++ * 
++ *  This file is part of "DeepDriving for Speed-Dreams".
++ *
++ *  "DeepDriving for Speed-Dreams" is free software: you can redistribute it 
++ *  and/or modify it under the terms of the GNU General Public License as 
++ *  published by the Free Software Foundation, either version 3 of the License, 
++ *  or (at your option) any later version.
++ *
++ *  "DeepDriving for Speed-Dreams" is distributed in the hope that it 
++ *  will be useful, but WITHOUT ANY WARRANTY; without even the implied 
++ *  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
++ *  See the GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with "DeepDriving for Speed-Dreams".  
++ *  If not, see <http://www.gnu.org/licenses/>.  
++ */
++
++/**
++ * @file CRecordRenderCam.h
++ * @author Andre Netzeband
++ * @date 12.05.2017
++ *
++ * @brief A camera that performs an own render pass.
++ *
++ */
++
++#ifndef SPEED_DREAMS_2_CRECORDRENDERCAM_H
++#define SPEED_DREAMS_2_CRECORDRENDERCAM_H
++
++#include "CRecordCam.h"
++
++class CRecordRenderCam : public CRecordCam
++{
++  public:
++    CRecordRenderCam(cGrScreen * pMyScreen,
++                  int ID,
++                  int DrawCurr,
++                  int DrawBG,
++                  float MyFovY,
++                  float MyFovYMin,
++                  float MyFovYMax,
++                  float MyFNear,
++                  float MyFFar = 1500.0,
++                  float MyFogStart = 1400.0,
++                  float MyFogEnd = 1500.0);
++
++    virtual ~CRecordRenderCam();
++
++    virtual void setModelView();
++    virtual void update(tCarElt *car, tSituation *s);
++    virtual void afterDraw (void);
++    virtual void beforeDraw (void);
++    virtual void doRender(tSituation * pSituation);
++
++  protected:
++    GLuint mFramebufferName;
++    GLuint mColorBuffer;
++    GLuint mDepthBuffer;
++};
++
++
++#endif //SPEED_DREAMS_2_CRECORDRENDERCAM_H
+diff --git a/src/modules/graphic/ssggraph/CSharedMemroy.cpp b/src/modules/graphic/ssggraph/CSharedMemroy.cpp
+new file mode 100644
+index 0000000..0faaa70
+--- /dev/null
++++ b/src/modules/graphic/ssggraph/CSharedMemroy.cpp
+@@ -0,0 +1,86 @@
++/**
++ *  Copyright (C) 2017 Andre Netzeband
++ * 
++ *  This file is part of "DeepDriving for Speed-Dreams".
++ *
++ *  "DeepDriving for Speed-Dreams" is free software: you can redistribute it 
++ *  and/or modify it under the terms of the GNU General Public License as 
++ *  published by the Free Software Foundation, either version 3 of the License, 
++ *  or (at your option) any later version.
++ *
++ *  "DeepDriving for Speed-Dreams" is distributed in the hope that it 
++ *  will be useful, but WITHOUT ANY WARRANTY; without even the implied 
++ *  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
++ *  See the GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with "DeepDriving for Speed-Dreams".  
++ *  If not, see <http://www.gnu.org/licenses/>.  
++ */
++
++/**
++ * @file CSharedMemroy.cpp
++ * @author Andre Netzeband
++ * @date 12.05.2017
++ *
++ * @brief TODO
++ *
++ */
++
++#include "CSharedMemroy.h"
++
++#include <boost/thread/thread.hpp>
++#include <boost/date_time/posix_time/posix_time.hpp>
++
++using namespace boost::interprocess;
++
++typedef windows_shared_memory Memory_t;
++typedef mapped_region Region_t;
++
++CSharedMemory::CSharedMemory():
++  mpMemory(NULL),
++  mpRegion(NULL)
++{
++  mpMemory = new Memory_t(open_or_create, "DeepDrivingMemory", read_write, sizeof(Data_t));
++  assert(mpMemory);
++
++  mpRegion = new Region_t(*mpMemory, read_write);
++  assert(mpRegion);
++
++  memset(getAddress(), 0, sizeof(Data_t));
++}
++
++CSharedMemory::~CSharedMemory()
++{
++  if (mpRegion)
++  {
++    delete(mpRegion);
++    mpRegion = NULL;
++  }
++
++  if (mpMemory)
++  {
++    delete(mpMemory);
++    mpMemory = NULL;
++  }
++}
++
++Data_t * CSharedMemory::getAddress()
++{
++  return (Data_t*)mpRegion->get_address();
++}
++
++
++void CSharedMemory::waitOnRead()
++{
++  while (getAddress()->Sync.IsWritten && getAddress()->Sync.IsPauseOn)
++  {
++    boost::this_thread::sleep(boost::posix_time::microseconds(1));
++  }
++}
++
++
++void CSharedMemory::indicateWrite()
++{
++  getAddress()->Sync.IsWritten = 1;
++}
+\ No newline at end of file
+diff --git a/src/modules/graphic/ssggraph/CSharedMemroy.h b/src/modules/graphic/ssggraph/CSharedMemroy.h
+new file mode 100644
+index 0000000..aefa9a9
+--- /dev/null
++++ b/src/modules/graphic/ssggraph/CSharedMemroy.h
+@@ -0,0 +1,85 @@
++/**
++ *  Copyright (C) 2017 Andre Netzeband
++ * 
++ *  This file is part of "DeepDriving for Speed-Dreams".
++ *
++ *  "DeepDriving for Speed-Dreams" is free software: you can redistribute it 
++ *  and/or modify it under the terms of the GNU General Public License as 
++ *  published by the Free Software Foundation, either version 3 of the License, 
++ *  or (at your option) any later version.
++ *
++ *  "DeepDriving for Speed-Dreams" is distributed in the hope that it 
++ *  will be useful, but WITHOUT ANY WARRANTY; without even the implied 
++ *  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
++ *  See the GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with "DeepDriving for Speed-Dreams".  
++ *  If not, see <http://www.gnu.org/licenses/>.  
++ */
++
++/**
++ * @file CSharedMemroy.h
++ * @author Andre Netzeband
++ * @date 12.05.2017
++ *
++ * @brief Encapsulates the shared memory.
++ *
++ */
++
++#ifndef SPEED_DREAMS_2_CSHAREDMEMROY_H
++#define SPEED_DREAMS_2_CSHAREDMEMROY_H
++
++#include <cstdint>
++
++#if defined(_WIN32)
++#include <boost/interprocess/windows_shared_memory.hpp>
++#endif
++
++#include <boost/interprocess/mapped_region.hpp>
++
++#if defined(_WIN32)
++typedef boost::interprocess::windows_shared_memory Memory_t;
++#endif
++typedef boost::interprocess::mapped_region Region_t;
++
++#define RECORD_MAX_IMAGE_WIDTH 2560
++#define RECORD_MAX_IMAGE_HEIGHT 1440
++#define RECORD_IMAGE_CHANNELS 3
++
++typedef struct
++{
++  uint32_t ImageWidth;
++  uint32_t ImageHeight;
++  uint8_t Data[RECORD_MAX_IMAGE_WIDTH * RECORD_MAX_IMAGE_HEIGHT * RECORD_IMAGE_CHANNELS];
++} Image_t;
++
++typedef struct
++{
++  uint8_t IsPauseOn;
++  uint8_t IsWritten;
++} Sync_t;
++
++typedef struct
++{
++  Sync_t Sync;
++  Image_t Image;
++} Data_t;
++
++
++class CSharedMemory
++{
++  public:
++    CSharedMemory();
++    ~CSharedMemory();
++
++    Data_t * getAddress();
++    void indicateWrite();
++    void waitOnRead();
++
++  protected:
++    Memory_t * mpMemory;
++    Region_t * mpRegion;
++};
++
++#endif //SPEED_DREAMS_2_CSHAREDMEMROY_H
+diff --git a/src/modules/graphic/ssggraph/grcam.h b/src/modules/graphic/ssggraph/grcam.h
+index c09cb5a..5f41344 100644
+--- a/src/modules/graphic/ssggraph/grcam.h
++++ b/src/modules/graphic/ssggraph/grcam.h
+@@ -33,6 +33,8 @@ class cGrScreen;
+ 
+ GF_TAILQ_HEAD(GrCamHead, cGrCamera);
+ 
++void grMakeLookAtMat4 ( sgMat4 dst, const sgVec3 eye, const sgVec3 center, const sgVec3 up );
++
+ /* Camera interface */
+ class cGrCamera 
+ {
+diff --git a/src/modules/graphic/ssggraph/grscreen.cpp b/src/modules/graphic/ssggraph/grscreen.cpp
+index b7a0196..05fd174 100644
+--- a/src/modules/graphic/ssggraph/grscreen.cpp
++++ b/src/modules/graphic/ssggraph/grscreen.cpp
+@@ -32,6 +32,9 @@
+ #include "grrain.h"
+ #include "grutil.h"
+ 
++#include "CRecordCam.h"
++#include "CRecordRenderCam.h"
++
+ static char buf[1024];
+ static char path[1024];
+ static char path2[1024];
+@@ -42,6 +45,7 @@ cGrScreen::cGrScreen(int myid)
+ 	curCar = NULL;
+ 	curCam = NULL;
+ 	mirrorCam = NULL;
++	pRecordCam = NULL;
+ 	dispCam = NULL;
+ 	boardCam = NULL;
+ 	bgCam = NULL;
+@@ -77,6 +81,11 @@ cGrScreen::~cGrScreen()
+ 	
+ 	delete boardCam;
+ 	delete mirrorCam;
++	if (pRecordCam)
++	{
++		delete pRecordCam;
++		pRecordCam = NULL;
++	}
+ 	delete bgCam;
+ 	
+ 	if (board)
+@@ -137,6 +146,11 @@ void cGrScreen::activate(int x, int y, int w, int h, float v)
+ 	    mirrorCam->adaptScreenSize();
+ 	}
+ 
++	if (pRecordCam)
++	{
++		pRecordCam->adaptScreenSize();
++	}
++
+ 	if (curCam) {
+ 		curCam->limitFov ();
+ #if 0	//SDW
+@@ -329,9 +343,11 @@ void cGrScreen::camDraw(tSituation *s)
+ 	
+ 	// Sort the cars by distance for transparent windows
+ 	TheDispCam = dispCam; // Needed by compareCars() ordering function
+-	if (dispCam != mirrorCam)
++	if (dispCam != mirrorCam /*&& dispCam != pRecordCam*/)
++	{
+ 		qsort(cars, s->_ncars, sizeof(tCarElt*), compareCars);
+-	
++	}
++
+ 	for (int i = 0; i < s->_ncars; i++) {
+ 		grDrawCar(s, cars[i], curCar, dispCam->getDrawCurrent(), dispCam->getDrawDriver(), s->currentTime, dispCam);
+ 	}
+@@ -431,6 +447,12 @@ void cGrScreen::update(tSituation *s, const cGrFrameInfo* frameInfo)
+ 		dispCam = mirrorCam;
+ 		camDraw (s);
+ 	}
++
++	if (pRecordCam)
++	{
++		dispCam = pRecordCam;
++		pRecordCam->renderImage(s, frameInfo->nTotalFrames);
++	}
+ 	
+ 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+ 	glDisable(GL_CULL_FACE);
+@@ -584,7 +606,24 @@ void cGrScreen::initCams(tSituation *s)
+ 			fixedFar ? fixedFar : 300.0 * fovFactor	// fogend
+ 		);
+ 	}
+-	
++
++	if (!pRecordCam)
++	{
++		pRecordCam = new CRecordRenderCam(
++				this,
++				-1,
++				0,					// drawCurr
++				1,					// drawBG
++				67.5,	/* fovy */
++				10.0,	/* fovymin */
++				95.0,	/* fovymax */
++				0.3,	/* near */
++				fixedFar ? fixedFar : 600.0 * fovFactor,	/* far */
++				fixedFar ? fixedFar/2 : 300.0 * fovFactor,	/* fogstart */
++				fixedFar ? fixedFar : 600.0 * fovFactor	/* fogend */
++		);
++	}
++
+ 	// Scene Cameras
+ 	memset(cams, 0, sizeof(cams));
+ 	grCamCreateSceneCameraList(this, cams, fovFactor, fixedFar);
+diff --git a/src/modules/graphic/ssggraph/grscreen.h b/src/modules/graphic/ssggraph/grscreen.h
+index e1fe0ad..ecde8fd 100644
+--- a/src/modules/graphic/ssggraph/grscreen.h
++++ b/src/modules/graphic/ssggraph/grscreen.h
+@@ -21,6 +21,7 @@
+ 
+ #include <car.h>			//tCarElt
+ #include "grcam.h"		//Cameras
++#include "CRecordCam.h"
+ 
+ class cGrBoard;
+ class cGrFrameInfo;
+@@ -37,6 +38,7 @@ class cGrScreen {
+ 	
+ 		class cGrPerspCamera *curCam;			// The current camera.
+ 		class cGrCarCamMirror *mirrorCam;		// The mirror camera.
++		class CRecordCam *pRecordCam;       // The camera to record the screen.
+ 		class cGrPerspCamera *dispCam;			// The display camera.
+ 		class cGrOrthoCamera *boardCam;			// The board camera.
+ 		class cGrBackgroundCam *bgCam;			// The background camera.
+-- 
+2.11.1.windows.1
+

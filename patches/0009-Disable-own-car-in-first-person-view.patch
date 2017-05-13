@@ -1,0 +1,35 @@
+From 348c6af2a0d67d472879195bf0574b14ada2dad3 Mon Sep 17 00:00:00 2001
+From: Andre <andre.netzeband@hm.edu>
+Date: Sat, 13 May 2017 13:12:30 +0200
+Subject: [PATCH] Disable own car in first-person view.
+
+---
+ src/modules/graphic/ssggraph/grcam.cpp | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/src/modules/graphic/ssggraph/grcam.cpp b/src/modules/graphic/ssggraph/grcam.cpp
+index e7a5c6a..88a7df3 100644
+--- a/src/modules/graphic/ssggraph/grcam.cpp
++++ b/src/modules/graphic/ssggraph/grcam.cpp
+@@ -55,8 +55,7 @@ cGrCamera::getAspectRatio()
+     return screen->getViewRatio();
+ }
+ 
+-static void
+-grMakeLookAtMat4 ( sgMat4 dst, const sgVec3 eye, const sgVec3 center, const sgVec3 up )
++void grMakeLookAtMat4 ( sgMat4 dst, const sgVec3 eye, const sgVec3 center, const sgVec3 up )
+ {
+   // Caveats:
+   // 1) In order to compute the line of sight, the eye point must not be equal
+@@ -1948,7 +1947,7 @@ grCamCreateSceneCameraList(class cGrScreen *myscreen, tGrCamHead *cams,
+     /* cam F2 = inside, from the board (bonnet view), fixed to the car */
+     cam = new cGrCarCamInsideFixedCar(myscreen,
+ 				      id,
+-				      1,	/* drawCurr */
++				      0,	/* drawCurr */
+ 				      1,	/* drawBG  */
+ 				      67.5,	/* fovy */
+ 				      10.0,	/* fovymin */
+-- 
+2.11.1.windows.1
+

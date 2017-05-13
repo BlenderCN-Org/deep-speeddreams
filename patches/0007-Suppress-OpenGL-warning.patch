@@ -1,0 +1,24 @@
+From 8fc38d1372cfc3adfdb7f1a355b73a8f92f340ff Mon Sep 17 00:00:00 2001
+From: Andre <andre.netzeband@hm.edu>
+Date: Sat, 6 May 2017 18:27:16 +0200
+Subject: [PATCH] Suppress OpenGL warning.
+
+---
+ src/modules/graphic/ssggraph/grscene.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/modules/graphic/ssggraph/grscene.cpp b/src/modules/graphic/ssggraph/grscene.cpp
+index 6e87ffd..5c73121 100644
+--- a/src/modules/graphic/ssggraph/grscene.cpp
++++ b/src/modules/graphic/ssggraph/grscene.cpp
+@@ -246,6 +246,7 @@ grLoadScene(tTrack *track)
+ void
+ grDrawScene()
+ {
++    GLenum const rc = glGetError();
+     TRACE_GL("refresh: ssgCullAndDraw start");
+     ssgCullAndDraw(TheScene);
+     TRACE_GL("refresh: ssgCullAndDraw");
+-- 
+2.11.1.windows.1
+

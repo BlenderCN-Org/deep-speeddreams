@@ -1,0 +1,1297 @@
+From 943757b7eb12fc48f37b02a92a86383876e99922 Mon Sep 17 00:00:00 2001
+From: Andre <andre.netzeband@hm.edu>
+Date: Tue, 9 May 2017 17:03:37 +0200
+Subject: [PATCH] Added lane driver robot.
+
+---
+ data/drivers/CMakeLists.txt            |   2 +
+ data/drivers/LaneDriver/CMakeLists.txt |  10 +
+ data/drivers/LaneDriver/LaneDriver.xml | 503 +++++++++++++++++++++++++++++++++
+ data/drivers/LaneDriver/default.xml    |  19 ++
+ data/drivers/LaneDriver/readme.txt     |   1 +
+ src/drivers/CMakeLists.txt             |   1 +
+ src/drivers/LaneDriver/CLaneDriver.cpp | 318 +++++++++++++++++++++
+ src/drivers/LaneDriver/CLaneDriver.h   | 110 +++++++
+ src/drivers/LaneDriver/CMakeLists.txt  |  21 ++
+ src/drivers/LaneDriver/LaneDriver.cpp  | 163 +++++++++++
+ src/interfaces/track.h                 |   3 +
+ src/libs/tgf/modinfo.h                 |   2 +-
+ src/modules/track/trackv1/track.cpp    |   1 +
+ 13 files changed, 1153 insertions(+), 1 deletion(-)
+ create mode 100644 data/drivers/LaneDriver/CMakeLists.txt
+ create mode 100644 data/drivers/LaneDriver/LaneDriver.xml
+ create mode 100644 data/drivers/LaneDriver/default.xml
+ create mode 100644 data/drivers/LaneDriver/readme.txt
+ create mode 100644 src/drivers/LaneDriver/CLaneDriver.cpp
+ create mode 100644 src/drivers/LaneDriver/CLaneDriver.h
+ create mode 100644 src/drivers/LaneDriver/CMakeLists.txt
+ create mode 100644 src/drivers/LaneDriver/LaneDriver.cpp
+
+diff --git a/data/drivers/CMakeLists.txt b/data/drivers/CMakeLists.txt
+index 408127d..18aed27 100644
+--- a/data/drivers/CMakeLists.txt
++++ b/data/drivers/CMakeLists.txt
+@@ -30,6 +30,8 @@ SD_ADD_SUBDIRECTORY(dandroid_sc)
+ SD_ADD_SUBDIRECTORY(dandroid_srw)
+ SD_ADD_SUBDIRECTORY(dandroid_trb1)
+ 
++SD_ADD_SUBDIRECTORY(LaneDriver)
++
+ 
+ # Work-in-progress / unofficial robots.
+ IF(NOT OPTION_OFFICIAL_ONLY)
+diff --git a/data/drivers/LaneDriver/CMakeLists.txt b/data/drivers/LaneDriver/CMakeLists.txt
+new file mode 100644
+index 0000000..637f142
+--- /dev/null
++++ b/data/drivers/LaneDriver/CMakeLists.txt
+@@ -0,0 +1,10 @@
++INCLUDE(../../../cmake/macros.cmake)
++
++# The data for the RS clone of the ubiquitous USR robot module.
++
++SET(ROBOT_SUBDIRS 
++)
++
++ROBOT_DATA(NAME LaneDriver
++           FILES LaneDriver.xml default.xml readme.txt
++           SUBDIRS ${ROBOT_SUBDIRS} PATTERNS *.xml logo.rgb *.png *.jpg)
+diff --git a/data/drivers/LaneDriver/LaneDriver.xml b/data/drivers/LaneDriver/LaneDriver.xml
+new file mode 100644
+index 0000000..920e685
+--- /dev/null
++++ b/data/drivers/LaneDriver/LaneDriver.xml
+@@ -0,0 +1,503 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!--
++    file                 : usr.xml
++    created              : Wed Jan 8 18:31:16 CET 2003
++    copyright            : (C) 2002 Andrew Sumner
++    email                : firechief@bluewin.ch
++    version              : $Id$
++-->
++
++<!--    This program is free software; you can redistribute it and/or modify  -->
++<!--    it under the terms of the GNU General Public License as published by  -->
++<!--    the Free Software Foundation; either version 2 of the License, or     -->
++<!--    (at your option) any later version.                                   -->
++
++<!DOCTYPE params SYSTEM "../../libs/tgf/params.dtd">
++
++<params name="ld" type="robotdef">
++  <section name="Robots">
++    <section name="index">
++
++      <section name="1">
++        <attstr name="name" val="Lane Driver 1"></attstr>
++        <attstr name="short name" val="LD1"></attstr>
++        <attstr name="code name" val="LD1"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="ls1-cavallo-570s1"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="0"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="2">
++        <attstr name="name" val="Lane Driver 2"></attstr>
++        <attstr name="short name" val="LD2"></attstr>
++        <attstr name="code name" val="LD2"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="ls1-archer-r9"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="3">
++        <attstr name="name" val="Lane Driver 3"></attstr>
++        <attstr name="short name" val="LD3"></attstr>
++        <attstr name="code name" val="LD3"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="ls1-marisatech-gt4r"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="4">
++        <attstr name="name" val="Lane Driver 4"></attstr>
++        <attstr name="short name" val="LD4"></attstr>
++        <attstr name="code name" val="LD4"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="ls1-newcastle-fury"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="5">
++        <attstr name="name" val="Lane Driver 5"></attstr>
++        <attstr name="short name" val="LD5"></attstr>
++        <attstr name="code name" val="LD5"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="ls1-toro-rgt"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="6">
++        <attstr name="name" val="Lane Driver 6"></attstr>
++        <attstr name="short name" val="LD6"></attstr>
++        <attstr name="code name" val="LD6"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="ls1-vulture-v6r"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="7">
++        <attstr name="name" val="Lane Driver 7"></attstr>
++        <attstr name="short name" val="LD7"></attstr>
++        <attstr name="code name" val="LD7"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="ls1-zentek-z7r"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="8">
++        <attstr name="name" val="Lane Driver 8"></attstr>
++        <attstr name="short name" val="LD8"></attstr>
++        <attstr name="code name" val="LD8"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="ls2-bavaria-g3gtr"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="9">
++        <attstr name="name" val="Lane Driver 9"></attstr>
++        <attstr name="short name" val="LD9"></attstr>
++        <attstr name="code name" val="LD9"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="ls2-bavaria-nb"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="10">
++        <attstr name="name" val="Lane Driver 10"></attstr>
++        <attstr name="short name" val="LD10"></attstr>
++        <attstr name="code name" val="LD10"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="ls2-boxer-96rsr"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="11">
++        <attstr name="name" val="Lane Driver 11"></attstr>
++        <attstr name="short name" val="LD11"></attstr>
++        <attstr name="code name" val="LD11"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="ls2-cavallo-360r"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="12">
++        <attstr name="name" val="Lane Driver 12"></attstr>
++        <attstr name="short name" val="LD12"></attstr>
++        <attstr name="code name" val="LD12"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="ls2-condor-c400r"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="13">
++        <attstr name="name" val="Lane Driver 13"></attstr>
++        <attstr name="short name" val="LD13"></attstr>
++        <attstr name="code name" val="LD13"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="ls2-lynx-xkr"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="14">
++        <attstr name="name" val="Lane Driver 14"></attstr>
++        <attstr name="short name" val="LD14"></attstr>
++        <attstr name="code name" val="LD14"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="ls2-morley-r900"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="15">
++        <attstr name="name" val="Lane Driver 15"></attstr>
++        <attstr name="short name" val="LD15"></attstr>
++        <attstr name="code name" val="LD15"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers 15"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="ls2-vortex-gt"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="16">
++        <attstr name="name" val="Lane Driver 16"></attstr>
++        <attstr name="short name" val="LD16"></attstr>
++        <attstr name="code name" val="LD16"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="ls2-vulture-v6rs2"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="17">
++        <attstr name="name" val="Lane Driver 17"></attstr>
++        <attstr name="short name" val="LD17"></attstr>
++        <attstr name="code name" val="LD17"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="sc-kanagawa-z35gts"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="18">
++        <attstr name="name" val="Lane Driver 18"></attstr>
++        <attstr name="short name" val="LD18"></attstr>
++        <attstr name="code name" val="LD18"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="rs1-fmc-centre"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="19">
++        <attstr name="name" val="Lane Driver 19"></attstr>
++        <attstr name="short name" val="LD19"></attstr>
++        <attstr name="code name" val="LD19"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="rs1-kenji-08"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="20">
++        <attstr name="name" val="Lane Driver 20"></attstr>
++        <attstr name="short name" val="LD20"></attstr>
++        <attstr name="code name" val="LD20"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="rs2-fai-dot"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="21">
++        <attstr name="name" val="Lane Driver 21"></attstr>
++        <attstr name="short name" val="LD21"></attstr>
++        <attstr name="code name" val="LD21"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="rs2-lion-2m"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="22">
++        <attstr name="name" val="Lane Driver 22"></attstr>
++        <attstr name="short name" val="LD22"></attstr>
++        <attstr name="code name" val="LD22"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="sc-boxer-96"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="23">
++        <attstr name="name" val="Lane Driver 23"></attstr>
++        <attstr name="short name" val="LD23"></attstr>
++        <attstr name="code name" val="LD23"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="sc-cavallo-360"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="24">
++        <attstr name="name" val="Lane Driver 24"></attstr>
++        <attstr name="short name" val="LD24"></attstr>
++        <attstr name="code name" val="LD24"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="sc-fmc-gt4"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="25">
++        <attstr name="name" val="Lane Driver 25"></attstr>
++        <attstr name="short name" val="LD25"></attstr>
++        <attstr name="code name" val="LD25"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="sc-kanagawa-z35gts"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="26">
++        <attstr name="name" val="Lane Driver 26"></attstr>
++        <attstr name="short name" val="LD26"></attstr>
++        <attstr name="code name" val="LD26"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="sc-kongei-kk8s"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="27">
++        <attstr name="name" val="Lane Driver 27"></attstr>
++        <attstr name="short name" val="LD27"></attstr>
++        <attstr name="code name" val="LD27"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="sc-lynx-220"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="28">
++        <attstr name="name" val="Lane Driver 28"></attstr>
++        <attstr name="short name" val="LD28"></attstr>
++        <attstr name="code name" val="LD28"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="sc-murasama-nsx"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="29">
++        <attstr name="name" val="Lane Driver 29"></attstr>
++        <attstr name="short name" val="LD29"></attstr>
++        <attstr name="code name" val="LD29"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="sc-spirit-300"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++	  <section name="30">
++        <attstr name="name" val="Lane Driver 30"></attstr>
++        <attstr name="short name" val="LD30"></attstr>
++        <attstr name="code name" val="LD30"></attstr>
++        <attstr name="desc" val=""></attstr>
++        <attstr name="team" val="Lane Drivers"></attstr>
++        <attstr name="author" val="Chenyi Chen, André Netzeband"></attstr>
++        <attstr name="car name" val="gtc-aichi-aidoru"></attstr>
++		<attstr name="category" val="lanes"></attstr>
++        <attnum name="race number" val="1"></attnum>
++        <attnum name="red" val="1.0"></attnum>
++        <attnum name="green" val="0.2"></attnum>
++        <attnum name="blue" val="0.2"></attnum>
++        <attstr name="features" val=""></attstr>
++      </section>
++
++    </section>
++  </section>
++</params>
+diff --git a/data/drivers/LaneDriver/default.xml b/data/drivers/LaneDriver/default.xml
+new file mode 100644
+index 0000000..f01a398
+--- /dev/null
++++ b/data/drivers/LaneDriver/default.xml
+@@ -0,0 +1,19 @@
++<?xml version="1.0" encoding="iso-8859-1"?>
++<!-- 
++    file          : default.xml 
++    created       : 01 Dec 2007
++    copyright     : (C) 2007-2008 Wolf-Dieter Beelitz
++    $Id$
++    
++    USR rs1 - ALL CARS
++-->
++<!--    This program is free software; you can redistribute it and/or modify  -->
++<!--    it under the terms of the GNU General Public License as published by  -->
++<!--    the Free Software Foundation; either version 2 of the License, or     -->
++<!--    (at your option) any later version.                                   -->
++<!DOCTYPE params SYSTEM "../../../src/libs/tgf/params.dtd">
++<params name="chenyi_AI1" type="template" mode="mw">
++	<section name="skilling">
++		<attnum name="enable" min="0" max="1" val="1"/>
++	</section>
++</params>
+diff --git a/data/drivers/LaneDriver/readme.txt b/data/drivers/LaneDriver/readme.txt
+new file mode 100644
+index 0000000..437400a
+--- /dev/null
++++ b/data/drivers/LaneDriver/readme.txt
+@@ -0,0 +1 @@
++USR RS Serie
+diff --git a/src/drivers/CMakeLists.txt b/src/drivers/CMakeLists.txt
+index e1fc2a4..f39a0bc 100644
+--- a/src/drivers/CMakeLists.txt
++++ b/src/drivers/CMakeLists.txt
+@@ -7,6 +7,7 @@ SD_ADD_SUBDIRECTORY(kilo2008)
+ SD_ADD_SUBDIRECTORY(networkhuman)
+ SD_ADD_SUBDIRECTORY(simplix)
+ SD_ADD_SUBDIRECTORY(usr)
++SD_ADD_SUBDIRECTORY(LaneDriver)
+ 
+ # Work-in-progress / unofficial robots.
+ IF(NOT OPTION_OFFICIAL_ONLY)
+diff --git a/src/drivers/LaneDriver/CLaneDriver.cpp b/src/drivers/LaneDriver/CLaneDriver.cpp
+new file mode 100644
+index 0000000..d7ecd4f
+--- /dev/null
++++ b/src/drivers/LaneDriver/CLaneDriver.cpp
+@@ -0,0 +1,318 @@
++/**
++ *  Copyright (C) 2017 Andre Netzeband
++ * 
++ *  This file is part of "DeepDriving for Speed-Dreams".
++ *
++ *  "DeepDriving for Speed-Dreams" is free software: you can redistribute it 
++ *  and/or modify it under the terms of the GNU General Public License as 
++ *  published by the Free Software Foundation, either version 3 of the License, 
++ *  or (at your option) any later version.
++ *
++ *  "DeepDriving for Speed-Dreams" is distributed in the hope that it 
++ *  will be useful, but WITHOUT ANY WARRANTY; without even the implied 
++ *  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
++ *  See the GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with "DeepDriving for Speed-Dreams".  
++ *  If not, see <http://www.gnu.org/licenses/>.  
++ */
++
++/**
++ * @file CLaneDriver.cpp
++ * @author Andre Netzeband
++ * @date 08.05.2017
++ *
++ * @brief TODO
++ *
++ */
++
++#include <iostream>
++#include <random>
++
++#include <robottools.h>
++#include <car.h>
++#include <raceman.h>
++
++#include "CLaneDriver.h"
++
++using namespace std;
++
++static random_device RealRandomDevice;
++static default_random_engine RandomGenerator(RealRandomDevice());
++
++static int getRandomLane(int Lanes)
++{
++  uniform_int_distribution<int> UniformDistribution(1, Lanes);
++
++  return UniformDistribution(RandomGenerator);
++}
++
++CLaneDriver::CLaneDriver(char const * pName, char const * pDescription, float MaxSpeed, float MinSpeed)
++{
++  mName             = pName;
++  mDescription      = pDescription;
++  mpTrack           = NULL;
++  mpCar             = NULL;
++  mIsFirstDriveStep = true;
++  mMaxSpeed         = MaxSpeed/3.6f;
++  mMinSpeed         = MinSpeed/3.6f;
++  mDriverSpeed      = 0;
++  mStuckCount       = 0;
++  mLaneOffset       = 0;
++  mStartDelay       = 0;
++}
++
++void CLaneDriver::setupTrack(tTrack * pTrack, void * pCarHandle, void ** pCarArguments, tSituation * pRace)
++{
++  cout << "Setup track " << pTrack->name << " for driver " << mName << "." << endl;
++  mpTrack = pTrack;
++}
++
++void CLaneDriver::setupRace(tCarElt * pCar, tSituation * pSituation)
++{
++  cout << "Setup a new race for driver " << mName << "." << endl;
++  mpCar = pCar;
++}
++
++void CLaneDriver::choseSpeed(int StartPosition, int Drivers)
++{
++  float SpeedDiff  = mMaxSpeed - mMinSpeed;
++  float SpeedSteps = SpeedDiff/Drivers;
++  mDriverSpeed = mMaxSpeed - SpeedSteps * (StartPosition-1);
++
++  cout << " * Driver-Speed: " << (mDriverSpeed*3.6) << "km/h from " << (mMaxSpeed*3.6) << "km/h" << endl;
++}
++
++void CLaneDriver::choseLane()
++{
++  switch(mpTrack->lanes)
++  {
++    case 2:
++    {
++      switch (getRandomLane(2))
++      {
++        case 1:
++          cout << " * Drives on lane: left" << endl;
++          mLaneOffset = -2.0;
++          break;
++
++        case 2:
++          cout << " * Drives on lane: right" << endl;
++          mLaneOffset = +2.0;
++          break;
++      }
++      break;
++    }
++
++    case 3:
++    {
++      switch(getRandomLane(3))
++      {
++        case 1:
++          cout << " * Drives on lane: left" << endl;
++          mLaneOffset = -4.0;
++          break;
++
++        case 2:
++          cout << " * Drives on lane: middle" << endl;
++          mLaneOffset = 0.0;
++          break;
++
++        case 3:
++          cout << " * Drives on lane: right" << endl;
++          mLaneOffset = +4.0;
++          break;
++      }
++      break;
++    }
++
++    default:
++    case 1:
++    {
++      cout << " * Drives on lane: middle" << endl;
++      mLaneOffset = 0.0;
++      break;
++    }
++  }
++}
++
++void CLaneDriver::choseStartDelay(int StartPosition)
++{
++  mStartDelay = StartPosition*2.0f;
++}
++
++void CLaneDriver::doFirstStep(tSituation * pSituation)
++{
++  mIsFirstDriveStep = false;
++
++  cout << "Initialize driver " << mName << ":" << endl;
++
++  //int StartPosition = mpManager->getStartingPos(mDriverHandle);
++  int StartPosition = mpCar->info.startRank;
++  int Drivers       = pSituation->raceInfo.ncars;
++
++  cout << " * Starting-Position: " << StartPosition << " from " << Drivers << endl;
++
++  choseSpeed(StartPosition, Drivers);
++  choseLane();
++  choseStartDelay(StartPosition);
++}
++
++
++/// @note Original implementation taken from deep driving project.
++void CLaneDriver::doSpeedControl()
++{
++  static double const MaxDiff = 10/3.6;
++
++  if (mpCar->_speed_x > mDriverSpeed)
++  {
++    double const Diff = std::fmin(mpCar->_speed_x - mDriverSpeed, MaxDiff);
++
++    mpCar->ctrl.brakeCmd = (tdble)((0.5 * Diff)/MaxDiff);
++    mpCar->ctrl.accelCmd = 0.0;
++  }
++  else if (mpCar->_speed_x < mDriverSpeed)
++  {
++    double const Diff = std::fmin(mDriverSpeed - mpCar->_speed_x, MaxDiff);
++
++    mpCar->ctrl.accelCmd = (tdble)((0.5 * Diff)/MaxDiff);
++    mpCar->ctrl.brakeCmd = 0.0;
++  }
++}
++
++/// @note Original implementation taken from deep driving project.
++void CLaneDriver::doStayInLane()
++{
++  double Angle;
++  const float SC = 1.0;
++
++  Angle = RtTrackSideTgAngleL(&(mpCar->_trkPos)) - mpCar->_yaw;
++  NORM_PI_PI(Angle); // put the angle back in the range from -PI to PI
++  Angle -= SC*(mpCar->_trkPos.toMiddle+mLaneOffset)/mpCar->_trkPos.seg->width;
++
++  // set up the values to return
++  mpCar->ctrl.steer = (tdble)(Angle / mpCar->_steerLock);
++}
++
++/// @note Original implementation taken from deep driving project.
++void CLaneDriver::doBackwardTurn()
++{
++  double angle = -RtTrackSideTgAngleL(&(mpCar->_trkPos)) + mpCar->_yaw;
++  NORM_PI_PI(angle); // put the angle back in the range from -PI to PI
++
++  mpCar->ctrl.steer = (tdble)(angle / mpCar->_steerLock);
++  mpCar->ctrl.gear = -1; // reverse gear
++  mpCar->ctrl.accelCmd = 0.3f; // 30% accelerator pedal
++  mpCar->ctrl.brakeCmd = 0.0f; // no brakes
++}
++
++/// @note Original implementation taken from deep driving project.
++int CLaneDriver::calcGear()
++{
++  static const float SHIFT = 0.85f;         /* [-] (% of rpmredline) */
++  static const float SHIFT_MARGIN = 4.0f;   /* [m/s] */
++
++  if (mpCar->_gear <= 0)
++  {
++    return 1;
++  }
++
++  float gr_up = mpCar->_gearRatio[mpCar->_gear + mpCar->_gearOffset];
++  float omega = mpCar->_enginerpmRedLine/gr_up;
++  float wr = mpCar->_wheelRadius(2);
++
++  if (omega*wr*SHIFT < mpCar->_speed_x)
++  {
++    return mpCar->_gear + 1;
++  }
++  else
++  {
++    float gr_down = mpCar->_gearRatio[mpCar->_gear + mpCar->_gearOffset - 1];
++    omega = mpCar->_enginerpmRedLine/gr_down;
++    if (mpCar->_gear > 1 && omega*wr*SHIFT > mpCar->_speed_x + SHIFT_MARGIN)
++    {
++      return mpCar->_gear - 1;
++    }
++  }
++  return mpCar->_gear;
++}
++
++/// @note Original implementation taken from deep driving project.
++void CLaneDriver::drive(tSituation * pSituation)
++{
++  static const double MinTimeToSpeedIncrease = 3*60;
++  memset(&mpCar->ctrl, 0, sizeof(tCarCtrl));
++
++  if (mIsFirstDriveStep)
++  {
++    doFirstStep(pSituation);
++  }
++
++  if ((mDriverSpeed < mMaxSpeed) && (pSituation->currentTime > MinTimeToSpeedIncrease))
++  {
++    cout << "Driver " << mName << " increases speed to " << mMaxSpeed*3.6 << "km/h." << endl;
++    mDriverSpeed = mMaxSpeed;
++  }
++
++  if (mpCar->priv.fuel < 0.1)
++  {
++    //mpCar->info.tank
++    cout << "Driver " << mName << " is runnin gout of fuel" << endl;
++  }
++
++  if (pSituation->currentTime > mStartDelay)
++  {
++    if (isStuck())
++    {
++      doBackwardTurn();
++    }
++    else
++    {
++      doSpeedControl();
++      doStayInLane();
++      mpCar->ctrl.gear = calcGear();
++    }
++  }
++  else
++  {
++    mpCar->ctrl.brakeCmd = 0.5;
++  }
++}
++
++/// @note Original implementation taken from deep driving project.
++bool CLaneDriver::isStuck()
++{
++  static const float MAX_UNSTUCK_SPEED = 5.0;
++  static const float MIN_UNSTUCK_DIST = 3.0;
++  static const double MAX_UNSTUCK_ANGLE = 20.0/180.0*PI;
++  static const int MAX_UNSTUCK_COUNT = 250;
++
++  double angle = RtTrackSideTgAngleL(&(mpCar->_trkPos)) - mpCar->_yaw;
++  NORM_PI_PI(angle);
++
++  if (fabs(angle) > MAX_UNSTUCK_ANGLE &&
++      mpCar->_speed_x < MAX_UNSTUCK_SPEED &&
++      fabs(mpCar->_trkPos.toMiddle) > MIN_UNSTUCK_DIST)
++  {
++    if (mStuckCount > MAX_UNSTUCK_COUNT && mpCar->_trkPos.toMiddle*angle < 0.0)
++    {
++      return true;
++    }
++    else
++    {
++      mStuckCount++;
++      return false;
++    }
++  }
++  else
++  {
++    mStuckCount = 0;
++    return false;
++  }
++}
++
++void CLaneDriver::endRace(tSituation * pSituation)
++{
++  cout << "Ends the race for driver " << mName << "." << endl;
++}
+\ No newline at end of file
+diff --git a/src/drivers/LaneDriver/CLaneDriver.h b/src/drivers/LaneDriver/CLaneDriver.h
+new file mode 100644
+index 0000000..b2941c4
+--- /dev/null
++++ b/src/drivers/LaneDriver/CLaneDriver.h
+@@ -0,0 +1,110 @@
++/**
++ *  Copyright (C) 2017 Andre Netzeband
++ * 
++ *  This file is part of "DeepDriving for Speed-Dreams".
++ *
++ *  "DeepDriving for Speed-Dreams" is free software: you can redistribute it 
++ *  and/or modify it under the terms of the GNU General Public License as 
++ *  published by the Free Software Foundation, either version 3 of the License, 
++ *  or (at your option) any later version.
++ *
++ *  "DeepDriving for Speed-Dreams" is distributed in the hope that it 
++ *  will be useful, but WITHOUT ANY WARRANTY; without even the implied 
++ *  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
++ *  See the GNU General Public License for more details.
++ *
++ *  You should have received a copy of the GNU General Public License
++ *  along with "DeepDriving for Speed-Dreams".  
++ *  If not, see <http://www.gnu.org/licenses/>.  
++ */
++
++/**
++ * @file CLaneDriver.h
++ * @author Andre Netzeband
++ * @date 08.05.2017
++ *
++ * @brief A robot that simply drives on a single lane.
++ *        The lane and speed is chosen automatically
++ *        dependent on the starting position of the
++ *        robot car.
++ *
++ * @note Several parts of this code is taken from the Deep Driving project from Chenyi Chen.
++ *       When using this file, please also consider the original license.
++ *       URL: http://deepdriving.cs.princeton.edu/
++ *
++ */
++
++#include <string>
++
++#include <track.h>
++#include <car.h>
++#include <robot.h>
++
++#ifndef SPEED_DREAMS_2_CLANEDRIVER_H
++#define SPEED_DREAMS_2_CLANEDRIVER_H
++
++
++class CLaneDriver
++{
++  public:
++    /// @brief Constructor.
++    /// @param pName        Is the name of the driver.
++    /// @param pDescription Is the description of the driver.
++    /// @param pManager     Is a driver manager object.
++    /// @param MaxSpeed     Is the maximum speed of this driver.
++    CLaneDriver(char const * pName, char const * pDescription, float MaxSpeed, float MinSpeed);
++
++    /// @brief Setups the track for this driver.
++    /// @param pTrack        Is the track.
++    /// @param pCarHandle    Is the car-handle for that driver.
++    /// @param ppCarArgument Allows to define an argument-object for the car.
++    /// @param pRace         Is the current race situation.
++    void setupTrack(tTrack * pTrack, void * pCarHandle, void ** pCarArguments, tSituation * pRace);
++
++    /// @brief Setups a new race for this driver.
++    /// @param pCar       Is the car-object of this driver.
++    /// @param pSituation Is the situation description for the race.
++    void setupRace(tCarElt * pCar, tSituation * pSituation);
++
++    /// @brief Drives the driver.
++    /// @param pSituation Is the situation description for the race.
++    void drive(tSituation * pSituation);
++
++    /// @brief Ends a race.
++    /// @param pSituation Is the situation description for the race.
++    void endRace(tSituation * pSituation);
++
++    /// @return Returns the name of the driver.
++    char const * getName() const { return mName.c_str(); }
++
++    /// @return Returns the name of the driver.
++    char const * getDescription() const { return mDescription.c_str(); }
++
++  private:
++    void doFirstStep(tSituation * pSituation);
++    void doSpeedControl();
++    void doStayInLane();
++    void doBackwardTurn();
++    int calcGear();
++    bool isStuck();
++    void choseSpeed(int StartPosition, int Drivers);
++    void choseLane();
++    void choseStartDelay(int StartPosition);
++
++    std::string mName;
++    std::string mDescription;
++
++    tTrack * mpTrack;
++    tCarElt * mpCar;
++
++    bool  mIsFirstDriveStep;
++    float mMaxSpeed;
++    float mMinSpeed;
++    float mDriverSpeed;
++    int   mStuckCount;
++    float mLaneOffset;
++    float mStartDelay;
++};
++
++
++#endif //SPEED_DREAMS_2_CLANEDRIVER_H
+diff --git a/src/drivers/LaneDriver/CMakeLists.txt b/src/drivers/LaneDriver/CMakeLists.txt
+new file mode 100644
+index 0000000..486044c
+--- /dev/null
++++ b/src/drivers/LaneDriver/CMakeLists.txt
+@@ -0,0 +1,21 @@
++INCLUDE(../../../cmake/macros.cmake)
++
++SET(ROBOT_NAME "LaneDriver")
++SET(ROBOT_INTERFACE LEGACY_MIN)
++
++SET(ROBOT_SOURCES
++        ${ROBOT_NAME}.cpp
++        CLaneDriver.cpp
++        CLaneDriver.h
++        )
++
++ADD_SDLIB_INCLUDEDIR(robottools tgfclient)
++
++ROBOT_MODULE(NAME ${ROBOT_NAME} VERSION 1.0.0 SOVERSION 1.0.0
++             INTERFACE ${ROBOT_INTERFACE}
++             SOURCES ${ROBOT_SOURCES})
++
++ADD_SDLIB_LIBRARY(${ROBOT_NAME} robottools tgfclient)
++
++# For data associated to the robot module, see data/drivers/human/CMakeLists.txt
++
+diff --git a/src/drivers/LaneDriver/LaneDriver.cpp b/src/drivers/LaneDriver/LaneDriver.cpp
+new file mode 100644
+index 0000000..eb1df00
+--- /dev/null
++++ b/src/drivers/LaneDriver/LaneDriver.cpp
+@@ -0,0 +1,163 @@
++/***************************************************************************
++
++    file                 : LaneDriver1.cpp
++    created              : 2014年 09月 01日 星期一 13:08:18 EDT
++    copyright            : (C) 2002 Chenyi Chen
++    copyright            : (C) 2017 Andre Netzeband
++
++ ***************************************************************************/
++
++/***************************************************************************
++ *                                                                         *
++ *   This program is free software; you can redistribute it and/or modify  *
++ *   it under the terms of the GNU General Public License as published by  *
++ *   the Free Software Foundation; either version 2 of the License, or     *
++ *   (at your option) any later version.                                   *
++ *                                                                         *
++ ***************************************************************************/
++
++/***************************************************************************
++ *                                                                         *
++ *   This file was originally created from Chenyi Chen for the Deep-       *
++ *   Driving project.                                                      *
++ *                                                                         *
++ ***************************************************************************/
++
++
++#ifdef _WIN32
++#include <windows.h>
++#endif
++
++#include <stdio.h>
++#include <stdlib.h> 
++#include <string.h> 
++#include <math.h>
++
++#include <tgf.h> 
++#include <track.h> 
++#include <car.h> 
++#include <raceman.h> 
++#include <robot.h>
++
++#include "CLaneDriver.h"
++
++static tTrack	*curTrack;
++
++static float const sMaxSpeed = 62;
++static float const sMinSpeed = 30;
++static int const sNumberOfDrivers = 30;
++static CLaneDriver * spDriver[sNumberOfDrivers];
++
++static void initTrack(int index, tTrack* track, void *carHandle, void **carParmHandle, tSituation *s); 
++static void newrace(int index, tCarElt* car, tSituation *s); 
++static void drive(int index, tCarElt* car, tSituation *s); 
++static void endrace(int index, tCarElt *car, tSituation *s);
++static void shutdown(int index);
++static int  InitFuncPt(int index, void *pt); 
++
++static char * duplicateString(char const * const pString)
++{
++  size_t const Length = strlen(pString);
++  char * const pNewString = new char[Length+1];
++  strcpy(pNewString, pString);
++
++  assert(pNewString[Length] == '\0');
++
++  return pNewString;
++}
++
++/*
++ * Module entry point  
++ */ 
++extern "C" int LaneDriver(tModInfo *modInfo)
++{
++  memset(modInfo, 0, MAX_MOD_ITF*sizeof(tModInfo));
++
++  std::string Description = "Drives just on a single lane.";
++
++  for(int i = 0; (i < MAX_MOD_ITF) && (i < sNumberOfDrivers); i++)
++  {
++    std::string const Name = "Lane Driver " + std::to_string(i+1);
++
++    assert(spDriver[i] == NULL);
++    spDriver[i] = new CLaneDriver(Name.c_str(), Description.c_str(), sMaxSpeed, sMinSpeed);
++    assert(spDriver[i] != NULL);
++
++    modInfo[i].name    = duplicateString(spDriver[i]->getName());	       /* name of the module (short) */
++    modInfo[i].desc    = duplicateString(spDriver[i]->getDescription());	 /* description of the module (can be long) */
++    modInfo[i].fctInit = InitFuncPt;		                                   /* init function */
++    modInfo[i].gfId    = ROB_IDENT;		                                     /* supported framework version */
++    modInfo[i].index   = i+1;
++  }
++
++  return 0;
++} 
++
++/* Module interface initialization. */
++static int InitFuncPt(int index, void *pt)
++{ 
++    tRobotItf *itf  = (tRobotItf *)pt; 
++
++    itf->rbNewTrack = initTrack;  /* Give the robot the track view called */
++				                          /* for every track change or new race */
++    itf->rbNewRace  = newrace; 	  /* Start a new race */
++    itf->rbDrive    = drive;	    /* Drive during race */
++    itf->rbPitCmd   = NULL;
++    itf->rbEndRace  = endrace;	  /* End of the current race */
++    itf->rbShutdown = shutdown;	  /* Called before the module is unloaded */
++    itf->index      = index; 	    /* Index used if multiple interfaces */
++    return 0; 
++} 
++
++/* Called for every track change or new race. */
++static void initTrack(int index, tTrack* track, void *carHandle, void **carParmHandle, tSituation *s)
++{
++  int const i = index-1;
++  assert(i >= 0);
++
++  curTrack = track;
++  *carParmHandle = NULL;
++
++  assert(spDriver[i] != NULL);
++  spDriver[i]->setupTrack(track, carHandle, carParmHandle, s);
++}
++
++/* Start a new race. */
++static void newrace(int index, tCarElt* car, tSituation *s)
++{
++  int const i = index-1;
++  assert(i >= 0);
++
++  assert(spDriver[i] != NULL);
++  spDriver[i]->setupRace(car, s);
++} 
++
++static void drive(int index, tCarElt* car, tSituation *s) 
++{
++  int const i = index-1;
++  assert(i >= 0);
++
++  assert(spDriver[i] != NULL);
++  spDriver[i]->drive(s);
++}
++
++/* End of the current race */
++static void endrace(int index, tCarElt *car, tSituation *s)
++{
++  int const i = index - 1;
++  assert(i >= 0);
++
++  assert(spDriver[i] != NULL);
++  spDriver[i]->endRace(s);
++}
++
++/* Called before the module is unloaded */
++static void shutdown(int index)
++{
++  int const i = index - 1;
++  assert(i >= 0);
++
++  assert(spDriver[i] != NULL);
++  delete(spDriver[i]);
++}
++
+diff --git a/src/interfaces/track.h b/src/interfaces/track.h
+index 95bd2a2..253c70f 100644
+--- a/src/interfaces/track.h
++++ b/src/interfaces/track.h
+@@ -46,6 +46,7 @@
+ #define TRK_ATT_DESCR               "description"
+ #define TRK_ATT_CAT                 "category"
+ #define TRK_ATT_SUBCAT              "subcategory"
++#define TRK_ATT_LANES               "lanes"
+ 
+ #define TRK_ATT_NONE                "none"
+ #define TRK_ATT_SHORT               "short"
+@@ -652,6 +653,8 @@ typedef struct Track
+     tTrackSeg	  *seg;         /**< Segment list for the main track */
+     tTrackSurface *surfaces;	/**< Segment surface list */
+ 
++    int         lanes;
++
+     t3Dd		min;
+     t3Dd		max;
+     tTrackGraphicInfo	graphic;
+diff --git a/src/libs/tgf/modinfo.h b/src/libs/tgf/modinfo.h
+index 3fcb00a..c1df805 100644
+--- a/src/libs/tgf/modinfo.h
++++ b/src/libs/tgf/modinfo.h
+@@ -30,7 +30,7 @@
+     (no limit for "Unlimited Number of Interfaces" modules)
+     @see	ModList
+  */
+-#define MAX_MOD_ITF 10
++#define MAX_MOD_ITF 30
+ #define GfModInfoDefaultMaxItf MAX_MOD_ITF
+ 
+ /* Name of the module function where run-time informations are exchanged (new scheme) 
+diff --git a/src/modules/track/trackv1/track.cpp b/src/modules/track/trackv1/track.cpp
+index efe5189..794d5f9 100644
+--- a/src/modules/track/trackv1/track.cpp
++++ b/src/modules/track/trackv1/track.cpp
+@@ -139,6 +139,7 @@ GetTrackHeader(void *TrackHandle) {
+     theTrack->authors = GfParmGetStr(TrackHandle, TRK_SECT_HDR, TRK_ATT_AUTHOR, "none");
+     theTrack->category = GfParmGetStr(TrackHandle, TRK_SECT_HDR, TRK_ATT_CAT, "road");
+     theTrack->subcategory = GfParmGetStr(TrackHandle, TRK_SECT_HDR, TRK_ATT_SUBCAT, "none");
++	theTrack->lanes = (int)GfParmGetNum(TrackHandle, TRK_SECT_HDR, TRK_ATT_LANES, (char*)NULL, 0);
+ 
+     // Read Local Info section
+     tTrackLocalInfo *local = &theTrack->local;
+-- 
+2.11.1.windows.1
+
