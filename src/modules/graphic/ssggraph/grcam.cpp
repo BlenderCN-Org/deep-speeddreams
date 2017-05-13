@@ -55,8 +55,7 @@ cGrCamera::getAspectRatio()
     return screen->getViewRatio();
 }
 
-static void
-grMakeLookAtMat4 ( sgMat4 dst, const sgVec3 eye, const sgVec3 center, const sgVec3 up )
+void grMakeLookAtMat4 ( sgMat4 dst, const sgVec3 eye, const sgVec3 center, const sgVec3 up )
 {
   // Caveats:
   // 1) In order to compute the line of sight, the eye point must not be equal
@@ -1948,7 +1947,7 @@ grCamCreateSceneCameraList(class cGrScreen *myscreen, tGrCamHead *cams,
     /* cam F2 = inside, from the board (bonnet view), fixed to the car */
     cam = new cGrCarCamInsideFixedCar(myscreen,
 				      id,
-				      1,	/* drawCurr */
+				      0,	/* drawCurr */
 				      1,	/* drawBG  */
 				      67.5,	/* fovy */
 				      10.0,	/* fovymin */
