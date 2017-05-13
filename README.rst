@@ -5,7 +5,7 @@ Deep-SpeedDreams
 Intention
 ====================
 
-This is a fork of the SpeedDreams project (version 2.2.1) which works together with the DeepDriving implementation from this repository (**ToDo: Add Link, if finished**). It allows to control a robot-car in this game by calculating 14 driving indicators out of the front-camera picture. 
+This is a fork of the SpeedDreams project (version 2.2.1) which works together with the DeepDriving implementation from the repository **ToDo: Add Link, if finished**. It allows to control a robot-car in this game by calculating 14 driving indicators out of the front-camera picture. 
 
 The original DeepDriving implementation is a project from the princeton university (http://deepdriving.cs.princeton.edu/).
 
@@ -23,8 +23,7 @@ Index
     * `Adding a second Camera as Output <https://bitbucket.org/Netzeband/deep-speeddreams/wiki/RecordOwnCamera>`_
 * `Accessing the Output with Python <https://bitbucket.org/Netzeband/deep-speeddreams/wiki/RecordInPython>`_
 
-====================
-* Licence
+Licence
 ====================
 
 The SpeedDreams project is published under the GPL license. All extensions which came from the DeepDriving project are published under the licence from the original DeepDriving Code. All other extensions to the code are published under the GPLv3 licence if not stated differently in code.
