@@ -14,7 +14,10 @@ SET(SSGGRAPH_HEADERS grMoonpos.h grSky.h
                      grtracklight.h 
                      grtrackmap.h grutil.h
                      grvtxtable.h grrain.h
-                     ssggraph.h)
+                     ssggraph.h
+                     CRecordCam.h
+                     CRecordRenderCam.h
+                     CSharedMemroy.h)
 SET(SSGGRAPH_SOURCES grMoonpos.cpp
                      grMoon.cpp grSun.cpp grCloudLayer.cpp grSky.cpp
                      grSkyDome.cpp grSphere.cpp grStars.cpp
@@ -30,7 +33,10 @@ SET(SSGGRAPH_SOURCES grMoonpos.cpp
                      grtracklight.cpp 
                      grtrackmap.cpp grutil.cpp
                      grvtxtable.cpp grrain.cpp
-                     ssggraph.cpp)
+                     ssggraph.cpp
+                     CRecordCam.cpp
+                     CRecordRenderCam.cpp
+                     CSharedMemroy.cpp)
 
 SET(SSGGRAPH_OTHER_SOURCES )
 
@@ -86,3 +92,8 @@ ADD_OPENGL_LIBRARY(ssggraph)
 ADD_SDLIB_LIBRARY(ssggraph portability tgf tgfclient robottools)
 
 SD_INSTALL_FILES(LIB modules/graphic TARGETS ssggraph)
+
+ADD_DEFINITIONS("-DBOOST_ALL_NO_LIB")
+find_package(Boost 1.55 REQUIRED COMPONENTS date_time thread)
+include_directories(${Boost_INCLUDE_DIRS})
+target_link_libraries(ssggraph Boost::date_time Boost::thread)

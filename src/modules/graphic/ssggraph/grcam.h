@@ -33,6 +33,8 @@ class cGrScreen;
 
 GF_TAILQ_HEAD(GrCamHead, cGrCamera);
 
+void grMakeLookAtMat4 ( sgMat4 dst, const sgVec3 eye, const sgVec3 center, const sgVec3 up );
+
 /* Camera interface */
 class cGrCamera 
 {

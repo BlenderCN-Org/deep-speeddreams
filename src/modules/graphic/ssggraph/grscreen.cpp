@@ -32,6 +32,9 @@
 #include "grrain.h"
 #include "grutil.h"
 
+#include "CRecordCam.h"
+#include "CRecordRenderCam.h"
+
 static char buf[1024];
 static char path[1024];
 static char path2[1024];
@@ -42,6 +45,7 @@ cGrScreen::cGrScreen(int myid)
 	curCar = NULL;
 	curCam = NULL;
 	mirrorCam = NULL;
+	pRecordCam = NULL;
 	dispCam = NULL;
 	boardCam = NULL;
 	bgCam = NULL;
@@ -77,6 +81,11 @@ cGrScreen::~cGrScreen()
 	
 	delete boardCam;
 	delete mirrorCam;
+	if (pRecordCam)
+	{
+		delete pRecordCam;
+		pRecordCam = NULL;
+	}
 	delete bgCam;
 	
 	if (board)
@@ -135,6 +144,11 @@ void cGrScreen::activate(int x, int y, int w, int h, float v)
 	if (mirrorCam) {
 	    // call this method after scr* values have been updated
 	    mirrorCam->adaptScreenSize();
+	}
+
+	if (pRecordCam)
+	{
+		pRecordCam->adaptScreenSize();
 	}
 
 	if (curCam) {
@@ -329,9 +343,11 @@ void cGrScreen::camDraw(tSituation *s)
 	
 	// Sort the cars by distance for transparent windows
 	TheDispCam = dispCam; // Needed by compareCars() ordering function
-	if (dispCam != mirrorCam)
+	if (dispCam != mirrorCam /*&& dispCam != pRecordCam*/)
+	{
 		qsort(cars, s->_ncars, sizeof(tCarElt*), compareCars);
-	
+	}
+
 	for (int i = 0; i < s->_ncars; i++) {
 		grDrawCar(s, cars[i], curCar, dispCam->getDrawCurrent(), dispCam->getDrawDriver(), s->currentTime, dispCam);
 	}
@@ -430,6 +446,12 @@ void cGrScreen::update(tSituation *s, const cGrFrameInfo* frameInfo)
 	if (mirrorFlag && curCam->isMirrorAllowed ()) {
 		dispCam = mirrorCam;
 		camDraw (s);
+	}
+
+	if (pRecordCam)
+	{
+		dispCam = pRecordCam;
+		pRecordCam->renderImage(s, frameInfo->nTotalFrames);
 	}
 	
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
@@ -584,7 +606,24 @@ void cGrScreen::initCams(tSituation *s)
 			fixedFar ? fixedFar : 300.0 * fovFactor	// fogend
 		);
 	}
-	
+
+	if (!pRecordCam)
+	{
+		pRecordCam = new CRecordRenderCam(
+				this,
+				-1,
+				0,					// drawCurr
+				1,					// drawBG
+				67.5,	/* fovy */
+				10.0,	/* fovymin */
+				95.0,	/* fovymax */
+				0.3,	/* near */
+				fixedFar ? fixedFar : 600.0 * fovFactor,	/* far */
+				fixedFar ? fixedFar/2 : 300.0 * fovFactor,	/* fogstart */
+				fixedFar ? fixedFar : 600.0 * fovFactor	/* fogend */
+		);
+	}
+
 	// Scene Cameras
 	memset(cams, 0, sizeof(cams));
 	grCamCreateSceneCameraList(this, cams, fovFactor, fixedFar);

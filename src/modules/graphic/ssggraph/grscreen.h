@@ -21,6 +21,7 @@
 
 #include <car.h>			//tCarElt
 #include "grcam.h"		//Cameras
+#include "CRecordCam.h"
 
 class cGrBoard;
 class cGrFrameInfo;
@@ -37,6 +38,7 @@ class cGrScreen {
 	
 		class cGrPerspCamera *curCam;			// The current camera.
 		class cGrCarCamMirror *mirrorCam;		// The mirror camera.
+		class CRecordCam *pRecordCam;       // The camera to record the screen.
 		class cGrPerspCamera *dispCam;			// The display camera.
 		class cGrOrthoCamera *boardCam;			// The board camera.
 		class cGrBackgroundCam *bgCam;			// The background camera.
