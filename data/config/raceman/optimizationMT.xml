@@ -15,7 +15,6 @@
 
   <section name="Tracks">
     <attnum name="maximum number" val="28"/>
-
     <section name="1">
       <attstr name="name" val="aalborg"/>
       <attstr name="category" val="circuit"/>
@@ -79,77 +78,77 @@
     <section name="13">
       <attstr name="name" val="charmey"/>
       <attstr name="category" val="road"/>
-    </section>  
+    </section>
 
     <section name="14">
       <attstr name="name" val="e-track-2"/>
       <attstr name="category" val="road"/>
-    </section> 
+    </section>
 
     <section name="15">
       <attstr name="name" val="e-track-3"/>
       <attstr name="category" val="road"/>
-    </section> 
+    </section>
 
     <section name="16">
       <attstr name="name" val="e-track-4"/>
       <attstr name="category" val="road"/>
-    </section> 
+    </section>
 
     <section name="17">
       <attstr name="name" val="inuksuk"/>
       <attstr name="category" val="road"/>
-    </section> 
+    </section>
 
     <section name="18">
       <attstr name="name" val="lombaro"/>
       <attstr name="category" val="road"/>
-    </section> 
+    </section>
 
     <section name="19">
       <attstr name="name" val="longday"/>
       <attstr name="category" val="road"/>
-    </section> 
+    </section>
 
     <section name="20">
       <attstr name="name" val="ole-road-1"/>
       <attstr name="category" val="road"/>
-    </section> 
+    </section>
 
     <section name="21">
       <attstr name="name" val="peters"/>
       <attstr name="category" val="road"/>
-    </section> 
+    </section>
 
     <section name="22">
       <attstr name="name" val="pinabashi"/>
       <attstr name="category" val="road"/>
-    </section> 
+    </section>
 
     <section name="23">
       <attstr name="name" val="prenzlau"/>
       <attstr name="category" val="road"/>
-    </section> 
+    </section>
 
     <section name="24">
       <attstr name="name" val="salty"/>
       <attstr name="category" val="road"/>
-    </section> 
+    </section>
 
     <section name="25">
       <attstr name="name" val="spring"/>
       <attstr name="category" val="road"/>
-    </section> 
+    </section>
 
     <section name="26">
       <attstr name="name" val="street-1"/>
       <attstr name="category" val="road"/>
-    </section> 
+    </section>
 
     <section name="27">
       <attstr name="name" val="wheel-1"/>
       <attstr name="category" val="road"/>
-    </section> 
+    </section>
 
   </section>
 
