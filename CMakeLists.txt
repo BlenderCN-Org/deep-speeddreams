@@ -16,7 +16,7 @@ SET(NEXT_MAJOR_MINOR_VERSION "2.2") # Next major.minor version
 
 # Uncomment if you don't want automatic SVN version detection
 # (poor performances under Windows, don't work with git-svn, ...)
-# SET(OPTION_AUTOVERSION Off)
+SET(OPTION_AUTOVERSION Off)
 
 IF(NOT OPTION_AUTOVERSION)
 	
