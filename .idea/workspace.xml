@@ -2,52 +2,52 @@
 <project version="4">
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
     <generated>
-      <config projectName="speed-dreams-2" targetName="legacymenu" />
-      <config projectName="speed-dreams-2" targetName="ephemeris" />
-      <config projectName="speed-dreams-2" targetName="learning" />
-      <config projectName="speed-dreams-2" targetName="rootdoc" />
-      <config projectName="speed-dreams-2" targetName="shaders" />
-      <config projectName="speed-dreams-2" targetName="simuv4" />
-      <config projectName="speed-dreams-2" targetName="math" />
-      <config projectName="speed-dreams-2" targetName="simuv3" />
-      <config projectName="speed-dreams-2" targetName="tgf" />
-      <config projectName="speed-dreams-2" targetName="usr" />
-      <config projectName="speed-dreams-2" targetName="simuv2.1" />
-      <config projectName="speed-dreams-2" targetName="genparoptv1" />
-      <config projectName="speed-dreams-2" targetName="sd2-nfs2ac" />
-      <config projectName="speed-dreams-2" targetName="shadow" />
-      <config projectName="speed-dreams-2" targetName="standardgame" />
-      <config projectName="speed-dreams-2" targetName="textonly" />
-      <config projectName="speed-dreams-2" targetName="PACKAGE_SRC" />
-      <config projectName="speed-dreams-2" targetName="interfaces" />
       <config projectName="speed-dreams-2" targetName="tgfclient" />
-      <config projectName="speed-dreams-2" targetName="UNINSTALL" />
-      <config projectName="speed-dreams-2" targetName="simplix" />
-      <config projectName="speed-dreams-2" targetName="tracks_xml" />
-      <config projectName="speed-dreams-2" targetName="telemetryv1" />
-      <config projectName="speed-dreams-2" targetName="networkhuman" />
-      <config projectName="speed-dreams-2" targetName="portability" />
-      <config projectName="speed-dreams-2" targetName="ssggraph" />
-      <config projectName="speed-dreams-2" targetName="sd2-nfsperf" />
-      <config projectName="speed-dreams-2" targetName="networking" />
-      <config projectName="speed-dreams-2" targetName="install_speed-dreams-2" />
-      <config projectName="speed-dreams-2" targetName="speed-dreams-2" />
-      <config projectName="speed-dreams-2" targetName="raceman" />
-      <config projectName="speed-dreams-2" targetName="kilo2008" />
-      <config projectName="speed-dreams-2" targetName="tgfdata" />
-      <config projectName="speed-dreams-2" targetName="sd2-accc" />
-      <config projectName="speed-dreams-2" targetName="human" />
-      <config projectName="speed-dreams-2" targetName="xmlversion" />
-      <config projectName="speed-dreams-2" targetName="sd2-menuview" />
+      <config projectName="speed-dreams-2" targetName="math" />
+      <config projectName="speed-dreams-2" targetName="usr" />
+      <config projectName="speed-dreams-2" targetName="tgf" />
+      <config projectName="speed-dreams-2" targetName="rootdoc" />
       <config projectName="speed-dreams-2" targetName="osggraph" />
-      <config projectName="speed-dreams-2" targetName="robottools" />
-      <config projectName="speed-dreams-2" targetName="sd2-trackgen" />
-      <config projectName="speed-dreams-2" targetName="legacymenu_xml" />
-      <config projectName="speed-dreams-2" targetName="trackv1" />
-      <config projectName="speed-dreams-2" targetName="settings_versions" />
-      <config projectName="speed-dreams-2" targetName="LaneDriver" />
-      <config projectName="speed-dreams-2" targetName="snddefault" />
+      <config projectName="speed-dreams-2" targetName="human" />
       <config projectName="speed-dreams-2" targetName="dandroid" />
+      <config projectName="speed-dreams-2" targetName="sd2-trackgen" />
+      <config projectName="speed-dreams-2" targetName="speed-dreams-2" />
+      <config projectName="speed-dreams-2" targetName="kilo2008" />
+      <config projectName="speed-dreams-2" targetName="legacymenu_xml" />
+      <config projectName="speed-dreams-2" targetName="textonly" />
+      <config projectName="speed-dreams-2" targetName="tracks_xml" />
+      <config projectName="speed-dreams-2" targetName="trackv1" />
+      <config projectName="speed-dreams-2" targetName="portability" />
+      <config projectName="speed-dreams-2" targetName="sd2-nfs2ac" />
+      <config projectName="speed-dreams-2" targetName="ephemeris" />
+      <config projectName="speed-dreams-2" targetName="telemetryv1" />
+      <config projectName="speed-dreams-2" targetName="sd2-nfsperf" />
+      <config projectName="speed-dreams-2" targetName="raceman" />
+      <config projectName="speed-dreams-2" targetName="networkhuman" />
+      <config projectName="speed-dreams-2" targetName="ssggraph" />
+      <config projectName="speed-dreams-2" targetName="networking" />
+      <config projectName="speed-dreams-2" targetName="sd2-accc" />
+      <config projectName="speed-dreams-2" targetName="xmlversion" />
+      <config projectName="speed-dreams-2" targetName="standardgame" />
+      <config projectName="speed-dreams-2" targetName="robottools" />
+      <config projectName="speed-dreams-2" targetName="interfaces" />
+      <config projectName="speed-dreams-2" targetName="genparoptv1" />
+      <config projectName="speed-dreams-2" targetName="snddefault" />
+      <config projectName="speed-dreams-2" targetName="UNINSTALL" />
+      <config projectName="speed-dreams-2" targetName="install_speed-dreams-2" />
+      <config projectName="speed-dreams-2" targetName="PACKAGE_SRC" />
+      <config projectName="speed-dreams-2" targetName="settings_versions" />
+      <config projectName="speed-dreams-2" targetName="tgfdata" />
+      <config projectName="speed-dreams-2" targetName="simuv2.1" />
+      <config projectName="speed-dreams-2" targetName="legacymenu" />
+      <config projectName="speed-dreams-2" targetName="shaders" />
+      <config projectName="speed-dreams-2" targetName="learning" />
+      <config projectName="speed-dreams-2" targetName="shadow" />
+      <config projectName="speed-dreams-2" targetName="simuv4" />
+      <config projectName="speed-dreams-2" targetName="simuv3" />
+      <config projectName="speed-dreams-2" targetName="LaneDriver" />
+      <config projectName="speed-dreams-2" targetName="simplix" />
+      <config projectName="speed-dreams-2" targetName="sd2-menuview" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -60,11 +60,13 @@
   <component name="ChangeListManager">
     <list default="true" id="9761ed18-0676-4744-81f8-8805a908d55c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modules/graphic/ssggraph/CMakeLists.txt" afterPath="$PROJECT_DIR$/src/modules/graphic/ssggraph/CMakeLists.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modules/graphic/ssggraph/grcam.cpp" afterPath="$PROJECT_DIR$/src/modules/graphic/ssggraph/grcam.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modules/graphic/ssggraph/grcam.h" afterPath="$PROJECT_DIR$/src/modules/graphic/ssggraph/grcam.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.cpp" afterPath="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.h" afterPath="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordRenderCam.cpp" afterPath="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordRenderCam.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordRenderCam.h" afterPath="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordRenderCam.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modules/graphic/ssggraph/CSharedMemroy.cpp" afterPath="$PROJECT_DIR$/src/modules/graphic/ssggraph/CSharedMemroy.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modules/graphic/ssggraph/CSharedMemroy.h" afterPath="$PROJECT_DIR$/src/modules/graphic/ssggraph/CSharedMemroy.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modules/graphic/ssggraph/grscreen.cpp" afterPath="$PROJECT_DIR$/src/modules/graphic/ssggraph/grscreen.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modules/graphic/ssggraph/grscreen.h" afterPath="$PROJECT_DIR$/src/modules/graphic/ssggraph/grscreen.h" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/build/win64-vc2015/debug/" />
@@ -79,33 +81,23 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="grcam.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grcam.cpp">
+      <file leaf-file-name="CRecordCam.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3383">
-              <caret line="199" column="22" lean-forward="false" selection-start-line="199" selection-start-column="22" selection-end-line="199" selection-end-column="22" />
+            <state relative-caret-position="525">
+              <caret line="65" column="39" lean-forward="true" selection-start-line="65" selection-start-column="26" selection-end-line="65" selection-end-column="39" />
               <folding>
-                <element signature="e#1041#1065#0" expanded="true" />
+                <element signature="e#977#995#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CRecordCam.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1173">
-              <caret line="69" column="18" lean-forward="false" selection-start-line="69" selection-start-column="18" selection-end-line="69" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="grscreen.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="grscreen.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grscreen.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="10404">
-              <caret line="612" column="13" lean-forward="false" selection-start-line="612" selection-start-column="13" selection-end-line="612" selection-end-column="13" />
+            <state relative-caret-position="598">
+              <caret line="611" column="28" lean-forward="false" selection-start-line="611" selection-start-column="28" selection-end-line="611" selection-end-column="28" />
               <folding>
                 <element signature="e#1008#1029#0" expanded="true" />
               </folding>
@@ -116,8 +108,8 @@
       <file leaf-file-name="CRecordCam.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="88" column="28" lean-forward="false" selection-start-line="88" selection-start-column="18" selection-end-line="88" selection-end-column="28" />
+            <state relative-caret-position="712">
+              <caret line="138" column="27" lean-forward="false" selection-start-line="138" selection-start-column="27" selection-end-line="138" selection-end-column="27" />
               <folding>
                 <element signature="e#936#954#0" expanded="true" />
               </folding>
@@ -125,11 +117,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CSharedMemroy.cpp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CSharedMemroy.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CSharedMemroy.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1006">
-              <caret line="75" column="69" lean-forward="false" selection-start-line="75" selection-start-column="60" selection-end-line="75" selection-end-column="69" />
+            <state relative-caret-position="1088">
+              <caret line="82" column="0" lean-forward="true" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
               <folding>
                 <element signature="e#939#965#0" expanded="true" />
               </folding>
@@ -140,8 +132,8 @@
       <file leaf-file-name="CSharedMemroy.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CSharedMemroy.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="627">
-              <caret line="77" column="22" lean-forward="false" selection-start-line="77" selection-start-column="22" selection-end-line="77" selection-end-column="22" />
+            <state relative-caret-position="309">
+              <caret line="145" column="1" lean-forward="true" selection-start-line="145" selection-start-column="1" selection-end-line="145" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -150,8 +142,8 @@
       <file leaf-file-name="CRecordRenderCam.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordRenderCam.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2941">
-              <caret line="173" column="22" lean-forward="false" selection-start-line="173" selection-start-column="22" selection-end-line="173" selection-end-column="22" />
+            <state relative-caret-position="695">
+              <caret line="223" column="47" lean-forward="false" selection-start-line="223" selection-start-column="47" selection-end-line="223" selection-end-column="47" />
               <folding>
                 <element signature="e#942#971#0" expanded="true" />
               </folding>
@@ -182,8 +174,8 @@
       <file leaf-file-name="CRecordRenderCam.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordRenderCam.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="867">
-              <caret line="51" column="4" lean-forward="false" selection-start-line="51" selection-start-column="4" selection-end-line="51" selection-end-column="4" />
+            <state relative-caret-position="576">
+              <caret line="55" column="41" lean-forward="false" selection-start-line="55" selection-start-column="41" selection-end-line="55" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -247,14 +239,14 @@
         <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/grcam.cpp" />
         <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/grcam.h" />
         <option value="C:/OpenCV/opencv/build/OpenCVConfig.cmake" />
-        <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/grscreen.cpp" />
-        <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordRenderCam.h" />
-        <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordRenderCam.cpp" />
-        <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.h" />
         <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/CSharedMemroy.cpp" />
         <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/CSharedMemroy.h" />
+        <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.h" />
         <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.cpp" />
+        <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordRenderCam.h" />
+        <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordRenderCam.cpp" />
+        <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/grscreen.cpp" />
       </list>
     </option>
   </component>
@@ -300,6 +292,19 @@
               <item name="speed-dreams-2" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="speed-dreams-2" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="drivers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="speed-dreams-2" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="drivers" type="462c0819:PsiDirectoryNode" />
+              <item name="LaneDriver" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="speed-dreams-2" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
@@ -751,26 +756,29 @@
       <workItem from="1494595475431" duration="2851000" />
       <workItem from="1494600029879" duration="5094000" />
       <workItem from="1494605732307" duration="6052000" />
+      <workItem from="1494928949469" duration="77000" />
+      <workItem from="1494929231590" duration="10807000" />
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="116552000" />
+    <option name="totallyTimeSpent" value="127436000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12148438" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.4984375" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32924962" sideWeight="0.4984375" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4486983" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.503125" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.496875" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12148438" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -780,7 +788,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -903,13 +910,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/drivers/LaneDriver/CLaneDriver.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="537">
-          <caret line="54" column="12" lean-forward="false" selection-start-line="54" selection-start-column="12" selection-end-line="54" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/drivers/usr/src/mod.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
@@ -949,7 +949,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
           <caret line="160" column="6" lean-forward="false" selection-start-line="160" selection-start-column="6" selection-end-line="160" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1058,16 +1057,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grscreen.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10404">
-          <caret line="612" column="13" lean-forward="false" selection-start-line="612" selection-start-column="13" selection-end-line="612" selection-end-column="13" />
-          <folding>
-            <element signature="e#1008#1029#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grcam.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3383">
@@ -1075,14 +1064,6 @@
           <folding>
             <element signature="e#1041#1065#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordRenderCam.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="867">
-          <caret line="51" column="4" lean-forward="false" selection-start-line="51" selection-start-column="4" selection-end-line="51" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1115,14 +1096,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1173">
-          <caret line="69" column="18" lean-forward="false" selection-start-line="69" selection-start-column="18" selection-end-line="69" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1666">
@@ -1131,40 +1104,76 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordRenderCam.cpp">
+    <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CSharedMemroy.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2941">
-          <caret line="173" column="22" lean-forward="false" selection-start-line="173" selection-start-column="22" selection-end-line="173" selection-end-column="22" />
+        <state relative-caret-position="1088">
+          <caret line="82" column="0" lean-forward="true" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
           <folding>
-            <element signature="e#942#971#0" expanded="true" />
+            <element signature="e#939#965#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CSharedMemroy.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="627">
-          <caret line="77" column="22" lean-forward="false" selection-start-line="77" selection-start-column="22" selection-end-line="77" selection-end-column="22" />
+        <state relative-caret-position="309">
+          <caret line="145" column="1" lean-forward="true" selection-start-line="145" selection-start-column="1" selection-end-line="145" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/drivers/LaneDriver/CLaneDriver.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="184" column="18" lean-forward="false" selection-start-line="184" selection-start-column="18" selection-end-line="184" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="88" column="28" lean-forward="false" selection-start-line="88" selection-start-column="18" selection-end-line="88" selection-end-column="28" />
+        <state relative-caret-position="712">
+          <caret line="138" column="27" lean-forward="false" selection-start-line="138" selection-start-column="27" selection-end-line="138" selection-end-column="27" />
           <folding>
             <element signature="e#936#954#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CSharedMemroy.cpp">
+    <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1006">
-          <caret line="75" column="69" lean-forward="false" selection-start-line="75" selection-start-column="60" selection-end-line="75" selection-end-column="69" />
+        <state relative-caret-position="525">
+          <caret line="65" column="39" lean-forward="true" selection-start-line="65" selection-start-column="26" selection-end-line="65" selection-end-column="39" />
           <folding>
-            <element signature="e#939#965#0" expanded="true" />
+            <element signature="e#977#995#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordRenderCam.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="55" column="41" lean-forward="false" selection-start-line="55" selection-start-column="41" selection-end-line="55" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordRenderCam.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="695">
+          <caret line="223" column="47" lean-forward="false" selection-start-line="223" selection-start-column="47" selection-end-line="223" selection-end-column="47" />
+          <folding>
+            <element signature="e#942#971#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grscreen.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="598">
+          <caret line="611" column="28" lean-forward="false" selection-start-line="611" selection-start-column="28" selection-end-line="611" selection-end-column="28" />
+          <folding>
+            <element signature="e#1008#1029#0" expanded="true" />
           </folding>
         </state>
       </provider>
