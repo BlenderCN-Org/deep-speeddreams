@@ -28,6 +28,7 @@
  */
 
 #include "grcam.h"
+#include "CSharedMemroy.h"
 
 #ifndef SPEED_DREAMS_2_CRECORDCAM_H
 #define SPEED_DREAMS_2_CRECORDCAM_H
@@ -56,12 +57,13 @@ class CRecordCam : public cGrCarCamMirror
     virtual ~CRecordCam();
 
     virtual void adaptScreenSize();
+    virtual void update(tCarElt *pCar, tSituation *pSituation);
     virtual void setModelView();
-    virtual void renderImage(tSituation * pSituation, uint64_t FrameNumber);
+    virtual void renderImage(tCarElt *pCar, tSituation * pSituation, uint64_t FrameNumber);
 
   protected:
     virtual void storeImage(int X, int Y, int Height, int Width);
-    virtual void doRender(tSituation * pSituation);
+    virtual void doRender(tCarElt *pCar, tSituation * pSituation);
 
     cGrScreen * mpScreen;
     int mScreenX;
@@ -70,6 +72,8 @@ class CRecordCam : public cGrCarCamMirror
     int mMaxWidth;
     CSharedMemory * mpSharedMemory;
     double mLastTime;
+    Game_t   GameData;
+    Labels_t LabelData;
 };
 
 #endif //SPEED_DREAMS_2_CRECORDCAM_H

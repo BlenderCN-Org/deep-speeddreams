@@ -53,7 +53,7 @@ class CRecordRenderCam : public CRecordCam
     virtual void update(tCarElt *car, tSituation *s);
     virtual void afterDraw (void);
     virtual void beforeDraw (void);
-    virtual void doRender(tSituation * pSituation);
+    virtual void doRender(tCarElt *pCar, tSituation * pSituation);
 
   protected:
     GLuint mFramebufferName;

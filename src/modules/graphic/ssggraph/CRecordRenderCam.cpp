@@ -197,11 +197,7 @@ void CRecordRenderCam::update(tCarElt *car, tSituation *s) {
   up[1] = car->_posMat[2][1];
   up[2] = car->_posMat[2][2];
 
-  speed[0] =car->pub.DynGCg.vel.x;
-  speed[1] =car->pub.DynGCg.vel.y;
-  speed[2] =car->pub.DynGCg.vel.z;
-
-  Speed = (int)(car->_speed_x * 3.6f);
+  CRecordCam::update(car, s);
 }
 
 
@@ -225,7 +221,7 @@ void CRecordRenderCam::afterDraw (void)
   glPopAttrib();
 }
 
-void CRecordRenderCam::doRender(tSituation * pSituation)
+void CRecordRenderCam::doRender(tCarElt *pCar, tSituation * pSituation)
 {
   mpScreen->camDraw(pSituation);
 }

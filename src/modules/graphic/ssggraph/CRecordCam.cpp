@@ -54,6 +54,8 @@ CRecordCam::CRecordCam(cGrScreen * pMyScreen,
   mLastTime = GfTimeClock();
 
   mpSharedMemory = new CSharedMemory();
+
+  memset(&LabelData, 0, sizeof(LabelData));
 }
 
 CRecordCam::~CRecordCam()
@@ -82,6 +84,17 @@ void CRecordCam::adaptScreenSize()
   assert(mMaxWidth  - mScreenX <= RECORD_MAX_IMAGE_WIDTH);
 }
 
+void CRecordCam::update(tCarElt *pCar, tSituation *pSituation)
+{
+  speed[0] =pCar->pub.DynGCg.vel.x;
+  speed[1] =pCar->pub.DynGCg.vel.y;
+  speed[2] =pCar->pub.DynGCg.vel.z;
+
+  GameData.Speed = (pCar->_speed_x * 3.6f);
+
+  Speed = (int)GameData.Speed;
+}
+
 void CRecordCam::storeImage(int X, int Y, int Height, int Width)
 {
   assert(mpSharedMemory);
@@ -102,10 +115,13 @@ void CRecordCam::storeImage(int X, int Y, int Height, int Width)
   pMemory->Image.ImageWidth = EffectiveWidth;
   glReadPixels(X, Y, Width, Height, GL_BGR, GL_UNSIGNED_BYTE, (GLvoid*)pMemory->Image.Data);
 
+  memcpy(&(pMemory->Labels), &LabelData, sizeof(LabelData));
+  memcpy(&(pMemory->Game), &GameData, sizeof(GameData));
+
   mpSharedMemory->indicateWrite();
 }
 
-void CRecordCam::renderImage(tSituation * pSituation, uint64_t FrameNumber)
+void CRecordCam::renderImage(tCarElt *pCar, tSituation * pSituation, uint64_t FrameNumber)
 {
   double Time = GfTimeClock();
   double Difference = Time - mLastTime;
@@ -113,12 +129,13 @@ void CRecordCam::renderImage(tSituation * pSituation, uint64_t FrameNumber)
   if (Difference > (1.0/(double)RECORD_FRAME_RATE))
   {
     mLastTime = Time;
-    doRender(pSituation);
+    doRender(pCar, pSituation);
   }
 }
 
 
-void CRecordCam::doRender(tSituation * pSituation)
+void CRecordCam::doRender(tCarElt *pCar, tSituation * pSituation)
 {
+  update(pCar, pSituation);
   storeImage(mScreenX, mScreenY, mMaxHeight, mMaxWidth);
 }

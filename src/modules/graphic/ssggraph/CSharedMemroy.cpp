@@ -39,7 +39,8 @@ typedef mapped_region Region_t;
 
 CSharedMemory::CSharedMemory():
   mpMemory(NULL),
-  mpRegion(NULL)
+  mpRegion(NULL),
+  mWriteNumber(0)
 {
   mpMemory = new Memory_t(open_or_create, "DeepDrivingMemory", read_write, sizeof(Data_t));
   assert(mpMemory);
@@ -82,5 +83,7 @@ void CSharedMemory::waitOnRead()
 
 void CSharedMemory::indicateWrite()
 {
+  mWriteNumber++;
+  getAddress()->Sync.WriteNumber = mWriteNumber;
   getAddress()->Sync.IsWritten = 1;
 }

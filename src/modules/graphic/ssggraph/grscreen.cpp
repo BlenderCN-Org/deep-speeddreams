@@ -451,7 +451,7 @@ void cGrScreen::update(tSituation *s, const cGrFrameInfo* frameInfo)
 	if (pRecordCam)
 	{
 		dispCam = pRecordCam;
-		pRecordCam->renderImage(s, frameInfo->nTotalFrames);
+		pRecordCam->renderImage(curCar, s, frameInfo->nTotalFrames);
 	}
 	
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
@@ -609,7 +609,7 @@ void cGrScreen::initCams(tSituation *s)
 
 	if (!pRecordCam)
 	{
-		pRecordCam = new CRecordRenderCam(
+		pRecordCam = new CRecordCam(
 				this,
 				-1,
 				0,					// drawCurr
