@@ -23,9 +23,8 @@ while not IsExit:
     # Output image from memory
     cv2.imshow("SpeedDreams Image", Memory.Image)
 
-    if cv2.waitKey(10) == 27:
-      IsExit = True
-
     # Indicate that reader process is ready and a new value can be written
     Memory.indicateReady()
 
+  if cv2.waitKey(10) == 27:
+    IsExit = True
