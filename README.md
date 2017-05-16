@@ -10,14 +10,16 @@ If you are simply looking for the original SpeedDreams project, please visit htt
 
 ## Index
 
-* [Installation](https://bitbucket.org/Netzeband/deep-speeddreams/wiki/Installation)
+* Installation
     * [Compiling from Source (Windows)](https://bitbucket.org/Netzeband/deep-speeddreams/wiki/InstallationSourceWindows)
-    * [Compiling from Source (Linux)](https://bitbucket.org/Netzeband/deep-speeddreams/wiki/InstallationSourceLinux>)
+    * [Compiling from Source (Linux)](https://bitbucket.org/Netzeband/deep-speeddreams/wiki/InstallationSourceLinux)
 * [Configuration](https://bitbucket.org/Netzeband/deep-speeddreams/wiki/Configuration)
 * [Adapting the Camera](https://bitbucket.org/Netzeband/deep-speeddreams/wiki/Camera)
-    * [Framebuffer output (current Screen)](https://bitbucket.org/Netzeband/deep-speeddreams/wiki/RecordCamera)
-    * [Adding a second Camera as Output](https://bitbucket.org/Netzeband/deep-speeddreams/wiki/RecordOwnCamera)
+    * [Record Images from the Main Camera](https://bitbucket.org/Netzeband/deep-speeddreams/wiki/Camera#markdown-header-record-images-from-the-main-camera)
+    * [Record Images from a separate Camera](https://bitbucket.org/Netzeband/deep-speeddreams/wiki/Camera#markdown-header-record-images-from-a-separate-camera)
+    * [Shared-Memory](https://bitbucket.org/Netzeband/deep-speeddreams/wiki/Camera#markdown-header-shared-memory)
 * [Accessing the Output with Python](https://bitbucket.org/Netzeband/deep-speeddreams/wiki/RecordInPython)
+* [Label-Description](https://bitbucket.org/Netzeband/deep-speeddreams/wiki/LabelDescription)
 
 ## Licence
 
