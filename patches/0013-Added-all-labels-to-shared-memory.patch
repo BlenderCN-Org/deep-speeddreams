@@ -1,0 +1,337 @@
+From 23460021a43b00a318b578b04493cb526bccf56a Mon Sep 17 00:00:00 2001
+From: Andre <andre.netzeband@hm.edu>
+Date: Tue, 16 May 2017 19:22:59 +0200
+Subject: [PATCH] Added all labels to shared-memory.
+
+---
+ src/modules/graphic/ssggraph/CRecordCam.cpp       |  23 ++++-
+ src/modules/graphic/ssggraph/CRecordCam.h         |   8 +-
+ src/modules/graphic/ssggraph/CRecordRenderCam.cpp |   8 +-
+ src/modules/graphic/ssggraph/CRecordRenderCam.h   |   2 +-
+ src/modules/graphic/ssggraph/CSharedMemroy.cpp    |   5 +-
+ src/modules/graphic/ssggraph/CSharedMemroy.h      | 100 ++++++++++++++++++++++
+ src/modules/graphic/ssggraph/grscreen.cpp         |   4 +-
+ 7 files changed, 135 insertions(+), 15 deletions(-)
+
+diff --git a/src/modules/graphic/ssggraph/CRecordCam.cpp b/src/modules/graphic/ssggraph/CRecordCam.cpp
+index 1a42fc2..c2f94fa 100644
+--- a/src/modules/graphic/ssggraph/CRecordCam.cpp
++++ b/src/modules/graphic/ssggraph/CRecordCam.cpp
+@@ -54,6 +54,8 @@ CRecordCam::CRecordCam(cGrScreen * pMyScreen,
+   mLastTime = GfTimeClock();
+ 
+   mpSharedMemory = new CSharedMemory();
++
++  memset(&LabelData, 0, sizeof(LabelData));
+ }
+ 
+ CRecordCam::~CRecordCam()
+@@ -82,6 +84,17 @@ void CRecordCam::adaptScreenSize()
+   assert(mMaxWidth  - mScreenX <= RECORD_MAX_IMAGE_WIDTH);
+ }
+ 
++void CRecordCam::update(tCarElt *pCar, tSituation *pSituation)
++{
++  speed[0] =pCar->pub.DynGCg.vel.x;
++  speed[1] =pCar->pub.DynGCg.vel.y;
++  speed[2] =pCar->pub.DynGCg.vel.z;
++
++  GameData.Speed = (pCar->_speed_x * 3.6f);
++
++  Speed = (int)GameData.Speed;
++}
++
+ void CRecordCam::storeImage(int X, int Y, int Height, int Width)
+ {
+   assert(mpSharedMemory);
+@@ -102,10 +115,13 @@ void CRecordCam::storeImage(int X, int Y, int Height, int Width)
+   pMemory->Image.ImageWidth = EffectiveWidth;
+   glReadPixels(X, Y, Width, Height, GL_BGR, GL_UNSIGNED_BYTE, (GLvoid*)pMemory->Image.Data);
+ 
++  memcpy(&(pMemory->Labels), &LabelData, sizeof(LabelData));
++  memcpy(&(pMemory->Game), &GameData, sizeof(GameData));
++
+   mpSharedMemory->indicateWrite();
+ }
+ 
+-void CRecordCam::renderImage(tSituation * pSituation, uint64_t FrameNumber)
++void CRecordCam::renderImage(tCarElt *pCar, tSituation * pSituation, uint64_t FrameNumber)
+ {
+   double Time = GfTimeClock();
+   double Difference = Time - mLastTime;
+@@ -113,12 +129,13 @@ void CRecordCam::renderImage(tSituation * pSituation, uint64_t FrameNumber)
+   if (Difference > (1.0/(double)RECORD_FRAME_RATE))
+   {
+     mLastTime = Time;
+-    doRender(pSituation);
++    doRender(pCar, pSituation);
+   }
+ }
+ 
+ 
+-void CRecordCam::doRender(tSituation * pSituation)
++void CRecordCam::doRender(tCarElt *pCar, tSituation * pSituation)
+ {
++  update(pCar, pSituation);
+   storeImage(mScreenX, mScreenY, mMaxHeight, mMaxWidth);
+ }
+diff --git a/src/modules/graphic/ssggraph/CRecordCam.h b/src/modules/graphic/ssggraph/CRecordCam.h
+index 8c5daab..4837879 100644
+--- a/src/modules/graphic/ssggraph/CRecordCam.h
++++ b/src/modules/graphic/ssggraph/CRecordCam.h
+@@ -28,6 +28,7 @@
+  */
+ 
+ #include "grcam.h"
++#include "CSharedMemroy.h"
+ 
+ #ifndef SPEED_DREAMS_2_CRECORDCAM_H
+ #define SPEED_DREAMS_2_CRECORDCAM_H
+@@ -56,12 +57,13 @@ class CRecordCam : public cGrCarCamMirror
+     virtual ~CRecordCam();
+ 
+     virtual void adaptScreenSize();
++    virtual void update(tCarElt *pCar, tSituation *pSituation);
+     virtual void setModelView();
+-    virtual void renderImage(tSituation * pSituation, uint64_t FrameNumber);
++    virtual void renderImage(tCarElt *pCar, tSituation * pSituation, uint64_t FrameNumber);
+ 
+   protected:
+     virtual void storeImage(int X, int Y, int Height, int Width);
+-    virtual void doRender(tSituation * pSituation);
++    virtual void doRender(tCarElt *pCar, tSituation * pSituation);
+ 
+     cGrScreen * mpScreen;
+     int mScreenX;
+@@ -70,6 +72,8 @@ class CRecordCam : public cGrCarCamMirror
+     int mMaxWidth;
+     CSharedMemory * mpSharedMemory;
+     double mLastTime;
++    Game_t   GameData;
++    Labels_t LabelData;
+ };
+ 
+ #endif //SPEED_DREAMS_2_CRECORDCAM_H
+diff --git a/src/modules/graphic/ssggraph/CRecordRenderCam.cpp b/src/modules/graphic/ssggraph/CRecordRenderCam.cpp
+index 9f2a3b6..cdc48a2 100644
+--- a/src/modules/graphic/ssggraph/CRecordRenderCam.cpp
++++ b/src/modules/graphic/ssggraph/CRecordRenderCam.cpp
+@@ -197,11 +197,7 @@ void CRecordRenderCam::update(tCarElt *car, tSituation *s) {
+   up[1] = car->_posMat[2][1];
+   up[2] = car->_posMat[2][2];
+ 
+-  speed[0] =car->pub.DynGCg.vel.x;
+-  speed[1] =car->pub.DynGCg.vel.y;
+-  speed[2] =car->pub.DynGCg.vel.z;
+-
+-  Speed = (int)(car->_speed_x * 3.6f);
++  CRecordCam::update(car, s);
+ }
+ 
+ 
+@@ -225,7 +221,7 @@ void CRecordRenderCam::afterDraw (void)
+   glPopAttrib();
+ }
+ 
+-void CRecordRenderCam::doRender(tSituation * pSituation)
++void CRecordRenderCam::doRender(tCarElt *pCar, tSituation * pSituation)
+ {
+   mpScreen->camDraw(pSituation);
+ }
+\ No newline at end of file
+diff --git a/src/modules/graphic/ssggraph/CRecordRenderCam.h b/src/modules/graphic/ssggraph/CRecordRenderCam.h
+index b9cdd93..231db96 100644
+--- a/src/modules/graphic/ssggraph/CRecordRenderCam.h
++++ b/src/modules/graphic/ssggraph/CRecordRenderCam.h
+@@ -53,7 +53,7 @@ class CRecordRenderCam : public CRecordCam
+     virtual void update(tCarElt *car, tSituation *s);
+     virtual void afterDraw (void);
+     virtual void beforeDraw (void);
+-    virtual void doRender(tSituation * pSituation);
++    virtual void doRender(tCarElt *pCar, tSituation * pSituation);
+ 
+   protected:
+     GLuint mFramebufferName;
+diff --git a/src/modules/graphic/ssggraph/CSharedMemroy.cpp b/src/modules/graphic/ssggraph/CSharedMemroy.cpp
+index 0faaa70..05febb4 100644
+--- a/src/modules/graphic/ssggraph/CSharedMemroy.cpp
++++ b/src/modules/graphic/ssggraph/CSharedMemroy.cpp
+@@ -39,7 +39,8 @@ typedef mapped_region Region_t;
+ 
+ CSharedMemory::CSharedMemory():
+   mpMemory(NULL),
+-  mpRegion(NULL)
++  mpRegion(NULL),
++  mWriteNumber(0)
+ {
+   mpMemory = new Memory_t(open_or_create, "DeepDrivingMemory", read_write, sizeof(Data_t));
+   assert(mpMemory);
+@@ -82,5 +83,7 @@ void CSharedMemory::waitOnRead()
+ 
+ void CSharedMemory::indicateWrite()
+ {
++  mWriteNumber++;
++  getAddress()->Sync.WriteNumber = mWriteNumber;
+   getAddress()->Sync.IsWritten = 1;
+ }
+\ No newline at end of file
+diff --git a/src/modules/graphic/ssggraph/CSharedMemroy.h b/src/modules/graphic/ssggraph/CSharedMemroy.h
+index aefa9a9..fabd68c 100644
+--- a/src/modules/graphic/ssggraph/CSharedMemroy.h
++++ b/src/modules/graphic/ssggraph/CSharedMemroy.h
+@@ -47,23 +47,122 @@ typedef boost::interprocess::mapped_region Region_t;
+ #define RECORD_MAX_IMAGE_HEIGHT 1440
+ #define RECORD_IMAGE_CHANNELS 3
+ 
++/// @brief Contains the image.
+ typedef struct
+ {
++  /// @brief The real width of the recorded image.
+   uint32_t ImageWidth;
++
++  /// @brief The real height of the recorded image.
+   uint32_t ImageHeight;
++
++  /// @brief The memory reserved for the image itself.
+   uint8_t Data[RECORD_MAX_IMAGE_WIDTH * RECORD_MAX_IMAGE_HEIGHT * RECORD_IMAGE_CHANNELS];
+ } Image_t;
+ 
++
++/// @brief Contains flags and values used for synchronization.
+ typedef struct
+ {
++  /// @brief Indicates if Speed-Dream should wait until "IsWritten" is set to 0, before new values are written.
+   uint8_t IsPauseOn;
++
++  /// @brief Is set to 1 as soon new values have been written from Speed-Dreams.
+   uint8_t IsWritten;
++
++  /// @brief Contains the number of frames, that have been written to the memory, since the race has been started.
++  uint64_t WriteNumber;
+ } Sync_t;
+ 
++
++/// @brief Contains the labels for the deep-driving project.
++typedef struct
++{
++  /// @brief The relative angle between the car and the middle line of the street.
++  ///        The value is given in grad and is always in an interval of -90 to +90.
++  float Angle;
++
++  /// @brief Indicates if the street is straight for at least 60m or if a curve is near than 60m.
++  ///        This value is eighter 0 or 1.
++  float Fast;
++
++  /// @brief The distance between the mid of the car to the left lane marking of the left lane. (Only valid, if the car is inside a lane.)
++  ///        The value is given in meter. The valid range is -7 to -4.5. If the system is not active or no left lane exists, the value is set to -9.
++  float LL;
++
++  /// @brief The distance between the mid of the car to the left lane marking of the current lane. (Only valid if the car is inside a lane.)
++  ///        The value is given in meter. The valid range is -3.5 to -0.5. If the system is not active, the value is set to -5.
++  float ML;
++
++  /// @brief The distance between the mid of the car to the right lane marking of the current lane. (Only valid if the car is inside a lane.)
++  ///        The value is given in meter. The valid range is 0.5 to 3.5. If the system is not active, the value is set to 5.
++  float MR;
++
++  /// @brief The distance between the mid of the car to the right lane marking of the right lane. (Only valid if the car is inside a lane.)
++  ///        The value is given in meter. The valid range is 4.5 to 7. If the system is not active or no right lane exists, the value is set to 9.
++  float RR;
++
++  /// @brief The distance between the mid of the car to a traffic car which is driving on the left lane. (Only valid if the car is inside a lane.)
++  ///        The value is given in meter. The valid range is 0 to 60. If the system is not active or if no traffic car on the left lane is available,
++  ///        the value is set to 90.
++  float DistLL;
++
++  /// @brief The distance between the mid of the car to a traffic car which is driving on the current lame. (Only valid if the car is inside a lane.)
++  ///        The value is given in meter. The valid range is 0 to 60. If the system is not active or if no traffic car on the current lane is available,
++  ///        the value is set to 90.
++  float DistMM;
++
++  /// @brief The distance between the mid of the car to a traffic car which is driving on the right lane. (Only valid if the car is inside a lane.)
++  ///        The value is given in meter. The valid range is 0 to 60. If the system is not active or if no traffic car on the right lane is available,
++  ///        the value is set to 90.
++  float DistRR;
++
++  /// @brief The distance between the mid of the car to the left lane marking. (Only valid, if the car is driving between two lanes - on the marking.)
++  ///        The value is given in meter. The valid range is -5 to -3. If the system is not active or no left lane exists, the value is set to -7.
++  float L;
++
++  /// @brief The distance between the mid of the car to the middle lane marking. (Only valid if the car is driving between two lanes - on the marking.)
++  ///        The value is given in meter. The valid range is -2 to 2. If the system is not active, the value is set to -5.
++  float M;
++
++  /// @brief The distance between the mid of the car to the right lane marking. (Only valid if the car is driving between two lanes - on the marking.)
++  ///        The value is given in meter. The valid range is 3 to 5. If the system is not active or no right lane exists, the value is set to 7.
++  float R;
++
++  /// @brief The distance between the mid of the car to a traffic car which is driving on the left lane. (Only valid if the car is driving between two lanes - on the marking.)
++  ///        The value is given in meter. The valid range is 0 to 60. If the system is not active or if no traffic car on the left lane is available,
++  ///        the value is set to 90.
++  float DistL;
++
++  /// @brief The distance between the mid of the car to a traffic car which is driving on the right lane. (Only valid if the car is driving between two lanes - on the marking.)
++  ///        The value is given in meter. The valid range is 0 to 60. If the system is not active or if no traffic car on the right lane is available,
++  ///        the value is set to 90.
++  float DistR;
++} Labels_t;
++
++
++/// @brief Additional information about the game situation.
+ typedef struct
+ {
++  /// @brief The current speed of the car. The value is given in km/h.
++  float Speed;
++} Game_t;
++
++
++/// @brief The overall memory structure.
++typedef struct
++{
++  /// @brief Information used to sync reader and writer process.
+   Sync_t Sync;
++
++  /// @brief Contains the image.
+   Image_t Image;
++
++  /// @brief The labels used by deep-driving.
++  Labels_t Labels;
++
++  /// @brief Additional information about the game situation.
++  Game_t Game;
+ } Data_t;
+ 
+ 
+@@ -80,6 +179,7 @@ class CSharedMemory
+   protected:
+     Memory_t * mpMemory;
+     Region_t * mpRegion;
++    uint64_t   mWriteNumber;
+ };
+ 
+ #endif //SPEED_DREAMS_2_CSHAREDMEMROY_H
+diff --git a/src/modules/graphic/ssggraph/grscreen.cpp b/src/modules/graphic/ssggraph/grscreen.cpp
+index 05fd174..15e343c 100644
+--- a/src/modules/graphic/ssggraph/grscreen.cpp
++++ b/src/modules/graphic/ssggraph/grscreen.cpp
+@@ -451,7 +451,7 @@ void cGrScreen::update(tSituation *s, const cGrFrameInfo* frameInfo)
+ 	if (pRecordCam)
+ 	{
+ 		dispCam = pRecordCam;
+-		pRecordCam->renderImage(s, frameInfo->nTotalFrames);
++		pRecordCam->renderImage(curCar, s, frameInfo->nTotalFrames);
+ 	}
+ 	
+ 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+@@ -609,7 +609,7 @@ void cGrScreen::initCams(tSituation *s)
+ 
+ 	if (!pRecordCam)
+ 	{
+-		pRecordCam = new CRecordRenderCam(
++		pRecordCam = new CRecordCam(
+ 				this,
+ 				-1,
+ 				0,					// drawCurr
+-- 
+2.11.1.windows.1
+

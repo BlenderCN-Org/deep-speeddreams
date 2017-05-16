@@ -1,0 +1,796 @@
+From 4c1e4d2b232a8a2d105c0ceac844d79ec0dc7f63 Mon Sep 17 00:00:00 2001
+From: Andre <andre.netzeband@hm.edu>
+Date: Tue, 16 May 2017 19:23:50 +0200
+Subject: [PATCH] Added python module and example project for reading
+ information from shared memory.
+
+---
+ python/.idea/misc.xml                              |  36 +++
+ python/.idea/modules.xml                           |   8 +
+ python/.idea/python.iml                            |  11 +
+ python/.idea/workspace.xml                         | 327 +++++++++++++++++++++
+ python/example.py                                  |  31 ++
+ python/speed_dreams/__init__.py                    |   2 +
+ .../__pycache__/__init__.cpython-35.pyc            | Bin 0 -> 282 bytes
+ .../__pycache__/data_types.cpython-35.pyc          | Bin 0 -> 3740 bytes
+ .../__pycache__/shared_memory.cpython-35.pyc       | Bin 0 -> 2841 bytes
+ python/speed_dreams/data_types.py                  | 117 ++++++++
+ python/speed_dreams/shared_memory.py               |  82 ++++++
+ 11 files changed, 614 insertions(+)
+ create mode 100644 python/.idea/misc.xml
+ create mode 100644 python/.idea/modules.xml
+ create mode 100644 python/.idea/python.iml
+ create mode 100644 python/.idea/workspace.xml
+ create mode 100644 python/example.py
+ create mode 100644 python/speed_dreams/__init__.py
+ create mode 100644 python/speed_dreams/__pycache__/__init__.cpython-35.pyc
+ create mode 100644 python/speed_dreams/__pycache__/data_types.cpython-35.pyc
+ create mode 100644 python/speed_dreams/__pycache__/shared_memory.cpython-35.pyc
+ create mode 100644 python/speed_dreams/data_types.py
+ create mode 100644 python/speed_dreams/shared_memory.py
+
+diff --git a/python/.idea/misc.xml b/python/.idea/misc.xml
+new file mode 100644
+index 0000000..6c94f6c
+--- /dev/null
++++ b/python/.idea/misc.xml
+@@ -0,0 +1,36 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectInspectionProfilesVisibleTreeState">
++    <entry key="Project Default">
++      <profile-state>
++        <expanded-state>
++          <State>
++            <id />
++          </State>
++          <State>
++            <id>Python</id>
++          </State>
++        </expanded-state>
++      </profile-state>
++    </entry>
++  </component>
++  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.5.3 virtualenv at D:\Projects\Uni\DeepLearning\dl_python" project-jdk-type="Python SDK" />
++  <component name="SvnConfiguration">
++    <configuration>D:\Users\Netbandit\AppData\Roaming\Subversion</configuration>
++  </component>
++  <component name="masterDetails">
++    <states>
++      <state key="ScopeChooserConfigurable.UI">
++        <settings>
++          <splitter-proportions>
++            <option name="proportions">
++              <list>
++                <option value="0.2" />
++              </list>
++            </option>
++          </splitter-proportions>
++        </settings>
++      </state>
++    </states>
++  </component>
++</project>
+\ No newline at end of file
+diff --git a/python/.idea/modules.xml b/python/.idea/modules.xml
+new file mode 100644
+index 0000000..614b3c1
+--- /dev/null
++++ b/python/.idea/modules.xml
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/.idea/python.iml" filepath="$PROJECT_DIR$/.idea/python.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+diff --git a/python/.idea/python.iml b/python/.idea/python.iml
+new file mode 100644
+index 0000000..a65fe61
+--- /dev/null
++++ b/python/.idea/python.iml
+@@ -0,0 +1,11 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="PYTHON_MODULE" version="4">
++  <component name="NewModuleRootManager">
++    <content url="file://$MODULE_DIR$" />
++    <orderEntry type="jdk" jdkName="Python 3.5.3 virtualenv at D:\Projects\Uni\DeepLearning\dl_python" jdkType="Python SDK" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++  <component name="TestRunnerService">
++    <option name="PROJECT_TEST_RUNNER" value="Unittests" />
++  </component>
++</module>
+\ No newline at end of file
+diff --git a/python/.idea/workspace.xml b/python/.idea/workspace.xml
+new file mode 100644
+index 0000000..afe486d
+--- /dev/null
++++ b/python/.idea/workspace.xml
+@@ -0,0 +1,327 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ChangeListManager">
++    <list default="true" id="b7c14870-b595-4af6-b928-02575b4975c5" name="Default" comment="" />
++    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
++    <option name="TRACKING_ENABLED" value="true" />
++    <option name="SHOW_DIALOG" value="false" />
++    <option name="HIGHLIGHT_CONFLICTS" value="true" />
++    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
++    <option name="LAST_RESOLUTION" value="IGNORE" />
++  </component>
++  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
++  <component name="FileEditorManager">
++    <leaf>
++      <file leaf-file-name="example.py" pinned="false" current-in-tab="false">
++        <entry file="file://$PROJECT_DIR$/example.py">
++          <provider selected="true" editor-type-id="text-editor">
++            <state relative-caret-position="476">
++              <caret line="28" column="37" lean-forward="false" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
++              <folding>
++                <element signature="e#0#10#0" expanded="true" />
++              </folding>
++            </state>
++          </provider>
++        </entry>
++      </file>
++      <file leaf-file-name="data_types.py" pinned="false" current-in-tab="true">
++        <entry file="file://$PROJECT_DIR$/speed_dreams/data_types.py">
++          <provider selected="true" editor-type-id="text-editor">
++            <state relative-caret-position="551">
++              <caret line="88" column="25" lean-forward="true" selection-start-line="88" selection-start-column="25" selection-end-line="88" selection-end-column="25" />
++              <folding />
++            </state>
++          </provider>
++        </entry>
++      </file>
++      <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
++        <entry file="file://$PROJECT_DIR$/speed_dreams/__init__.py">
++          <provider selected="true" editor-type-id="text-editor">
++            <state relative-caret-position="17">
++              <caret line="1" column="40" lean-forward="false" selection-start-line="1" selection-start-column="40" selection-end-line="1" selection-end-column="40" />
++              <folding>
++                <element signature="e#0#50#0" expanded="true" />
++              </folding>
++            </state>
++          </provider>
++        </entry>
++      </file>
++      <file leaf-file-name="shared_memory.py" pinned="false" current-in-tab="false">
++        <entry file="file://$PROJECT_DIR$/speed_dreams/shared_memory.py">
++          <provider selected="true" editor-type-id="text-editor">
++            <state relative-caret-position="612">
++              <caret line="69" column="56" lean-forward="false" selection-start-line="69" selection-start-column="56" selection-end-line="69" selection-end-column="56" />
++              <folding>
++                <element signature="e#0#11#0" expanded="true" />
++              </folding>
++            </state>
++          </provider>
++        </entry>
++      </file>
++    </leaf>
++  </component>
++  <component name="FileTemplateManagerImpl">
++    <option name="RECENT_TEMPLATES">
++      <list>
++        <option value="Python Script" />
++      </list>
++    </option>
++  </component>
++  <component name="IdeDocumentHistory">
++    <option name="CHANGED_PATHS">
++      <list>
++        <option value="$PROJECT_DIR$/speed_dreams/__init__.py" />
++        <option value="$PROJECT_DIR$/speed_dreams/shared_memory.py" />
++        <option value="$PROJECT_DIR$/example.py" />
++        <option value="$PROJECT_DIR$/speed_dreams/data_types.py" />
++      </list>
++    </option>
++  </component>
++  <component name="ProjectFrameBounds">
++    <option name="x" value="-8" />
++    <option name="y" value="-8" />
++    <option name="width" value="2576" />
++    <option name="height" value="1416" />
++  </component>
++  <component name="ProjectView">
++    <navigator currentView="ProjectPane" proportions="" version="1">
++      <flattenPackages />
++      <showMembers />
++      <showModules />
++      <showLibraryContents />
++      <hideEmptyPackages />
++      <abbreviatePackageNames />
++      <autoscrollToSource />
++      <autoscrollFromSource />
++      <sortByType />
++      <manualOrder />
++      <foldersAlwaysOnTop value="true" />
++    </navigator>
++    <panes>
++      <pane id="Scratches" />
++      <pane id="Scope" />
++      <pane id="ProjectPane">
++        <subPane>
++          <PATH>
++            <PATH_ELEMENT>
++              <option name="myItemId" value="python" />
++              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
++            </PATH_ELEMENT>
++            <PATH_ELEMENT>
++              <option name="myItemId" value="python" />
++              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
++            </PATH_ELEMENT>
++          </PATH>
++          <PATH>
++            <PATH_ELEMENT>
++              <option name="myItemId" value="python" />
++              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
++            </PATH_ELEMENT>
++            <PATH_ELEMENT>
++              <option name="myItemId" value="python" />
++              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
++            </PATH_ELEMENT>
++            <PATH_ELEMENT>
++              <option name="myItemId" value="speed_dreams" />
++              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
++            </PATH_ELEMENT>
++          </PATH>
++        </subPane>
++      </pane>
++    </panes>
++  </component>
++  <component name="PropertiesComponent">
++    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
++    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
++  </component>
++  <component name="PyConsoleOptionsProvider">
++    <option name="myPythonConsoleState">
++      <console-settings sdk-home="D:\Python\Python35\python.exe">
++        <option name="mySdkHome" value="D:\Python\Python35\python.exe" />
++      </console-settings>
++    </option>
++  </component>
++  <component name="RunDashboard">
++    <option name="ruleStates">
++      <list>
++        <RuleState>
++          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
++        </RuleState>
++        <RuleState>
++          <option name="name" value="StatusDashboardGroupingRule" />
++        </RuleState>
++      </list>
++    </option>
++  </component>
++  <component name="RunManager" selected="Python.example">
++    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
++      <option name="INTERPRETER_OPTIONS" value="" />
++      <option name="PARENT_ENVS" value="true" />
++      <envs>
++        <env name="PYTHONUNBUFFERED" value="1" />
++      </envs>
++      <option name="SDK_HOME" value="" />
++      <option name="WORKING_DIRECTORY" value="" />
++      <option name="IS_MODULE_SDK" value="false" />
++      <option name="ADD_CONTENT_ROOTS" value="true" />
++      <option name="ADD_SOURCE_ROOTS" value="true" />
++      <module name="DeepDriving" />
++      <option name="SCRIPT_NAME" value="" />
++      <option name="PARAMETERS" value="" />
++      <option name="SHOW_COMMAND_LINE" value="false" />
++      <option name="EMULATE_TERMINAL" value="false" />
++      <method />
++    </configuration>
++    <configuration default="true" type="Tox" factoryName="Tox">
++      <option name="INTERPRETER_OPTIONS" value="" />
++      <option name="PARENT_ENVS" value="true" />
++      <envs />
++      <option name="SDK_HOME" value="" />
++      <option name="WORKING_DIRECTORY" value="" />
++      <option name="IS_MODULE_SDK" value="false" />
++      <option name="ADD_CONTENT_ROOTS" value="true" />
++      <option name="ADD_SOURCE_ROOTS" value="true" />
++      <module name="DeepDriving" />
++      <method />
++    </configuration>
++    <configuration default="true" type="tests" factoryName="Doctests">
++      <option name="INTERPRETER_OPTIONS" value="" />
++      <option name="PARENT_ENVS" value="true" />
++      <envs />
++      <option name="SDK_HOME" value="" />
++      <option name="WORKING_DIRECTORY" value="" />
++      <option name="IS_MODULE_SDK" value="false" />
++      <option name="ADD_CONTENT_ROOTS" value="true" />
++      <option name="ADD_SOURCE_ROOTS" value="true" />
++      <module name="DeepDriving" />
++      <option name="SCRIPT_NAME" value="" />
++      <option name="CLASS_NAME" value="" />
++      <option name="METHOD_NAME" value="" />
++      <option name="FOLDER_NAME" value="" />
++      <option name="TEST_TYPE" value="TEST_SCRIPT" />
++      <option name="PATTERN" value="" />
++      <option name="USE_PATTERN" value="false" />
++      <method />
++    </configuration>
++    <configuration default="true" type="tests" factoryName="Unittests">
++      <option name="INTERPRETER_OPTIONS" value="" />
++      <option name="PARENT_ENVS" value="true" />
++      <envs />
++      <option name="SDK_HOME" value="" />
++      <option name="WORKING_DIRECTORY" value="" />
++      <option name="IS_MODULE_SDK" value="false" />
++      <option name="ADD_CONTENT_ROOTS" value="true" />
++      <option name="ADD_SOURCE_ROOTS" value="true" />
++      <module name="DeepDriving" />
++      <option name="_new_additionalArguments" value="&quot;&quot;" />
++      <option name="_new_target" value="&quot;.&quot;" />
++      <option name="_new_targetType" value="&quot;PATH&quot;" />
++      <method />
++    </configuration>
++    <configuration default="false" name="example" type="PythonConfigurationType" factoryName="Python">
++      <option name="INTERPRETER_OPTIONS" value="" />
++      <option name="PARENT_ENVS" value="true" />
++      <envs>
++        <env name="PYTHONUNBUFFERED" value="1" />
++      </envs>
++      <option name="SDK_HOME" value="D:\Projects\Uni\DeepLearning\dl_python\Scripts\python.exe" />
++      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
++      <option name="IS_MODULE_SDK" value="false" />
++      <option name="ADD_CONTENT_ROOTS" value="true" />
++      <option name="ADD_SOURCE_ROOTS" value="true" />
++      <module name="python" />
++      <option name="SCRIPT_NAME" value="example.py" />
++      <option name="PARAMETERS" value="" />
++      <option name="SHOW_COMMAND_LINE" value="false" />
++      <option name="EMULATE_TERMINAL" value="false" />
++      <method />
++    </configuration>
++    <list size="1">
++      <item index="0" class="java.lang.String" itemvalue="Python.example" />
++    </list>
++  </component>
++  <component name="ShelveChangesManager" show_recycled="false">
++    <option name="remove_strategy" value="false" />
++  </component>
++  <component name="TaskManager">
++    <task active="true" id="Default" summary="Default task">
++      <changelist id="b7c14870-b595-4af6-b928-02575b4975c5" name="Default" comment="" />
++      <created>1494933421787</created>
++      <option name="number" value="Default" />
++      <option name="presentableId" value="Default" />
++      <updated>1494933421787</updated>
++    </task>
++    <servers />
++  </component>
++  <component name="ToolWindowManager">
++    <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
++    <editor active="true" />
++    <layout>
++      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1844197" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
++      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
++      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
++      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32969603" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
++      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
++      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
++      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
++      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
++      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3998441" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
++      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
++      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
++      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
++      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
++      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
++      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
++      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
++      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
++      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
++    </layout>
++  </component>
++  <component name="VcsContentAnnotationSettings">
++    <option name="myLimit" value="2678400000" />
++  </component>
++  <component name="XDebuggerManager">
++    <breakpoint-manager />
++    <watches-manager />
++  </component>
++  <component name="editorHistoryManager">
++    <entry file="file://$PROJECT_DIR$/speed_dreams/__init__.py">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="17">
++          <caret line="1" column="40" lean-forward="false" selection-start-line="1" selection-start-column="40" selection-end-line="1" selection-end-column="40" />
++          <folding>
++            <element signature="e#0#50#0" expanded="true" />
++          </folding>
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/speed_dreams/shared_memory.py">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="612">
++          <caret line="69" column="56" lean-forward="false" selection-start-line="69" selection-start-column="56" selection-end-line="69" selection-end-column="56" />
++          <folding>
++            <element signature="e#0#11#0" expanded="true" />
++          </folding>
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/example.py">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="476">
++          <caret line="28" column="37" lean-forward="false" selection-start-line="28" selection-start-column="37" selection-end-line="28" selection-end-column="37" />
++          <folding>
++            <element signature="e#0#10#0" expanded="true" />
++          </folding>
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/speed_dreams/data_types.py">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="551">
++          <caret line="88" column="25" lean-forward="true" selection-start-line="88" selection-start-column="25" selection-end-line="88" selection-end-column="25" />
++          <folding />
++        </state>
++      </provider>
++    </entry>
++  </component>
++</project>
+\ No newline at end of file
+diff --git a/python/example.py b/python/example.py
+new file mode 100644
+index 0000000..95cc8a4
+--- /dev/null
++++ b/python/example.py
+@@ -0,0 +1,31 @@
++import cv2
++import speed_dreams as sd
++
++# Create shared memory object
++Memory = sd.CSharedMemory()
++
++# Enable Pause-Mode
++Memory.setSyncMode(True)
++
++IsExit = False
++
++# Repeat until ESC was pressed
++while not IsExit:
++
++  # Check if new values are available
++  if Memory.read():
++    print("\n")
++    print("Image Size: {}x{}".format(Memory.Data.Image.ImageWidth, Memory.Data.Image.ImageHeight))
++
++    # Output all values from memory
++    print(str(Memory.Data))
++
++    # Output image from memory
++    cv2.imshow("SpeedDreams Image", Memory.Image)
++
++    if cv2.waitKey(10) == 27:
++      IsExit = True
++
++    # Indicate that reader process is ready and a new value can be written
++    Memory.indicateReady()
++
+diff --git a/python/speed_dreams/__init__.py b/python/speed_dreams/__init__.py
+new file mode 100644
+index 0000000..8ae5fee
+--- /dev/null
++++ b/python/speed_dreams/__init__.py
+@@ -0,0 +1,2 @@
++from .data_types import Data_t, RECORD_MEMORY_NAME
++from .shared_memory import CSharedMemory
+\ No newline at end of file
+diff --git a/python/speed_dreams/__pycache__/__init__.cpython-35.pyc b/python/speed_dreams/__pycache__/__init__.cpython-35.pyc
+new file mode 100644
+index 0000000000000000000000000000000000000000..c2ed102c898fa8ab27d1c5afde46e5933f8e4d0b
+GIT binary patch
+literal 282
+zcmX|5v1-FG5IxCGDFH7X(ji~q4EcakN<-{XNwMh=Avi=Oh>K+#Ng4b}{UxuRI(F?;
+z$qha39(V7(<L*Aomfx^G2>|#E^&d2J&!OBVfC@>V1uz6S0YiaPAd#ieCSX$FX_ynJ
+z^Yn{^g`7?|h4d2rbXS%8V^tt4*|9p|VaLjxOxeCZORE*rrnloEU+|@x{o|mWjmK>g
+zfM;&Dp_zR)4crIVMbsnw6vcyhvHiP#^G>{Wji`4_xIt^Btd_<JBb!bPqd)iEACFf7
+ZvFRF*xE;pn_R;j}((0%9yNlOX<QHTdNQD3Z
+
+literal 0
+HcmV?d00001
+
+diff --git a/python/speed_dreams/__pycache__/data_types.cpython-35.pyc b/python/speed_dreams/__pycache__/data_types.cpython-35.pyc
+new file mode 100644
+index 0000000000000000000000000000000000000000..f931f768e7da25acef4bec777c49c8ca43194d95
+GIT binary patch
+literal 3740
+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
+bRINE3>&he;gfzjW&zI**^Ec-6^V9zUX?e4W
+
+literal 0
+HcmV?d00001
+
+diff --git a/python/speed_dreams/__pycache__/shared_memory.cpython-35.pyc b/python/speed_dreams/__pycache__/shared_memory.cpython-35.pyc
+new file mode 100644
+index 0000000000000000000000000000000000000000..de31e23a604c1b0c947c6c75ce3186d806d923bc
+GIT binary patch
+literal 2841
+zcma)8Uuzpj5T85Uo&HCT6Xj2xmMxStf+U0zN-!nV*iK?nE5UXN5r*ZgTUjUT?$o_i
+z9Ek)<oyWfSGxQ_$6Z9*TeJb=R(0+lwv@?71MRFV3vu|&9c6N4l=C{Aq<$AsHdvWFY
+zPbGlgVD2fP{3X6=7n=b8Ef@lHa@m58b*i_aQ#h3!=r|DA5ENkOLgYcmgQy6dB19$V
+zl)!oz;J6EK(31-%IJHc^cU#_DTnO54Eo@r_?QQtV=SnZ{Y_31q+2Gro+fR0$^Y+^I
+zrf$x3Tia_7H~IRbwRU^+t6d5-fAa9ZLzTe5O|TssM8O1zT^kNfm>AC++>J}|1Re#3
+zAqPbWN)VLI5Xuz@s%8k4H3;fPE`vb*IS3lmJwYc`qgjIB{HX?wmvMI&bbWod?@JME
+ziztzk@LL-o{1rFbMZrAub?{xsH$B1z)A9;{1H8%v3zQ85jM)WMfPn)F6NpL=P721d
+zNSZ;3<Ux^!XnGk`1qM|rNaklygF_20pMXWfbqE~F{`3b{Vfd^|;VY3cpJn0R%Hn0+
+zp`WI=jY($sSWJ!+88BZSjw2DPbTu1fY!6jJ?T9oPj#Ze%t8A|?SS&;!0w!}cOL|P<
+zKp6Rlg53y2&mRvJ`~2>mmv`^oVWXEV<M4r`#Ar9|`y<hQ`xic~bGpK}(x?776;EP)
+zo}XP&J5l71wAWRWkw~?dhEtLBB!NOwiaT{aUkqLC$t2<j<6cil?Q(*iw&Rg@MKn?q
+z-P~K-dAPa97xAV&zD1$8Z0)3C*y}8v4dX|UO<e8It&P?Fr!pCcu1fd6j>G-kwe9_M
+zgb4{S+flk7`C+_2ny7vfXL>#xz)d4$cw{hhdo<A{&cirVoY&BCTEPa2Wvgs`Y&EUv
+zr3HxHJ~i#qk)nsbluU!L3n*j=8z5XP;0P>0B-m{^JA#hMgR?t{ySkjGyJg9XIMwVd
+zYc63|7da2akn<0)lNv}{)8^TDjK$sp;`4awIB^Da6BtG^{ly?)GxiUL2+2gUAWSov
+zfHR`{vnUA=J-d|6TN@^w?AQ-g%8o<T&!8HMV-{dd**I3=kR`()>-PN@f*lAEBP#u%
+zm7&`#`Cf46X;@`jaS(RttlVT_Z$6l`pNw&d1HpueJeZ3-$QEg17R$KdmYpS&vUWD3
+z)l?|T{Wfm!qdcpn>D9%o&ROM!CXBoInnG8woWuyG%0wR)9N8c}I{t$K$UBQLa3F3F
+zIp$Nib1Eabc<|cL3VFkB5nkJ%N-!wT*?`ehOf_w|NRFy-5jpBLQV<eX4PK%9%uSWJ
+zi}YC+*~o^gM+HcKHbyuVRhCi7KR}&>L4$md&&+lvp-IoC>jZs~)e>2uFVvs~KTq_x
+zYnaZRes4;=-WT1YluDPwBShMJ;fF(l81rKyD<26io>3H$gkh}gIGU;_X&R#S9CTKt
+zP-BUtw`0C3+mmA?xn2gjE_y>?kmGEQVK;N)_8zpB<rM<LRcz?QJ(HnQA~r~o1QG2T
+z#?ck?c@_q$ud7CWB*MeKl1pS%p+Hk5!}w6U<1kkD<TB}t$h}0Ol4wI0x-UM{9;%QV
+zwbL7hBT1CdattCnuJPXSW{wGfX94P%Q-cF3#Rgu}E?diX!){m&>!x+ZzHVK&o0elw
+zmlqLB({iZ(Cnwp+NrmZsQ?vZYF_p0SBYzX?;ww`e@-8I9T9P!GWto;~w+ip_D?dcd
+zd$_C~&W`pDdDuY1jM1Fw%HmEI>=w2}>zUJ6M1e3$)N0YOZ@hP16Wrr`wSVM|==gsw
+zVk-HsL@lY3Pv;i7u(&0Irgp1NH%;tEf^)oUIg;#nNOFzyZ^r&G8<E5@23ztnNh{P`
+zqvlg;ZeXKJBbgxN)Fey&8645|DCz!?9ya(J6jFk4&GHJ(b2X<?t*z9G%dQ!1Rb-Vc
+z>E_dJJdQ>agLnA}DJn$p+}!u??)fZ0ay^ILd`(^YBHPz}s+PG-YnJ)5ui1YC)5wSl
+
+literal 0
+HcmV?d00001
+
+diff --git a/python/speed_dreams/data_types.py b/python/speed_dreams/data_types.py
+new file mode 100644
+index 0000000..dc6ca5e
+--- /dev/null
++++ b/python/speed_dreams/data_types.py
+@@ -0,0 +1,117 @@
++import ctypes
++
++RECORD_MAX_IMAGE_HEIGHT=1440
++RECORD_MAX_IMAGE_WIDTH=2560
++RECORD_IMAGE_CHANNELS=3
++RECORD_MEMORY_NAME="DeepDrivingMemory"
++
++class Sync_t(ctypes.Structure):
++  _fields_ = [
++    ('IsPauseOn', ctypes.c_uint8),
++    ('IsWritten', ctypes.c_uint8),
++    ('WriteNumber', ctypes.c_uint64),
++  ]
++
++  def __str__(self):
++    String = ""
++    String += "IsPauseOn={}\n".format(self.IsPauseOn)
++    String += "IsWritten={}\n".format(self.IsWritten)
++    String += "WriteNumber={}\n".format(self.WriteNumber)
++    return String
++
++
++class Image_t(ctypes.Structure):
++  _fields_ = [
++    ('ImageWidth', ctypes.c_uint32),
++    ('ImageHeight', ctypes.c_uint32),
++    ('Data', ctypes.c_uint8 * (RECORD_MAX_IMAGE_HEIGHT*RECORD_MAX_IMAGE_WIDTH*RECORD_IMAGE_CHANNELS))
++  ]
++
++  def __str__(self):
++    String = ""
++    String += "ImageWidth={}\n".format(self.ImageWidth)
++    String += "ImageHeight={}\n".format(self.ImageHeight)
++    return String
++
++
++class Labels_t(ctypes.Structure):
++  _fields_ = [
++    ('Angle', ctypes.c_float),
++    ('Fast', ctypes.c_float),
++    ('LL', ctypes.c_float),
++    ('ML', ctypes.c_float),
++    ('MR', ctypes.c_float),
++    ('RR', ctypes.c_float),
++    ('DistLL', ctypes.c_float),
++    ('DistMM', ctypes.c_float),
++    ('DistRR', ctypes.c_float),
++    ('L', ctypes.c_float),
++    ('M', ctypes.c_float),
++    ('R', ctypes.c_float),
++    ('DistL', ctypes.c_float),
++    ('DistR', ctypes.c_float),
++  ]
++
++  def __str__(self):
++    String = ""
++    String += "Angle={}\n".format(self.Angle)
++    String += "Fast={}\n".format(self.Fast)
++    String += "LL={}\n".format(self.LL)
++    String += "ML={}\n".format(self.ML)
++    String += "MR={}\n".format(self.MR)
++    String += "RR={}\n".format(self.RR)
++    String += "DistLL={}\n".format(self.DistLL)
++    String += "DistMM={}\n".format(self.DistMM)
++    String += "DistRR={}\n".format(self.DistRR)
++    String += "L={}\n".format(self.L)
++    String += "M={}\n".format(self.M)
++    String += "R={}\n".format(self.R)
++    String += "DistL={}\n".format(self.DistL)
++    String += "DistR={}\n".format(self.DistR)
++    return String
++
++
++class Game_t(ctypes.Structure):
++  _fields_ = [
++    ('Speed', ctypes.c_float),
++  ]
++
++  def __str__(self):
++    String = ""
++    String += "Speed={}\n".format(self.Speed)
++    return String
++
++
++class Data_t(ctypes.Structure):
++  _fields_ = [
++    ('Sync', Sync_t),
++    ('Image', Image_t),
++    ('Labels', Labels_t),
++    ('Game', Game_t),
++  ]
++
++  def __str__(self):
++    String = ""
++    String += addStringPrefix("Sync.", str(self.Sync))
++    String += addStringPrefix("Image.", str(self.Image))
++    String += addStringPrefix("Labels.", str(self.Labels))
++    String += addStringPrefix("Game.", str(self.Game))
++    return String
++
++
++def addStringPrefix(Prefix, String):
++  import re
++
++  IsLastNewLine = False
++
++  if String[-1] == '\n':
++    String = String[:-1]
++    IsLastNewLine = True
++
++  EndOfLine = re.compile("\n")
++  NewString = Prefix + EndOfLine.sub("\n"+Prefix, String)
++
++  if IsLastNewLine:
++    NewString += "\n"
++
++  return NewString
+\ No newline at end of file
+diff --git a/python/speed_dreams/shared_memory.py b/python/speed_dreams/shared_memory.py
+new file mode 100644
+index 0000000..149a65a
+--- /dev/null
++++ b/python/speed_dreams/shared_memory.py
+@@ -0,0 +1,82 @@
++import mmap
++import ctypes
++import numpy as np
++import cv2
++
++from .data_types import Data_t, RECORD_MEMORY_NAME, RECORD_IMAGE_CHANNELS
++
++class CSharedMemory():
++  TARGET_IMAGE_CHANNELS = RECORD_IMAGE_CHANNELS
++
++
++  def __init__(self, TargetResolution = [640, 480]):
++    """ 
++    Creates a Shared-Memory class.
++     
++    Keyword arguments:
++       TargetResolution: The needed resolution of the image (default 640x480 px)
++    """
++    self._IsPauseOn = False
++    self._TargetResolution = TargetResolution
++    self._SharedMemory = mmap.mmap(-1, ctypes.sizeof(Data_t), RECORD_MEMORY_NAME)
++    self._Data = Data_t.from_buffer(self._SharedMemory)
++    self._Image = np.empty(shape=TargetResolution + [self.TARGET_IMAGE_CHANNELS])
++
++
++  def __del__(self):
++    self.Data.Sync.IsPauseOn = 0
++
++
++  def setSyncMode(self, IsPauseOn = True):
++    """
++    Enables or disables the pause mode (Speed-Dreams waits with 
++    new data until old data have been read).
++    
++    Keyword arguments:
++      IsPauseOn: Indicates, if pause mode should be enabled or disabled.
++    """
++    self._IsPauseOn = IsPauseOn
++
++
++  def read(self):
++    """
++    Checks if new data is available and read an image from the memory if possible.
++    
++    :return: Returns True if data can be read.
++    """
++    if self.Data.Sync.IsWritten == 1:
++
++      if self._IsPauseOn:
++        self.Data.Sync.IsPauseOn = 1
++      else:
++        self.Data.Sync.IsPauseOn = 0
++
++      Width = self.Data.Image.ImageWidth
++      Height = self.Data.Image.ImageHeight
++      Image = np.fromstring(self.Data.Image.Data, np.uint8, Width * Height * self.TARGET_IMAGE_CHANNELS)
++      Image = Image.reshape(Height, Width, self.TARGET_IMAGE_CHANNELS)
++
++      if Width != self._TargetResolution[0] or Height != self._TargetResolution[1]:
++        Image = cv2.resize(Image, (self._TargetResolution[0], self._TargetResolution[1]))
++
++      self._Image = cv2.flip(Image, 0)
++      return True
++
++    return False
++
++
++  def indicateReady(self):
++    """
++    Indicates to Speed-Dreams, that the reader is ready.
++    """
++    self.Data.Sync.IsWritten = 0
++
++
++  @property
++  def Data(self):
++    return self._Data
++
++
++  @property
++  def Image(self):
++    return self._Image
+\ No newline at end of file
+-- 
+2.11.1.windows.1
+
