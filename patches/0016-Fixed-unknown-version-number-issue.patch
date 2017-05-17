@@ -1,0 +1,25 @@
+From 8bc04cf9144fc9611aa6effe17a04d38d742add3 Mon Sep 17 00:00:00 2001
+From: Andre <andre.netzeband@hm.edu>
+Date: Tue, 16 May 2017 22:12:37 +0200
+Subject: [PATCH] Fixed unknown version number issue.
+
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 1ddf1f6..d53e911 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -16,7 +16,7 @@ SET(NEXT_MAJOR_MINOR_VERSION "2.2") # Next major.minor version
+ 
+ # Uncomment if you don't want automatic SVN version detection
+ # (poor performances under Windows, don't work with git-svn, ...)
+-# SET(OPTION_AUTOVERSION Off)
++SET(OPTION_AUTOVERSION Off)
+ 
+ IF(NOT OPTION_AUTOVERSION)
+ 	
+-- 
+2.11.1.windows.1
+

@@ -1,0 +1,30 @@
+From e43a9f5ee1705cc9940afbbb36b109b642fca0cd Mon Sep 17 00:00:00 2001
+From: Andre <andre.netzeband@hm.edu>
+Date: Tue, 16 May 2017 22:13:09 +0200
+Subject: [PATCH] Fixed blocking process issue, in case of Speed-Dreams is not
+ running.
+
+---
+ python/example.py | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+
+diff --git a/python/example.py b/python/example.py
+index 95cc8a4..db75656 100644
+--- a/python/example.py
++++ b/python/example.py
+@@ -23,9 +23,8 @@ while not IsExit:
+     # Output image from memory
+     cv2.imshow("SpeedDreams Image", Memory.Image)
+ 
+-    if cv2.waitKey(10) == 27:
+-      IsExit = True
+-
+     # Indicate that reader process is ready and a new value can be written
+     Memory.indicateReady()
+ 
++  if cv2.waitKey(10) == 27:
++    IsExit = True
+\ No newline at end of file
+-- 
+2.11.1.windows.1
+

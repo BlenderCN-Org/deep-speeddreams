@@ -1,0 +1,178 @@
+From fc6fb4b17d465f1f3b34fece5fd607e67ca73e95 Mon Sep 17 00:00:00 2001
+From: Andre <andre.netzeband@hm.edu>
+Date: Wed, 17 May 2017 20:42:24 +0200
+Subject: [PATCH] Added unique TrackID and unique RaceID to the recorded
+ game-data.
+
+---
+ python/speed_dreams/data_types.py            |  6 +++-
+ src/modules/graphic/ssggraph/CRecordCam.cpp  | 53 ++++++++++++++++++----------
+ src/modules/graphic/ssggraph/CRecordCam.h    |  5 +--
+ src/modules/graphic/ssggraph/CSharedMemroy.h |  6 ++++
+ 4 files changed, 48 insertions(+), 22 deletions(-)
+
+diff --git a/python/speed_dreams/data_types.py b/python/speed_dreams/data_types.py
+index a8e7f50..b707473 100644
+--- a/python/speed_dreams/data_types.py
++++ b/python/speed_dreams/data_types.py
+@@ -76,7 +76,9 @@ class Game_t(ctypes.Structure):
+   _fields_ = [
+     ('Speed', ctypes.c_float),
+     ('Lanes', ctypes.c_uint8),
+-    ('TrackNameArray', ctypes.c_char * MAX_TRACK_NAME_LENGTH)
++    ('TrackNameArray', ctypes.c_char * MAX_TRACK_NAME_LENGTH),
++    ('UniqueTrackID', ctypes.c_uint64),
++    ('UniqueRaceID', ctypes.c_uint64),
+   ]
+ 
+   @property
+@@ -88,6 +90,8 @@ class Game_t(ctypes.Structure):
+     String += "Speed={}\n".format(self.Speed)
+     String += "Lanes={}\n".format(self.Lanes)
+     String += "TrackName={}\n".format(self.TrackName)
++    String += "UniqueTrackID={}\n".format(self.UniqueTrackID)
++    String += "UniqueRaceID={}\n".format(self.UniqueRaceID)
+     return String
+ 
+ 
+diff --git a/src/modules/graphic/ssggraph/CRecordCam.cpp b/src/modules/graphic/ssggraph/CRecordCam.cpp
+index 78da4c2..30fd9ad 100644
+--- a/src/modules/graphic/ssggraph/CRecordCam.cpp
++++ b/src/modules/graphic/ssggraph/CRecordCam.cpp
+@@ -27,6 +27,9 @@
+  *
+  */
+ 
++#include <cstring>
++#include <chrono>
++
+ #include <car.h>
+ #include "grcam.h"
+ #include "grmain.h"
+@@ -35,6 +38,8 @@
+ #include "CSharedMemroy.h"
+ #include "grscene.h"
+ 
++#include <boost/functional/hash.hpp>
++
+ CRecordCam::CRecordCam(cGrScreen * pMyScreen,
+                              int ID,
+                              int DrawCurr,
+@@ -47,7 +52,8 @@ CRecordCam::CRecordCam(cGrScreen * pMyScreen,
+                              float MyFogStart,
+                              float MyFogEnd):
+     cGrCarCamMirror(pMyScreen, ID, DrawCurr, DrawBG, MyFovY, MyFovYMin, MyFovYMax, MyFNear, MyFFar, MyFogStart, MyFogEnd),
+-    mpScreen(pMyScreen)
++    mpScreen(pMyScreen),
++    mIsFirstUpdate(true)
+ {
+   mScreenX   = screen->getScrX();
+   mScreenY   = screen->getScrY();
+@@ -57,8 +63,8 @@ CRecordCam::CRecordCam(cGrScreen * pMyScreen,
+ 
+   mpSharedMemory = new CSharedMemory();
+ 
+-  memset(&LabelData, 0, sizeof(LabelData));
+-  memset(&GameData, 0, sizeof(GameData));
++  memset(&mLabelData, 0, sizeof(mLabelData));
++  memset(&mGameData, 0, sizeof(mGameData));
+ }
+ 
+ CRecordCam::~CRecordCam()
+@@ -93,26 +99,35 @@ void CRecordCam::update(tCarElt *pCar, tSituation *pSituation)
+   speed[1] =pCar->pub.DynGCg.vel.y;
+   speed[2] =pCar->pub.DynGCg.vel.z;
+ 
+-  GameData.Speed = (pCar->_speed_x * 3.6f);
++  mGameData.Speed = (pCar->_speed_x * 3.6f);
+ 
+-  Speed = (int)GameData.Speed;
++  Speed = (int)mGameData.Speed;
+ 
+-  if (grTrack)
++  if (mIsFirstUpdate)
+   {
+-    assert(grTrack->lanes >= 0);
+-    assert(grTrack->lanes <= 0xFF);
++    mIsFirstUpdate = false;
+ 
+-    GameData.Lanes = (uint8_t)grTrack->lanes;
+-    if (GameData.TrackName[0] == 0)
++    if (grTrack)
+     {
+-      snprintf(GameData.TrackName, (size_t)MAX_TRACK_NAME_LENGTH, "%s", grTrack->name);
+-      GameData.TrackName[MAX_TRACK_NAME_LENGTH-1] = 0;
++      assert(grTrack->lanes >= 0);
++      assert(grTrack->lanes <= 0xFF);
++
++      mGameData.Lanes = (uint8_t)grTrack->lanes;
++
++      strncpy(mGameData.TrackName, grTrack->name, MAX_TRACK_NAME_LENGTH);
++      mGameData.TrackName[MAX_TRACK_NAME_LENGTH-1] = 0;
++
++      size_t Hash = 0;
++      boost::hash_combine(Hash, std::string(grTrack->name));
++      mGameData.UniqueTrackID = (uint64_t)Hash;
++      boost::hash_combine(Hash, std::chrono::system_clock::now().time_since_epoch().count());
++      mGameData.UniqueRaceID  = (uint64_t)Hash;
++    }
++    else
++    {
++      mGameData.Lanes = 0;
++      mGameData.TrackName[0] = 0;
+     }
+-  }
+-  else
+-  {
+-    GameData.Lanes = 0;
+-    GameData.TrackName[0] = 0;
+   }
+ }
+ 
+@@ -136,8 +151,8 @@ void CRecordCam::storeImage(int X, int Y, int Height, int Width)
+   pMemory->Image.ImageWidth = EffectiveWidth;
+   glReadPixels(X, Y, Width, Height, GL_BGR, GL_UNSIGNED_BYTE, (GLvoid*)pMemory->Image.Data);
+ 
+-  memcpy(&(pMemory->Labels), &LabelData, sizeof(LabelData));
+-  memcpy(&(pMemory->Game), &GameData, sizeof(GameData));
++  memcpy(&(pMemory->Labels), &mLabelData, sizeof(mLabelData));
++  memcpy(&(pMemory->Game), &mGameData, sizeof(mGameData));
+ 
+   mpSharedMemory->indicateWrite();
+ }
+diff --git a/src/modules/graphic/ssggraph/CRecordCam.h b/src/modules/graphic/ssggraph/CRecordCam.h
+index 4837879..fd8e1ad 100644
+--- a/src/modules/graphic/ssggraph/CRecordCam.h
++++ b/src/modules/graphic/ssggraph/CRecordCam.h
+@@ -72,8 +72,9 @@ class CRecordCam : public cGrCarCamMirror
+     int mMaxWidth;
+     CSharedMemory * mpSharedMemory;
+     double mLastTime;
+-    Game_t   GameData;
+-    Labels_t LabelData;
++    Game_t   mGameData;
++    Labels_t mLabelData;
++    bool mIsFirstUpdate;
+ };
+ 
+ #endif //SPEED_DREAMS_2_CRECORDCAM_H
+diff --git a/src/modules/graphic/ssggraph/CSharedMemroy.h b/src/modules/graphic/ssggraph/CSharedMemroy.h
+index b58e961..dfbcbfc 100644
+--- a/src/modules/graphic/ssggraph/CSharedMemroy.h
++++ b/src/modules/graphic/ssggraph/CSharedMemroy.h
+@@ -153,6 +153,12 @@ typedef struct
+ 
+   /// @brief The name of the current track. If the name is too long (longer than 256 characters, the name is truncated).
+   char TrackName[MAX_TRACK_NAME_LENGTH];
++
++  /// @brief An unique ID for the track.
++  uint64_t UniqueTrackID;
++
++  /// @brief An unique ID for the race.
++  uint64_t UniqueRaceID;
+ } Game_t;
+ 
+ 
+-- 
+2.11.1.windows.1
+

@@ -1,0 +1,25 @@
+From 8625032a107c6f3bd24b381cdbeb70fac6d32409 Mon Sep 17 00:00:00 2001
+From: Andre Netzeband <andre.netzeband@hm.edu>
+Date: Wed, 17 May 2017 13:24:12 +0200
+Subject: [PATCH] Enable or disable the car visibility with Flag DrawCurr.
+
+---
+ src/modules/graphic/ssggraph/CRecordRenderCam.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/modules/graphic/ssggraph/CRecordRenderCam.cpp b/src/modules/graphic/ssggraph/CRecordRenderCam.cpp
+index cdc48a2..a4d6ca4 100644
+--- a/src/modules/graphic/ssggraph/CRecordRenderCam.cpp
++++ b/src/modules/graphic/ssggraph/CRecordRenderCam.cpp
+@@ -111,7 +111,7 @@ CRecordRenderCam::CRecordRenderCam(cGrScreen * pMyScreen,
+                              float MyFFar,
+                              float MyFogStart,
+                              float MyFogEnd):
+-    CRecordCam(pMyScreen, ID, 1, DrawBG, MyFovY, MyFovYMin, MyFovYMax, MyFNear, MyFFar, MyFogStart, MyFogEnd)
++    CRecordCam(pMyScreen, ID, DrawCurr, DrawBG, MyFovY, MyFovYMin, MyFovYMax, MyFNear, MyFFar, MyFogStart, MyFogEnd)
+ {
+   bool SetupSucessful = setupOpenGLFunctions();
+ 
+-- 
+2.11.1.windows.1
+
