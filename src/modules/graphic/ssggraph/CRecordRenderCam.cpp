@@ -111,7 +111,7 @@ CRecordRenderCam::CRecordRenderCam(cGrScreen * pMyScreen,
                              float MyFFar,
                              float MyFogStart,
                              float MyFogEnd):
-    CRecordCam(pMyScreen, ID, 1, DrawBG, MyFovY, MyFovYMin, MyFovYMax, MyFNear, MyFFar, MyFogStart, MyFogEnd)
+    CRecordCam(pMyScreen, ID, DrawCurr, DrawBG, MyFovY, MyFovYMin, MyFovYMax, MyFNear, MyFFar, MyFogStart, MyFogEnd)
 {
   bool SetupSucessful = setupOpenGLFunctions();
 
