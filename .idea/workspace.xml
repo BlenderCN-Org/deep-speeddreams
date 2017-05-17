@@ -17,15 +17,15 @@
       <config projectName="speed-dreams-2" targetName="sd2-nfs2ac" />
       <config projectName="speed-dreams-2" targetName="shadow" />
       <config projectName="speed-dreams-2" targetName="standardgame" />
-      <config projectName="speed-dreams-2" targetName="textonly" />
       <config projectName="speed-dreams-2" targetName="PACKAGE_SRC" />
+      <config projectName="speed-dreams-2" targetName="textonly" />
       <config projectName="speed-dreams-2" targetName="interfaces" />
-      <config projectName="speed-dreams-2" targetName="tgfclient" />
       <config projectName="speed-dreams-2" targetName="UNINSTALL" />
       <config projectName="speed-dreams-2" targetName="simplix" />
+      <config projectName="speed-dreams-2" targetName="tgfclient" />
       <config projectName="speed-dreams-2" targetName="tracks_xml" />
-      <config projectName="speed-dreams-2" targetName="telemetryv1" />
       <config projectName="speed-dreams-2" targetName="networkhuman" />
+      <config projectName="speed-dreams-2" targetName="telemetryv1" />
       <config projectName="speed-dreams-2" targetName="portability" />
       <config projectName="speed-dreams-2" targetName="ssggraph" />
       <config projectName="speed-dreams-2" targetName="sd2-nfsperf" />
@@ -37,8 +37,8 @@
       <config projectName="speed-dreams-2" targetName="tgfdata" />
       <config projectName="speed-dreams-2" targetName="sd2-accc" />
       <config projectName="speed-dreams-2" targetName="human" />
-      <config projectName="speed-dreams-2" targetName="xmlversion" />
       <config projectName="speed-dreams-2" targetName="sd2-menuview" />
+      <config projectName="speed-dreams-2" targetName="xmlversion" />
       <config projectName="speed-dreams-2" targetName="osggraph" />
       <config projectName="speed-dreams-2" targetName="robottools" />
       <config projectName="speed-dreams-2" targetName="sd2-trackgen" />
@@ -52,7 +52,7 @@
   </component>
   <component name="CMakeSettings">
     <configurations>
-      <configuration CONFIG_NAME="Debug" GENERATION_DIR="build/win64-vc2015/debug">
+      <configuration CONFIG_NAME="Release" GENERATION_DIR="build/win64-vc2015/release">
         <toolsetOption type="msvc.arch" value="amd64" />
       </configuration>
     </configurations>
@@ -60,12 +60,13 @@
   <component name="ChangeListManager">
     <list default="true" id="9761ed18-0676-4744-81f8-8805a908d55c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/python/.idea/misc.xml" afterPath="$PROJECT_DIR$/python/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/python/.idea/workspace.xml" afterPath="$PROJECT_DIR$/python/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordRenderCam.cpp" afterPath="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordRenderCam.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modules/graphic/ssggraph/grscreen.cpp" afterPath="$PROJECT_DIR$/src/modules/graphic/ssggraph/grscreen.cpp" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/build/win64-vc2015/debug/" />
     <ignored path="$PROJECT_DIR$/build/win64-vc2017/debug/" />
+    <ignored path="$PROJECT_DIR$/build/win64-vc2015/release/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -79,7 +80,7 @@
       <file leaf-file-name="CRecordCam.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
+            <state relative-caret-position="1105">
               <caret line="65" column="39" lean-forward="false" selection-start-line="65" selection-start-column="26" selection-end-line="65" selection-end-column="39" />
               <folding>
                 <element signature="e#977#995#0" expanded="true" />
@@ -91,8 +92,8 @@
       <file leaf-file-name="grscreen.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grscreen.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="530">
-              <caret line="607" column="3" lean-forward="false" selection-start-line="607" selection-start-column="3" selection-end-line="607" selection-end-column="3" />
+            <state relative-caret-position="179">
+              <caret line="616" column="24" lean-forward="false" selection-start-line="616" selection-start-column="24" selection-end-line="616" selection-end-column="24" />
               <folding>
                 <element signature="e#1008#1029#0" expanded="true" />
               </folding>
@@ -103,7 +104,7 @@
       <file leaf-file-name="CRecordCam.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="712">
+            <state relative-caret-position="332">
               <caret line="138" column="27" lean-forward="false" selection-start-line="138" selection-start-column="27" selection-end-line="138" selection-end-column="27" />
               <folding>
                 <element signature="e#936#954#0" expanded="true" />
@@ -115,7 +116,7 @@
       <file leaf-file-name="CSharedMemroy.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CSharedMemroy.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1088">
+            <state relative-caret-position="1394">
               <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
               <folding>
                 <element signature="e#939#965#0" expanded="true" />
@@ -127,7 +128,7 @@
       <file leaf-file-name="CSharedMemroy.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CSharedMemroy.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
+            <state relative-caret-position="2465">
               <caret line="145" column="1" lean-forward="false" selection-start-line="145" selection-start-column="1" selection-end-line="145" selection-end-column="1" />
               <folding />
             </state>
@@ -137,11 +138,9 @@
       <file leaf-file-name="CRecordRenderCam.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordRenderCam.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="717">
-              <caret line="199" column="0" lean-forward="false" selection-start-line="199" selection-start-column="0" selection-end-line="199" selection-end-column="29" />
-              <folding>
-                <element signature="e#942#971#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="128">
+              <caret line="167" column="32" lean-forward="false" selection-start-line="167" selection-start-column="32" selection-end-line="167" selection-end-column="32" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -169,7 +168,7 @@
       <file leaf-file-name="CRecordRenderCam.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordRenderCam.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="576">
+            <state relative-caret-position="935">
               <caret line="55" column="41" lean-forward="false" selection-start-line="55" selection-start-column="41" selection-end-line="55" selection-end-column="41" />
               <folding />
             </state>
@@ -240,8 +239,8 @@
         <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.h" />
         <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.cpp" />
         <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordRenderCam.h" />
-        <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordRenderCam.cpp" />
         <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/grscreen.cpp" />
+        <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordRenderCam.cpp" />
       </list>
     </option>
   </component>
@@ -253,10 +252,10 @@
   </component>
   <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="2576" />
-    <option name="height" value="1416" />
+    <option name="x" value="-6" />
+    <option name="y" value="-6" />
+    <option name="width" value="1293" />
+    <option name="height" value="693" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="1" id="Add" />
@@ -282,6 +281,17 @@
             <path>
               <item name="speed-dreams-2" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="speed-dreams-2" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="speed-dreams-2" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+              <item name="win64-vc2015" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="speed-dreams-2" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
@@ -347,22 +357,22 @@
     </option>
   </component>
   <component name="RunManager" selected="Application.Start">
-    <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all">
+    <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Release" EXPLICIT_BUILD_TARGET_NAME="all">
       <envs />
     </configuration>
-    <configuration name="Install" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="install_speed-dreams-2" CONFIG_NAME="Debug">
+    <configuration name="Install" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="install_speed-dreams-2" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="LaneDriver" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="LaneDriver" CONFIG_NAME="Debug">
+    <configuration name="LaneDriver" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="LaneDriver" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="PACKAGE_SRC" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="PACKAGE_SRC" CONFIG_NAME="Debug">
+    <configuration name="PACKAGE_SRC" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="PACKAGE_SRC" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="Start" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="file://$PROJECT_DIR$/build/win64-vc2017/debug" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="speed-dreams-2" RUN_TARGET_NAME="speed-dreams-2" EXPLICIT_BUILD_TARGET_NAME="all">
+    <configuration name="Start" type="CMakeRunConfiguration" factoryName="Application" WORKING_DIR="file://$PROJECT_DIR$/build/win64-vc2015/release" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="speed-dreams-2" RUN_TARGET_NAME="speed-dreams-2" EXPLICIT_BUILD_TARGET_NAME="all">
       <envs />
     </configuration>
-    <configuration name="UNINSTALL" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="UNINSTALL" CONFIG_NAME="Debug">
+    <configuration name="UNINSTALL" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="UNINSTALL" CONFIG_NAME="Release">
       <envs />
     </configuration>
     <configuration default="true" type="js.build_tools.grunt" factoryName="Grunt.js">
@@ -545,181 +555,181 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method />
     </configuration>
-    <configuration name="dandroid" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="dandroid" CONFIG_NAME="Debug">
+    <configuration name="dandroid" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="dandroid" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="ephemeris" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="ephemeris" CONFIG_NAME="Debug">
+    <configuration name="ephemeris" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="ephemeris" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="genparoptv1" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="genparoptv1" CONFIG_NAME="Debug">
+    <configuration name="genparoptv1" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="genparoptv1" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="human" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="human" CONFIG_NAME="Debug">
+    <configuration name="human" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="human" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="interfaces" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="interfaces" CONFIG_NAME="Debug">
+    <configuration name="interfaces" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="interfaces" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="kilo2008" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="kilo2008" CONFIG_NAME="Debug">
+    <configuration name="kilo2008" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="kilo2008" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="learning" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="learning" CONFIG_NAME="Debug">
+    <configuration name="learning" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="learning" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="legacymenu" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="legacymenu" CONFIG_NAME="Debug">
+    <configuration name="legacymenu" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="legacymenu" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="legacymenu_xml" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="legacymenu_xml" CONFIG_NAME="Debug">
+    <configuration name="legacymenu_xml" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="legacymenu_xml" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="math" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="math" CONFIG_NAME="Debug">
+    <configuration name="math" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="math" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="networkhuman" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="networkhuman" CONFIG_NAME="Debug">
+    <configuration name="networkhuman" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="networkhuman" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="networking" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="networking" CONFIG_NAME="Debug">
+    <configuration name="networking" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="networking" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="osggraph" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="osggraph" CONFIG_NAME="Debug">
+    <configuration name="osggraph" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="osggraph" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="portability" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="portability" CONFIG_NAME="Debug">
+    <configuration name="portability" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="portability" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="raceman" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="raceman" CONFIG_NAME="Debug">
+    <configuration name="raceman" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="raceman" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="robottools" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="robottools" CONFIG_NAME="Debug">
+    <configuration name="robottools" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="robottools" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="rootdoc" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="rootdoc" CONFIG_NAME="Debug">
+    <configuration name="rootdoc" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="rootdoc" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="sd2-accc" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="sd2-accc" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="speed-dreams-2" RUN_TARGET_NAME="sd2-accc">
+    <configuration name="sd2-accc" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="sd2-accc" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="speed-dreams-2" RUN_TARGET_NAME="sd2-accc">
       <envs />
     </configuration>
-    <configuration name="sd2-menuview" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="sd2-menuview" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="speed-dreams-2" RUN_TARGET_NAME="sd2-menuview">
+    <configuration name="sd2-menuview" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="sd2-menuview" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="speed-dreams-2" RUN_TARGET_NAME="sd2-menuview">
       <envs />
     </configuration>
-    <configuration name="sd2-nfs2ac" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="sd2-nfs2ac" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="speed-dreams-2" RUN_TARGET_NAME="sd2-nfs2ac">
+    <configuration name="sd2-nfs2ac" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="sd2-nfs2ac" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="speed-dreams-2" RUN_TARGET_NAME="sd2-nfs2ac">
       <envs />
     </configuration>
-    <configuration name="sd2-nfsperf" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="sd2-nfsperf" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="speed-dreams-2" RUN_TARGET_NAME="sd2-nfsperf">
+    <configuration name="sd2-nfsperf" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="sd2-nfsperf" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="speed-dreams-2" RUN_TARGET_NAME="sd2-nfsperf">
       <envs />
     </configuration>
-    <configuration name="sd2-trackgen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="sd2-trackgen" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="speed-dreams-2" RUN_TARGET_NAME="sd2-trackgen">
+    <configuration name="sd2-trackgen" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="sd2-trackgen" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="speed-dreams-2" RUN_TARGET_NAME="sd2-trackgen">
       <envs />
     </configuration>
-    <configuration name="settings_versions" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="settings_versions" CONFIG_NAME="Debug">
+    <configuration name="settings_versions" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="settings_versions" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="shaders" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="shaders" CONFIG_NAME="Debug">
+    <configuration name="shaders" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="shaders" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="shadow" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="shadow" CONFIG_NAME="Debug">
+    <configuration name="shadow" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="shadow" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="simplix" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="simplix" CONFIG_NAME="Debug">
+    <configuration name="simplix" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="simplix" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="simuv2.1" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="simuv2.1" CONFIG_NAME="Debug">
+    <configuration name="simuv2.1" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="simuv2.1" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="simuv3" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="simuv3" CONFIG_NAME="Debug">
+    <configuration name="simuv3" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="simuv3" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="simuv4" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="simuv4" CONFIG_NAME="Debug">
+    <configuration name="simuv4" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="simuv4" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="snddefault" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="snddefault" CONFIG_NAME="Debug">
+    <configuration name="snddefault" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="snddefault" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="speed-dreams-2" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="speed-dreams-2" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="speed-dreams-2" RUN_TARGET_NAME="speed-dreams-2">
+    <configuration name="speed-dreams-2" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="speed-dreams-2" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="speed-dreams-2" RUN_TARGET_NAME="speed-dreams-2">
       <envs />
     </configuration>
-    <configuration name="ssggraph" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="ssggraph" CONFIG_NAME="Debug">
+    <configuration name="ssggraph" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="ssggraph" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="standardgame" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="standardgame" CONFIG_NAME="Debug">
+    <configuration name="standardgame" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="standardgame" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="telemetryv1" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="telemetryv1" CONFIG_NAME="Debug">
+    <configuration name="telemetryv1" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="telemetryv1" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="textonly" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="textonly" CONFIG_NAME="Debug">
+    <configuration name="textonly" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="textonly" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="tgf" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="tgf" CONFIG_NAME="Debug">
+    <configuration name="tgf" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="tgf" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="tgfclient" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="tgfclient" CONFIG_NAME="Debug">
+    <configuration name="tgfclient" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="tgfclient" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="tgfdata" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="tgfdata" CONFIG_NAME="Debug">
+    <configuration name="tgfdata" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="tgfdata" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="tracks_xml" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="tracks_xml" CONFIG_NAME="Debug">
+    <configuration name="tracks_xml" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="tracks_xml" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="trackv1" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="trackv1" CONFIG_NAME="Debug">
+    <configuration name="trackv1" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="trackv1" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="usr" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="usr" CONFIG_NAME="Debug">
+    <configuration name="usr" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="usr" CONFIG_NAME="Release">
       <envs />
     </configuration>
-    <configuration name="xmlversion" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="xmlversion" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="speed-dreams-2" RUN_TARGET_NAME="xmlversion">
+    <configuration name="xmlversion" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="speed-dreams-2" TARGET_NAME="xmlversion" CONFIG_NAME="Release" RUN_TARGET_PROJECT_NAME="speed-dreams-2" RUN_TARGET_NAME="xmlversion">
       <envs />
     </configuration>
     <list size="48">
       <item index="0" class="java.lang.String" itemvalue="Application.Build All" />
       <item index="1" class="java.lang.String" itemvalue="Application.Install" />
-      <item index="2" class="java.lang.String" itemvalue="Application.Start" />
-      <item index="3" class="java.lang.String" itemvalue="Application.PACKAGE_SRC" />
-      <item index="4" class="java.lang.String" itemvalue="Application.rootdoc" />
-      <item index="5" class="java.lang.String" itemvalue="Application.settings_versions" />
-      <item index="6" class="java.lang.String" itemvalue="Application.UNINSTALL" />
-      <item index="7" class="java.lang.String" itemvalue="Application.raceman" />
-      <item index="8" class="java.lang.String" itemvalue="Application.legacymenu_xml" />
-      <item index="9" class="java.lang.String" itemvalue="Application.shaders" />
-      <item index="10" class="java.lang.String" itemvalue="Application.tracks_xml" />
-      <item index="11" class="java.lang.String" itemvalue="Application.dandroid" />
-      <item index="12" class="java.lang.String" itemvalue="Application.human" />
-      <item index="13" class="java.lang.String" itemvalue="Application.kilo2008" />
-      <item index="14" class="java.lang.String" itemvalue="Application.LaneDriver" />
-      <item index="15" class="java.lang.String" itemvalue="Application.networkhuman" />
-      <item index="16" class="java.lang.String" itemvalue="Application.shadow" />
-      <item index="17" class="java.lang.String" itemvalue="Application.simplix" />
-      <item index="18" class="java.lang.String" itemvalue="Application.usr" />
-      <item index="19" class="java.lang.String" itemvalue="Application.interfaces" />
-      <item index="20" class="java.lang.String" itemvalue="Application.ephemeris" />
-      <item index="21" class="java.lang.String" itemvalue="Application.learning" />
-      <item index="22" class="java.lang.String" itemvalue="Application.math" />
-      <item index="23" class="java.lang.String" itemvalue="Application.portability" />
-      <item index="24" class="java.lang.String" itemvalue="Application.robottools" />
-      <item index="25" class="java.lang.String" itemvalue="Application.tgf" />
-      <item index="26" class="java.lang.String" itemvalue="Application.tgfclient" />
-      <item index="27" class="java.lang.String" itemvalue="Application.tgfdata" />
-      <item index="28" class="java.lang.String" itemvalue="Application.speed-dreams-2" />
-      <item index="29" class="java.lang.String" itemvalue="Application.osggraph" />
-      <item index="30" class="java.lang.String" itemvalue="Application.ssggraph" />
-      <item index="31" class="java.lang.String" itemvalue="Application.networking" />
-      <item index="32" class="java.lang.String" itemvalue="Application.genparoptv1" />
-      <item index="33" class="java.lang.String" itemvalue="Application.standardgame" />
-      <item index="34" class="java.lang.String" itemvalue="Application.simuv2.1" />
-      <item index="35" class="java.lang.String" itemvalue="Application.simuv3" />
-      <item index="36" class="java.lang.String" itemvalue="Application.simuv4" />
-      <item index="37" class="java.lang.String" itemvalue="Application.snddefault" />
-      <item index="38" class="java.lang.String" itemvalue="Application.telemetryv1" />
-      <item index="39" class="java.lang.String" itemvalue="Application.trackv1" />
-      <item index="40" class="java.lang.String" itemvalue="Application.legacymenu" />
-      <item index="41" class="java.lang.String" itemvalue="Application.textonly" />
-      <item index="42" class="java.lang.String" itemvalue="Application.sd2-accc" />
-      <item index="43" class="java.lang.String" itemvalue="Application.sd2-menuview" />
-      <item index="44" class="java.lang.String" itemvalue="Application.sd2-nfs2ac" />
-      <item index="45" class="java.lang.String" itemvalue="Application.sd2-nfsperf" />
-      <item index="46" class="java.lang.String" itemvalue="Application.sd2-trackgen" />
-      <item index="47" class="java.lang.String" itemvalue="Application.xmlversion" />
+      <item index="2" class="java.lang.String" itemvalue="Application.PACKAGE_SRC" />
+      <item index="3" class="java.lang.String" itemvalue="Application.rootdoc" />
+      <item index="4" class="java.lang.String" itemvalue="Application.settings_versions" />
+      <item index="5" class="java.lang.String" itemvalue="Application.UNINSTALL" />
+      <item index="6" class="java.lang.String" itemvalue="Application.raceman" />
+      <item index="7" class="java.lang.String" itemvalue="Application.legacymenu_xml" />
+      <item index="8" class="java.lang.String" itemvalue="Application.shaders" />
+      <item index="9" class="java.lang.String" itemvalue="Application.tracks_xml" />
+      <item index="10" class="java.lang.String" itemvalue="Application.dandroid" />
+      <item index="11" class="java.lang.String" itemvalue="Application.human" />
+      <item index="12" class="java.lang.String" itemvalue="Application.kilo2008" />
+      <item index="13" class="java.lang.String" itemvalue="Application.LaneDriver" />
+      <item index="14" class="java.lang.String" itemvalue="Application.networkhuman" />
+      <item index="15" class="java.lang.String" itemvalue="Application.shadow" />
+      <item index="16" class="java.lang.String" itemvalue="Application.simplix" />
+      <item index="17" class="java.lang.String" itemvalue="Application.usr" />
+      <item index="18" class="java.lang.String" itemvalue="Application.interfaces" />
+      <item index="19" class="java.lang.String" itemvalue="Application.ephemeris" />
+      <item index="20" class="java.lang.String" itemvalue="Application.learning" />
+      <item index="21" class="java.lang.String" itemvalue="Application.math" />
+      <item index="22" class="java.lang.String" itemvalue="Application.portability" />
+      <item index="23" class="java.lang.String" itemvalue="Application.robottools" />
+      <item index="24" class="java.lang.String" itemvalue="Application.tgf" />
+      <item index="25" class="java.lang.String" itemvalue="Application.tgfclient" />
+      <item index="26" class="java.lang.String" itemvalue="Application.tgfdata" />
+      <item index="27" class="java.lang.String" itemvalue="Application.speed-dreams-2" />
+      <item index="28" class="java.lang.String" itemvalue="Application.osggraph" />
+      <item index="29" class="java.lang.String" itemvalue="Application.ssggraph" />
+      <item index="30" class="java.lang.String" itemvalue="Application.networking" />
+      <item index="31" class="java.lang.String" itemvalue="Application.genparoptv1" />
+      <item index="32" class="java.lang.String" itemvalue="Application.standardgame" />
+      <item index="33" class="java.lang.String" itemvalue="Application.simuv2.1" />
+      <item index="34" class="java.lang.String" itemvalue="Application.simuv3" />
+      <item index="35" class="java.lang.String" itemvalue="Application.simuv4" />
+      <item index="36" class="java.lang.String" itemvalue="Application.snddefault" />
+      <item index="37" class="java.lang.String" itemvalue="Application.telemetryv1" />
+      <item index="38" class="java.lang.String" itemvalue="Application.trackv1" />
+      <item index="39" class="java.lang.String" itemvalue="Application.legacymenu" />
+      <item index="40" class="java.lang.String" itemvalue="Application.textonly" />
+      <item index="41" class="java.lang.String" itemvalue="Application.sd2-accc" />
+      <item index="42" class="java.lang.String" itemvalue="Application.sd2-menuview" />
+      <item index="43" class="java.lang.String" itemvalue="Application.sd2-nfs2ac" />
+      <item index="44" class="java.lang.String" itemvalue="Application.sd2-nfsperf" />
+      <item index="45" class="java.lang.String" itemvalue="Application.sd2-trackgen" />
+      <item index="46" class="java.lang.String" itemvalue="Application.xmlversion" />
+      <item index="47" class="java.lang.String" itemvalue="Application.Start" />
     </list>
   </component>
   <component name="ShelveChangesManager" show_recycled="false">
@@ -753,27 +763,27 @@
       <workItem from="1494605732307" duration="6052000" />
       <workItem from="1494928949469" duration="77000" />
       <workItem from="1494929231590" duration="12853000" />
+      <workItem from="1495014679153" duration="292000" />
+      <workItem from="1495015396270" duration="3273000" />
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="129482000" />
+    <option name="totallyTimeSpent" value="133047000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2576" height="1416" extended-state="0" />
-    <editor active="true" />
+    <frame x="-6" y="-6" width="1293" height="693" extended-state="6" />
     <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2157936" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.4984375" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4486983" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32764506" sideWeight="0.4984375" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30375427" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.503125" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.496875" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12148438" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32764506" sideWeight="0.496875" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -783,6 +793,7 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -954,62 +965,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Program Files (x86)/Windows Kits/10/Include/10.0.15063.0/um/gl/GL.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21301">
-          <caret line="1253" column="31" lean-forward="false" selection-start-line="1253" selection-start-column="26" selection-end-line="1253" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../CPP/libs/sd/install/win64/dbg/3rdParty/include/GL/glext.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/OpenCV/opencv/build/include/opencv2/core/operations.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="51" column="8" lean-forward="false" selection-start-line="51" selection-start-column="1" selection-end-line="51" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/OpenCV/opencv/build/OpenCVConfig.cmake">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="491">
-          <caret line="81" column="27" lean-forward="false" selection-start-line="81" selection-start-column="27" selection-end-line="81" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/OpenCV/opencv/build/include/opencv2/core/mat.inl.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5644">
-          <caret line="332" column="5" lean-forward="false" selection-start-line="332" selection-start-column="5" selection-end-line="332" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/OpenCV/opencv/build/include/opencv2/core/mat.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13362">
-          <caret line="786" column="4" lean-forward="false" selection-start-line="786" selection-start-column="4" selection-end-line="786" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/OpenCV/opencv/build/include/opencv2/core/hal/interface.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1411">
-          <caret line="83" column="15" lean-forward="false" selection-start-line="83" selection-start-column="8" selection-end-line="83" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/OpenCV/opencv/build/include/opencv2/core.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="639">
-          <caret line="1022" column="18" lean-forward="false" selection-start-line="1022" selection-start-column="18" selection-end-line="1022" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://C:/Program Files (x86)/Windows Kits/10/Include/10.0.15063.0/um/gl/GL.h" />
+    <entry file="file://$PROJECT_DIR$/../../../../CPP/libs/sd/install/win64/dbg/3rdParty/include/GL/glext.h" />
+    <entry file="file://C:/OpenCV/opencv/build/include/opencv2/core/operations.hpp" />
+    <entry file="file://C:/OpenCV/opencv/build/OpenCVConfig.cmake" />
+    <entry file="file://C:/OpenCV/opencv/build/include/opencv2/core/mat.inl.hpp" />
+    <entry file="file://C:/OpenCV/opencv/build/include/opencv2/core/mat.hpp" />
+    <entry file="file://C:/OpenCV/opencv/build/include/opencv2/core/hal/interface.h" />
+    <entry file="file://C:/OpenCV/opencv/build/include/opencv2/core.hpp" />
     <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grscene.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
@@ -1045,20 +1008,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/OpenCV/opencv/build/include/opencv2/imgproc.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="2205" column="18" lean-forward="false" selection-start-line="2205" selection-start-column="18" selection-end-line="2205" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://C:/OpenCV/opencv/build/include/opencv2/imgproc.hpp" />
     <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grcam.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3383">
           <caret line="199" column="22" lean-forward="false" selection-start-line="199" selection-start-column="22" selection-end-line="199" selection-end-column="22" />
-          <folding>
-            <element signature="e#1041#1065#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1076,7 +1030,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/Boost/boost_1_62_0/boost/interprocess/windows_shared_memory.hpp">
+    <entry file="file://C:/boost/boost_1_62_0/boost/interprocess/windows_shared_memory.hpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
           <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
@@ -1101,7 +1055,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CSharedMemroy.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1088">
+        <state relative-caret-position="1394">
           <caret line="82" column="0" lean-forward="false" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
           <folding>
             <element signature="e#939#965#0" expanded="true" />
@@ -1111,7 +1065,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CSharedMemroy.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
+        <state relative-caret-position="2465">
           <caret line="145" column="1" lean-forward="false" selection-start-line="145" selection-start-column="1" selection-end-line="145" selection-end-column="1" />
           <folding />
         </state>
@@ -1121,23 +1075,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="282">
           <caret line="184" column="18" lean-forward="false" selection-start-line="184" selection-start-column="18" selection-end-line="184" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="712">
-          <caret line="138" column="27" lean-forward="false" selection-start-line="138" selection-start-column="27" selection-end-line="138" selection-end-column="27" />
-          <folding>
-            <element signature="e#936#954#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
+        <state relative-caret-position="1105">
           <caret line="65" column="39" lean-forward="false" selection-start-line="65" selection-start-column="26" selection-end-line="65" selection-end-column="39" />
           <folding>
             <element signature="e#977#995#0" expanded="true" />
@@ -1147,16 +1090,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordRenderCam.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
+        <state relative-caret-position="935">
           <caret line="55" column="41" lean-forward="false" selection-start-line="55" selection-start-column="41" selection-end-line="55" selection-end-column="41" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="138" column="27" lean-forward="false" selection-start-line="138" selection-start-column="27" selection-end-line="138" selection-end-column="27" />
+          <folding>
+            <element signature="e#936#954#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grscreen.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="530">
-          <caret line="607" column="3" lean-forward="false" selection-start-line="607" selection-start-column="3" selection-end-line="607" selection-end-column="3" />
+        <state relative-caret-position="179">
+          <caret line="616" column="24" lean-forward="false" selection-start-line="616" selection-start-column="24" selection-end-line="616" selection-end-column="24" />
           <folding>
             <element signature="e#1008#1029#0" expanded="true" />
           </folding>
@@ -1165,11 +1118,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordRenderCam.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="717">
-          <caret line="199" column="0" lean-forward="false" selection-start-line="199" selection-start-column="0" selection-end-line="199" selection-end-column="29" />
-          <folding>
-            <element signature="e#942#971#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="128">
+          <caret line="167" column="32" lean-forward="false" selection-start-line="167" selection-start-column="32" selection-end-line="167" selection-end-column="32" />
+          <folding />
         </state>
       </provider>
     </entry>
