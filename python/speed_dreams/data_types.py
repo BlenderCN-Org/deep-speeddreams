@@ -76,7 +76,9 @@ class Game_t(ctypes.Structure):
   _fields_ = [
     ('Speed', ctypes.c_float),
     ('Lanes', ctypes.c_uint8),
-    ('TrackNameArray', ctypes.c_char * MAX_TRACK_NAME_LENGTH)
+    ('TrackNameArray', ctypes.c_char * MAX_TRACK_NAME_LENGTH),
+    ('UniqueTrackID', ctypes.c_uint64),
+    ('UniqueRaceID', ctypes.c_uint64),
   ]
 
   @property
@@ -88,6 +90,8 @@ class Game_t(ctypes.Structure):
     String += "Speed={}\n".format(self.Speed)
     String += "Lanes={}\n".format(self.Lanes)
     String += "TrackName={}\n".format(self.TrackName)
+    String += "UniqueTrackID={}\n".format(self.UniqueTrackID)
+    String += "UniqueRaceID={}\n".format(self.UniqueRaceID)
     return String
 
 

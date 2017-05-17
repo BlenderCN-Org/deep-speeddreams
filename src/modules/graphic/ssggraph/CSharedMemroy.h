@@ -153,6 +153,12 @@ typedef struct
 
   /// @brief The name of the current track. If the name is too long (longer than 256 characters, the name is truncated).
   char TrackName[MAX_TRACK_NAME_LENGTH];
+
+  /// @brief An unique ID for the track.
+  uint64_t UniqueTrackID;
+
+  /// @brief An unique ID for the race.
+  uint64_t UniqueRaceID;
 } Game_t;
 
 

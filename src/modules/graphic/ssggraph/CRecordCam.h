@@ -72,8 +72,9 @@ class CRecordCam : public cGrCarCamMirror
     int mMaxWidth;
     CSharedMemory * mpSharedMemory;
     double mLastTime;
-    Game_t   GameData;
-    Labels_t LabelData;
+    Game_t   mGameData;
+    Labels_t mLabelData;
+    bool mIsFirstUpdate;
 };
 
 #endif //SPEED_DREAMS_2_CRECORDCAM_H

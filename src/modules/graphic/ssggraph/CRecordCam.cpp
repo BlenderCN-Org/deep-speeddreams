@@ -27,6 +27,9 @@
  *
  */
 
+#include <cstring>
+#include <chrono>
+
 #include <car.h>
 #include "grcam.h"
 #include "grmain.h"
@@ -34,6 +37,8 @@
 
 #include "CSharedMemroy.h"
 #include "grscene.h"
+
+#include <boost/functional/hash.hpp>
 
 CRecordCam::CRecordCam(cGrScreen * pMyScreen,
                              int ID,
@@ -47,7 +52,8 @@ CRecordCam::CRecordCam(cGrScreen * pMyScreen,
                              float MyFogStart,
                              float MyFogEnd):
     cGrCarCamMirror(pMyScreen, ID, DrawCurr, DrawBG, MyFovY, MyFovYMin, MyFovYMax, MyFNear, MyFFar, MyFogStart, MyFogEnd),
-    mpScreen(pMyScreen)
+    mpScreen(pMyScreen),
+    mIsFirstUpdate(true)
 {
   mScreenX   = screen->getScrX();
   mScreenY   = screen->getScrY();
@@ -57,8 +63,8 @@ CRecordCam::CRecordCam(cGrScreen * pMyScreen,
 
   mpSharedMemory = new CSharedMemory();
 
-  memset(&LabelData, 0, sizeof(LabelData));
-  memset(&GameData, 0, sizeof(GameData));
+  memset(&mLabelData, 0, sizeof(mLabelData));
+  memset(&mGameData, 0, sizeof(mGameData));
 }
 
 CRecordCam::~CRecordCam()
@@ -93,26 +99,35 @@ void CRecordCam::update(tCarElt *pCar, tSituation *pSituation)
   speed[1] =pCar->pub.DynGCg.vel.y;
   speed[2] =pCar->pub.DynGCg.vel.z;
 
-  GameData.Speed = (pCar->_speed_x * 3.6f);
+  mGameData.Speed = (pCar->_speed_x * 3.6f);
 
-  Speed = (int)GameData.Speed;
+  Speed = (int)mGameData.Speed;
 
-  if (grTrack)
+  if (mIsFirstUpdate)
   {
-    assert(grTrack->lanes >= 0);
-    assert(grTrack->lanes <= 0xFF);
+    mIsFirstUpdate = false;
 
-    GameData.Lanes = (uint8_t)grTrack->lanes;
-    if (GameData.TrackName[0] == 0)
+    if (grTrack)
     {
-      snprintf(GameData.TrackName, (size_t)MAX_TRACK_NAME_LENGTH, "%s", grTrack->name);
-      GameData.TrackName[MAX_TRACK_NAME_LENGTH-1] = 0;
+      assert(grTrack->lanes >= 0);
+      assert(grTrack->lanes <= 0xFF);
+
+      mGameData.Lanes = (uint8_t)grTrack->lanes;
+
+      strncpy(mGameData.TrackName, grTrack->name, MAX_TRACK_NAME_LENGTH);
+      mGameData.TrackName[MAX_TRACK_NAME_LENGTH-1] = 0;
+
+      size_t Hash = 0;
+      boost::hash_combine(Hash, std::string(grTrack->name));
+      mGameData.UniqueTrackID = (uint64_t)Hash;
+      boost::hash_combine(Hash, std::chrono::system_clock::now().time_since_epoch().count());
+      mGameData.UniqueRaceID  = (uint64_t)Hash;
     }
-  }
-  else
-  {
-    GameData.Lanes = 0;
-    GameData.TrackName[0] = 0;
+    else
+    {
+      mGameData.Lanes = 0;
+      mGameData.TrackName[0] = 0;
+    }
   }
 }
 
@@ -136,8 +151,8 @@ void CRecordCam::storeImage(int X, int Y, int Height, int Width)
   pMemory->Image.ImageWidth = EffectiveWidth;
   glReadPixels(X, Y, Width, Height, GL_BGR, GL_UNSIGNED_BYTE, (GLvoid*)pMemory->Image.Data);
 
-  memcpy(&(pMemory->Labels), &LabelData, sizeof(LabelData));
-  memcpy(&(pMemory->Game), &GameData, sizeof(GameData));
+  memcpy(&(pMemory->Labels), &mLabelData, sizeof(mLabelData));
+  memcpy(&(pMemory->Game), &mGameData, sizeof(mGameData));
 
   mpSharedMemory->indicateWrite();
 }
