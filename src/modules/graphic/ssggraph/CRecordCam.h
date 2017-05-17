@@ -65,6 +65,13 @@ class CRecordCam : public cGrCarCamMirror
     virtual void storeImage(int X, int Y, int Height, int Width);
     virtual void doRender(tCarElt *pCar, tSituation * pSituation);
 
+    void updateGameData(tCarElt *pCar, tSituation *pSituation);
+    void updateSpeed(tCarElt *pCar);
+    void updateGameLanes();
+    void updateGameTrackName();
+    void updateGameHashes();
+    void updateLabels(tCarElt *pCar, tSituation *pSituation);
+
     cGrScreen * mpScreen;
     int mScreenX;
     int mScreenY;

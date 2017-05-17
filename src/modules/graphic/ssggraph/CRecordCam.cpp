@@ -93,7 +93,7 @@ void CRecordCam::adaptScreenSize()
   assert(mMaxWidth  - mScreenX <= RECORD_MAX_IMAGE_WIDTH);
 }
 
-void CRecordCam::update(tCarElt *pCar, tSituation *pSituation)
+void CRecordCam::updateSpeed(tCarElt *pCar)
 {
   speed[0] =pCar->pub.DynGCg.vel.x;
   speed[1] =pCar->pub.DynGCg.vel.y;
@@ -102,33 +102,75 @@ void CRecordCam::update(tCarElt *pCar, tSituation *pSituation)
   mGameData.Speed = (pCar->_speed_x * 3.6f);
 
   Speed = (int)mGameData.Speed;
+}
+
+void CRecordCam::updateGameLanes()
+{
+  if (grTrack)
+  {
+    assert(grTrack->lanes >= 0);
+    assert(grTrack->lanes <= 0xFF);
+
+    mGameData.Lanes = (uint8_t) grTrack->lanes;
+  }
+  else
+  {
+    mGameData.Lanes = 0;
+  }
+}
+
+void CRecordCam::updateGameTrackName()
+{
+  if (grTrack)
+  {
+    strncpy(mGameData.TrackName, grTrack->name, (size_t)MAX_TRACK_NAME_LENGTH);
+    mGameData.TrackName[MAX_TRACK_NAME_LENGTH-1] = 0;
+  }
+  else
+  {
+    mGameData.TrackName[0] = 0;
+  }
+}
+
+void CRecordCam::updateGameHashes()
+{
+  if (grTrack)
+  {
+    size_t Hash = 0;
+    boost::hash_combine(Hash, std::string(grTrack->name));
+    mGameData.UniqueTrackID = (uint64_t)Hash;
+    boost::hash_combine(Hash, std::chrono::system_clock::now().time_since_epoch().count());
+    mGameData.UniqueRaceID  = (uint64_t)Hash;
+  }
+  else
+  {
+    mGameData.UniqueTrackID = 0;
+    mGameData.UniqueRaceID  = 0;
+  }
+}
+
+void CRecordCam::updateGameData(tCarElt *pCar, tSituation *pSituation)
+{
+  updateSpeed(pCar);
 
   if (mIsFirstUpdate)
   {
     mIsFirstUpdate = false;
 
-    if (grTrack)
-    {
-      assert(grTrack->lanes >= 0);
-      assert(grTrack->lanes <= 0xFF);
-
-      mGameData.Lanes = (uint8_t)grTrack->lanes;
-
-      strncpy(mGameData.TrackName, grTrack->name, MAX_TRACK_NAME_LENGTH);
-      mGameData.TrackName[MAX_TRACK_NAME_LENGTH-1] = 0;
-
-      size_t Hash = 0;
-      boost::hash_combine(Hash, std::string(grTrack->name));
-      mGameData.UniqueTrackID = (uint64_t)Hash;
-      boost::hash_combine(Hash, std::chrono::system_clock::now().time_since_epoch().count());
-      mGameData.UniqueRaceID  = (uint64_t)Hash;
-    }
-    else
-    {
-      mGameData.Lanes = 0;
-      mGameData.TrackName[0] = 0;
-    }
+    updateGameLanes();
+    updateGameTrackName();
+    updateGameHashes();
   }
+}
+
+void CRecordCam::updateLabels(tCarElt *pCar, tSituation *pSituation)
+{
+}
+
+void CRecordCam::update(tCarElt *pCar, tSituation *pSituation)
+{
+  updateLabels(pCar, pSituation);
+  updateGameData(pCar, pSituation);
 }
 
 void CRecordCam::storeImage(int X, int Y, int Height, int Width)
