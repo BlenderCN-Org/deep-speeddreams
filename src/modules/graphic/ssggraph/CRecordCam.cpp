@@ -27,11 +27,13 @@
  *
  */
 
+#include <car.h>
 #include "grcam.h"
 #include "grmain.h"
 #include "grscreen.h"	//cGrScreen
 
 #include "CSharedMemroy.h"
+#include "grscene.h"
 
 CRecordCam::CRecordCam(cGrScreen * pMyScreen,
                              int ID,
@@ -56,6 +58,7 @@ CRecordCam::CRecordCam(cGrScreen * pMyScreen,
   mpSharedMemory = new CSharedMemory();
 
   memset(&LabelData, 0, sizeof(LabelData));
+  memset(&GameData, 0, sizeof(GameData));
 }
 
 CRecordCam::~CRecordCam()
@@ -93,6 +96,24 @@ void CRecordCam::update(tCarElt *pCar, tSituation *pSituation)
   GameData.Speed = (pCar->_speed_x * 3.6f);
 
   Speed = (int)GameData.Speed;
+
+  if (grTrack)
+  {
+    assert(grTrack->lanes >= 0);
+    assert(grTrack->lanes <= 0xFF);
+
+    GameData.Lanes = (uint8_t)grTrack->lanes;
+    if (GameData.TrackName[0] == 0)
+    {
+      snprintf(GameData.TrackName, (size_t)MAX_TRACK_NAME_LENGTH, "%s", grTrack->name);
+      GameData.TrackName[MAX_TRACK_NAME_LENGTH-1] = 0;
+    }
+  }
+  else
+  {
+    GameData.Lanes = 0;
+    GameData.TrackName[0] = 0;
+  }
 }
 
 void CRecordCam::storeImage(int X, int Y, int Height, int Width)

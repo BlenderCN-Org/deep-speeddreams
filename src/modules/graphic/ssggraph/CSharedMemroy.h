@@ -46,6 +46,7 @@ typedef boost::interprocess::mapped_region Region_t;
 #define RECORD_MAX_IMAGE_WIDTH 2560
 #define RECORD_MAX_IMAGE_HEIGHT 1440
 #define RECORD_IMAGE_CHANNELS 3
+#define MAX_TRACK_NAME_LENGTH 256
 
 /// @brief Contains the image.
 typedef struct
@@ -146,6 +147,12 @@ typedef struct
 {
   /// @brief The current speed of the car. The value is given in km/h.
   float Speed;
+
+  /// @brief The number of lanes for the current track. This value is 0, if the number of lanes is unknown.
+  uint8_t Lanes;
+
+  /// @brief The name of the current track. If the name is too long (longer than 256 characters, the name is truncated).
+  char TrackName[MAX_TRACK_NAME_LENGTH];
 } Game_t;
 
 

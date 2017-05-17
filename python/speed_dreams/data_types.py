@@ -3,6 +3,7 @@ import ctypes
 RECORD_MAX_IMAGE_HEIGHT=1440
 RECORD_MAX_IMAGE_WIDTH=2560
 RECORD_IMAGE_CHANNELS=3
+MAX_TRACK_NAME_LENGTH=256
 RECORD_MEMORY_NAME="DeepDrivingMemory"
 
 class Sync_t(ctypes.Structure):
@@ -74,11 +75,19 @@ class Labels_t(ctypes.Structure):
 class Game_t(ctypes.Structure):
   _fields_ = [
     ('Speed', ctypes.c_float),
+    ('Lanes', ctypes.c_uint8),
+    ('TrackNameArray', ctypes.c_char * MAX_TRACK_NAME_LENGTH)
   ]
+
+  @property
+  def TrackName(self):
+    return self.TrackNameArray.decode("ascii")
 
   def __str__(self):
     String = ""
     String += "Speed={}\n".format(self.Speed)
+    String += "Lanes={}\n".format(self.Lanes)
+    String += "TrackName={}\n".format(self.TrackName)
     return String
 
 
