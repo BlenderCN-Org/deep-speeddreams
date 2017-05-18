@@ -37,8 +37,38 @@
 
 #include "CSharedMemroy.h"
 #include "grscene.h"
+#include "CRecordCam.h"
 
 #include <boost/functional/hash.hpp>
+#include <raceman.h>
+
+#include "robottools.h"
+
+/// @brief The width of a line in m.
+static tdble const sLaneWidth = 4.0;
+static tdble const sMinLL = -7.5;
+static tdble const sMaxLL = -4.5;
+static tdble const sInvalidLL = -9;
+static tdble const sMinML = -3.5;
+static tdble const sMaxML = -0.5;
+static tdble const sInvalidML = -5;
+static tdble const sMinMR =  0.5;
+static tdble const sMaxMR =  3.5;
+static tdble const sInvalidMR = 5;
+static tdble const sMinRR =  4.5;
+static tdble const sMaxRR =  7.5;
+static tdble const sInvalidRR = 9;
+static tdble const sMinL  = -5;
+static tdble const sMaxL  = -3;
+static tdble const sInvalidL = -7;
+static tdble const sMinM  = -2;
+static tdble const sMaxM  = 2;
+static tdble const sInvalidM = -5;
+static tdble const sMinR  = 3;
+static tdble const sMaxR  = 5;
+static tdble const sInvalidR = 7;
+static tdble const sMaxObstacleDist = 60.0;
+static tdble const sInvalidDist = 90;
 
 CRecordCam::CRecordCam(cGrScreen * pMyScreen,
                              int ID,
@@ -65,6 +95,19 @@ CRecordCam::CRecordCam(cGrScreen * pMyScreen,
 
   memset(&mLabelData, 0, sizeof(mLabelData));
   memset(&mGameData, 0, sizeof(mGameData));
+
+  mStreet.pLane = 0;
+}
+
+static void delStreetDescription(StreetDescription_t * pStreet)
+{
+  if (pStreet->pLane)
+  {
+    delete[](pStreet->pLane);
+  }
+  pStreet->pLane = 0;
+
+  pStreet->Lanes = 0;
 }
 
 CRecordCam::~CRecordCam()
@@ -73,6 +116,8 @@ CRecordCam::~CRecordCam()
   {
     delete(mpSharedMemory);
   }
+
+  delStreetDescription(&mStreet);
 }
 
 void CRecordCam::setModelView(void)
@@ -104,6 +149,27 @@ void CRecordCam::updateSpeed(tCarElt *pCar)
   Speed = (int)mGameData.Speed;
 }
 
+static void calcStreetDescription(StreetDescription_t * pStreet, int Lanes)
+{
+  delStreetDescription(pStreet);
+
+  pStreet->Lanes    = Lanes;
+  pStreet->pLane    = new LaneDescription_t[Lanes];
+
+  tdble const StreetWidth = sLaneWidth * Lanes;
+
+  for (int i = 0; i < Lanes; i++)
+  {
+    tdble const LaneStart = sLaneWidth * i;
+    tdble const LaneEnd   = sLaneWidth * (i+1);
+
+    pStreet->pLane[i].LaneStartFromMiddle = LaneStart - StreetWidth/2.0f;
+    pStreet->pLane[i].LaneEndFromMiddle   = LaneEnd   - StreetWidth/2.0f;
+    pStreet->pLane[i].ObstacleDistance    = sInvalidDist;
+  }
+}
+
+
 void CRecordCam::updateGameLanes()
 {
   if (grTrack)
@@ -111,10 +177,12 @@ void CRecordCam::updateGameLanes()
     assert(grTrack->lanes >= 0);
     assert(grTrack->lanes <= 0xFF);
 
-    mGameData.Lanes = (uint8_t) grTrack->lanes;
+    calcStreetDescription(&mStreet, grTrack->lanes);
+    mGameData.Lanes = (uint8_t)mStreet.Lanes;
   }
   else
   {
+    delStreetDescription(&mStreet);
     mGameData.Lanes = 0;
   }
 }
@@ -163,14 +231,290 @@ void CRecordCam::updateGameData(tCarElt *pCar, tSituation *pSituation)
   }
 }
 
+
+static tdble calcDistanceFromSegmentStart(tCarElt const * pCar)
+{
+  if (pCar->pub.trkPos.seg->type == TR_STR)
+  {
+    return pCar->pub.trkPos.toStart;
+  }
+  else
+  {
+    // If the segment is a turn, "toStart" is given in ARC instead of m.
+    return pCar->pub.trkPos.toStart * pCar->pub.trkPos.seg->radius;
+  }
+}
+
+
+static int getLaneOfCar(tCarElt const * const pCar, StreetDescription_t const * const pStreet)
+{
+  tdble const DistanceToStreetMiddle = -pCar->pub.trkPos.toMiddle;
+
+  for(int i = 0; i < pStreet->Lanes; i++)
+  {
+    if (DistanceToStreetMiddle < pStreet->pLane[i].LaneStartFromMiddle)
+    {
+      return i-1;
+    }
+    else if (DistanceToStreetMiddle < pStreet->pLane[i].LaneEndFromMiddle)
+    {
+      return i;
+    }
+  }
+
+  return pStreet->Lanes+1;
+}
+
+static tdble getDistanceFromStart(tCarElt const * pCar)
+{
+  tdble const DistanceOfSegmentFromStart = pCar->pub.trkPos.seg->lgfromstart;
+  tdble const DistanceFromSegmentStart = calcDistanceFromSegmentStart(pCar);
+  return DistanceOfSegmentFromStart + DistanceFromSegmentStart;
+}
+
+static tdble getDistanceBetweenCars(tCarElt const * pCar1, tCarElt const * pCar2)
+{
+  assert(grTrack);
+
+  tdble const DistanceFromStartCar1 = getDistanceFromStart(pCar1);
+  tdble const DistanceFromStartCar2 = getDistanceFromStart(pCar2);
+  tdble Distance = DistanceFromStartCar2 - DistanceFromStartCar1;
+
+  tdble const TrackLength = grTrack->length;
+
+  if (Distance > TrackLength/2.0)
+  {
+    Distance -= TrackLength;
+  }
+  else if (Distance < -TrackLength/2.0)
+  {
+    Distance += TrackLength;
+  }
+
+  return Distance;
+}
+
+static void calcObstacleDistances(StreetDescription_t * pStreet, tCarElt *pCurrentCar, tSituation *pSituation)
+{
+  for (int i = 0; i < pStreet->Lanes; i++)
+  {
+    pStreet->pLane[i].ObstacleDistance = sInvalidDist;
+  }
+
+  int const NumberOfCars = pSituation->raceInfo.ncars;
+  for (int i = 0; i < NumberOfCars; i++)
+  {
+    tCarElt const * const pCar = pSituation->cars[i];
+
+    if (pCar != pCurrentCar)
+    {
+      tdble Distance = getDistanceBetweenCars(pCurrentCar, pCar);
+
+      if (Distance >= 0.0 && Distance <= sMaxObstacleDist)
+      {
+        int const CarLane = getLaneOfCar(pCar, pStreet);
+
+        if (CarLane >= 0 && CarLane < pStreet->Lanes)
+        {
+          if (pStreet->pLane[CarLane].ObstacleDistance > Distance)
+          {
+            pStreet->pLane[CarLane].ObstacleDistance = Distance;
+          }
+        }
+      }
+    }
+  }
+}
+
+void CRecordCam::updateLabelsFast(tCarElt *pCar)
+{
+  mLabelData.Fast = 0.0;
+
+  if (pCar->pub.trkPos.seg->type == TR_STR)
+  {
+    tdble StraightLength = -pCar->pub.trkPos.toStart;
+
+    tTrackSeg * pSegment = pCar->pub.trkPos.seg;
+
+    while (pSegment->type == TR_STR)
+    {
+      StraightLength += pSegment->length;
+      pSegment = pSegment->next;
+
+      if (StraightLength >= 60.0)
+      {
+        mLabelData.Fast = 1.0;
+        return;
+      }
+    }
+  }
+}
+
+
+void CRecordCam::updateLabelsAngle(tCarElt *pCar)
+{
+  double Angle = RtTrackSideTgAngleL(&(pCar->pub.trkPos)) - pCar->pub.DynGC.pos.az;
+  NORM_PI_PI(Angle);
+  mLabelData.Angle = (float)Angle;
+}
+
+
+void CRecordCam::updateInLaneSystem(tCarElt *pCar)
+{
+  int const CurrentLane = getLaneOfCar(pCar, &mStreet);
+  tdble const DistanceToMiddle = -pCar->pub.trkPos.toMiddle;
+
+  mLabelData.LL     = sInvalidLL;
+  mLabelData.ML     = sInvalidML;
+  mLabelData.MR     = sInvalidMR;
+  mLabelData.RR     = sInvalidRR;
+  mLabelData.DistLL = sInvalidDist;
+  mLabelData.DistMM = sInvalidDist;
+  mLabelData.DistRR = sInvalidDist;
+
+  // update left lane information
+  if (CurrentLane >= 1 && CurrentLane < mStreet.Lanes)
+  {
+    LaneDescription_t const * const pLane = &(mStreet.pLane[CurrentLane-1]);
+
+    tdble const LL = pLane->LaneStartFromMiddle - DistanceToMiddle;
+
+    if (LL >= sMinLL && LL <= sMaxLL)
+    {
+      mLabelData.LL     = LL;
+      mLabelData.DistLL = pLane->ObstacleDistance;
+    }
+  }
+
+  // update middle lane information
+  if (CurrentLane >= 0 && CurrentLane < mStreet.Lanes)
+  {
+    LaneDescription_t const * const pLane = &(mStreet.pLane[CurrentLane]);
+
+    tdble const ML = pLane->LaneStartFromMiddle - DistanceToMiddle;
+    tdble const MR = pLane->LaneEndFromMiddle - DistanceToMiddle;
+
+    if ((ML >= sMinML && ML <= sMaxML) && (MR >= sMinMR && MR <= sMaxMR))
+    {
+      mLabelData.ML     = ML;
+      mLabelData.MR     = MR;
+      mLabelData.DistMM = pLane->ObstacleDistance;
+    }
+  }
+
+  // update right lane information
+  if (CurrentLane >= 0 && CurrentLane < mStreet.Lanes-1)
+  {
+    LaneDescription_t const * const pLane = &(mStreet.pLane[CurrentLane+1]);
+
+    tdble const RR = pLane->LaneEndFromMiddle - DistanceToMiddle;
+
+    if (RR >= sMinRR && RR <= sMaxRR)
+    {
+      mLabelData.RR     = RR;
+      mLabelData.DistRR = pLane->ObstacleDistance;
+    }
+  }
+}
+
+void CRecordCam::updateOnLaneMarkingSystem(tCarElt *pCar)
+{
+  mLabelData.L = sInvalidL;
+  mLabelData.M = sInvalidM;
+  mLabelData.R = sInvalidR;
+  mLabelData.DistL = sInvalidDist;
+  mLabelData.DistR = sInvalidDist;
+
+  int const CurrentLane = getLaneOfCar(pCar, &mStreet);
+  tdble const DistanceToMiddle = -pCar->pub.trkPos.toMiddle;
+
+  LaneDescription_t const * pLaneL = NULL;
+  LaneDescription_t const * pLaneR = NULL;
+
+  if (CurrentLane < 0)
+  {
+    pLaneL = NULL;
+    pLaneR = &(mStreet.pLane[0]);
+  }
+  else if (CurrentLane >= mStreet.Lanes)
+  {
+    pLaneL = &(mStreet.pLane[mStreet.Lanes-1]);
+    pLaneR = NULL;
+  }
+  else
+  {
+    LaneDescription_t const * const pLaneM = &(mStreet.pLane[CurrentLane]);
+    tdble const ML = pLaneM->LaneStartFromMiddle - DistanceToMiddle;
+    tdble const MR = pLaneM->LaneEndFromMiddle   - DistanceToMiddle;
+
+    if (-ML < MR)
+    {
+      pLaneR = pLaneM;
+
+      if (CurrentLane > 0)
+      {
+        pLaneL = &(mStreet.pLane[CurrentLane-1]);
+      }
+      else
+      {
+        pLaneL = NULL;
+      }
+    }
+    else
+    {
+      pLaneL = pLaneM;
+
+      if (CurrentLane < mStreet.Lanes-1)
+      {
+        pLaneR = &(mStreet.pLane[CurrentLane+1]);
+      }
+      else
+      {
+        pLaneR = NULL;
+      }
+    }
+  }
+
+  if (pLaneL)
+  {
+    tdble const M = pLaneL->LaneEndFromMiddle - DistanceToMiddle;
+
+    if (M >= sMinM && M <= sMaxM)
+    {
+      mLabelData.L     = pLaneL->LaneStartFromMiddle - DistanceToMiddle;
+      mLabelData.M     = M;
+      mLabelData.DistL = pLaneL->ObstacleDistance;
+    }
+  }
+
+  if (pLaneR)
+  {
+    tdble const M = pLaneR->LaneStartFromMiddle - DistanceToMiddle;
+
+    if (M >= sMinM && M <= sMaxM)
+    {
+      mLabelData.R     = pLaneR->LaneEndFromMiddle - DistanceToMiddle;
+      mLabelData.M     = M;
+      mLabelData.DistR = pLaneR->ObstacleDistance;
+    }
+  }
+}
+
 void CRecordCam::updateLabels(tCarElt *pCar, tSituation *pSituation)
 {
+  calcObstacleDistances(&mStreet, pCar, pSituation);
+
+  updateLabelsFast(pCar);
+  updateLabelsAngle(pCar);
+  updateInLaneSystem(pCar);
+  updateOnLaneMarkingSystem(pCar);
 }
+
 
 void CRecordCam::update(tCarElt *pCar, tSituation *pSituation)
 {
-  updateLabels(pCar, pSituation);
   updateGameData(pCar, pSituation);
+  updateLabels(pCar, pSituation);
 }
 
 void CRecordCam::storeImage(int X, int Y, int Height, int Width)

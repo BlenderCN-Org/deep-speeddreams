@@ -39,6 +39,21 @@
 
 class CSharedMemory;
 
+
+typedef struct
+{
+  tdble LaneStartFromMiddle;
+  tdble LaneEndFromMiddle;
+  tdble ObstacleDistance;
+} LaneDescription_t;
+
+typedef struct
+{
+  int Lanes;
+  LaneDescription_t     * pLane;
+} StreetDescription_t;
+
+
 class CRecordCam : public cGrCarCamMirror
 {
   public:
@@ -71,6 +86,10 @@ class CRecordCam : public cGrCarCamMirror
     void updateGameTrackName();
     void updateGameHashes();
     void updateLabels(tCarElt *pCar, tSituation *pSituation);
+    void updateLabelsFast(tCarElt *pCar);
+    void updateLabelsAngle(tCarElt *pCar);
+    void updateInLaneSystem(tCarElt *pCar);
+    void updateOnLaneMarkingSystem(tCarElt *pCar);
 
     cGrScreen * mpScreen;
     int mScreenX;
@@ -82,6 +101,7 @@ class CRecordCam : public cGrCarCamMirror
     Game_t   mGameData;
     Labels_t mLabelData;
     bool mIsFirstUpdate;
+    StreetDescription_t mStreet;
 };
 
 #endif //SPEED_DREAMS_2_CRECORDCAM_H

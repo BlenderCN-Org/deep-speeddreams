@@ -80,7 +80,7 @@ typedef struct
 typedef struct
 {
   /// @brief The relative angle between the car and the middle line of the street.
-  ///        The value is given in grad and is always in an interval of -90 to +90.
+  ///        The value is given in arc and is always in an interval of -pi to +pi.
   float Angle;
 
   /// @brief Indicates if the street is straight for at least 60m or if a curve is near than 60m.
@@ -88,7 +88,7 @@ typedef struct
   float Fast;
 
   /// @brief The distance between the mid of the car to the left lane marking of the left lane. (Only valid, if the car is inside a lane.)
-  ///        The value is given in meter. The valid range is -7 to -4.5. If the system is not active or no left lane exists, the value is set to -9.
+  ///        The value is given in meter. The valid range is -7.5 to -4.5. If the system is not active or no left lane exists, the value is set to -9.
   float LL;
 
   /// @brief The distance between the mid of the car to the left lane marking of the current lane. (Only valid if the car is inside a lane.)
@@ -100,7 +100,7 @@ typedef struct
   float MR;
 
   /// @brief The distance between the mid of the car to the right lane marking of the right lane. (Only valid if the car is inside a lane.)
-  ///        The value is given in meter. The valid range is 4.5 to 7. If the system is not active or no right lane exists, the value is set to 9.
+  ///        The value is given in meter. The valid range is 4.5 to 7.5. If the system is not active or no right lane exists, the value is set to 9.
   float RR;
 
   /// @brief The distance between the mid of the car to a traffic car which is driving on the left lane. (Only valid if the car is inside a lane.)
