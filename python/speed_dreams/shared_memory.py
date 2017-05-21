@@ -21,6 +21,7 @@ class CSharedMemory():
     self._SharedMemory = mmap.mmap(-1, ctypes.sizeof(Data_t), RECORD_MEMORY_NAME)
     self._Data = Data_t.from_buffer(self._SharedMemory)
     self._Image = np.empty(shape=TargetResolution + [self.TARGET_IMAGE_CHANNELS])
+    self._RawImage = np.empty(shape=TargetResolution + [self.TARGET_IMAGE_CHANNELS])
 
 
   def __del__(self):
@@ -59,6 +60,7 @@ class CSharedMemory():
       if Width != self._TargetResolution[0] or Height != self._TargetResolution[1]:
         Image = cv2.resize(Image, (self._TargetResolution[0], self._TargetResolution[1]))
 
+      self._RawImage = Image
       self._Image = cv2.flip(Image, 0)
       return True
 
@@ -80,3 +82,17 @@ class CSharedMemory():
   @property
   def Image(self):
     return self._Image
+
+
+  @property
+  def RawImage(self):
+    return self._RawImage
+
+
+  @property
+  def ImageWidth(self):
+    return self._TargetResolution[0]
+
+  @property
+  def ImageHeight(self):
+    return self._TargetResolution[1]
