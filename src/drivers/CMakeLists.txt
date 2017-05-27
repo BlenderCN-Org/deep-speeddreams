@@ -8,6 +8,7 @@ SD_ADD_SUBDIRECTORY(networkhuman)
 SD_ADD_SUBDIRECTORY(simplix)
 SD_ADD_SUBDIRECTORY(usr)
 SD_ADD_SUBDIRECTORY(LaneDriver)
+SD_ADD_SUBDIRECTORY(DeepDriver)
 
 # Work-in-progress / unofficial robots.
 IF(NOT OPTION_OFFICIAL_ONLY)

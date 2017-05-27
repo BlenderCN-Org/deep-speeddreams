@@ -595,12 +595,20 @@ typedef struct CarPitCmd
 #define _pitRepair	pitcmd.repair
 #define _pitStopType	pitcmd.stopType
 
+typedef struct
+{
+	uint8_t IsControlling;
+	float * pSteering;
+	float * pAccelerating;
+	float * pBreaking;
+} CarRemoteControl_t;
 
 /** Car structure (tCarElt).
     This is the main car structure, used everywhere in the code.
 */
 typedef struct CarElt
 {
+		CarRemoteControl_t RemoteControl;
     int             index;	/**< car index */
     tInitCar		info;	/**< public */
     tPublicCar		pub;	/**< public */
