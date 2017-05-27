@@ -835,6 +835,7 @@ ReInitCars(void)
     for (i = 0; i < nCars; i++)
     {
         ReInfo->s->cars[i] = &(ReInfo->carList[i]);
+        memset(&(ReInfo->s->cars[i]->RemoteControl), NULL, sizeof(ReInfo->s->cars[i]->RemoteControl));
     }
     ReInfo->_rePitRequester = 0;
 
