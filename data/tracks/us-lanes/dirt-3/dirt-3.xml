@@ -34,11 +34,11 @@ the Free Software Foundation; either version 2 of the License, or
 	<attstr name="bump name" val="dirt-bump.png"/>
 	<attnum name="bump size" val="2.0" unit="m"/>
 
-	<attnum name="friction"           val="0.85"/>
-	<attnum name="rolling resistance" val="0.005"/>
+	<attnum name="friction"           val="1.1"/>
+	<attnum name="rolling resistance" val="0.02"/>
 
-	<attnum name="roughness" val="0.02"/>
-	<attnum name="roughness wavelength" val="30.0"/>
+	<attnum name="roughness" val="0"/>
+	<attnum name="roughness wavelength" val="1.0"/>
     </section>
     <section name="newdirt2">
 	<attnum name="color R1" val="0.3"/>
@@ -55,11 +55,11 @@ the Free Software Foundation; either version 2 of the License, or
 	<attstr name="bump name" val="dirt-bump.png"/>
 	<attnum name="bump size" val="2.0" unit="m"/>
 
-	<attnum name="friction"           val="0.75"/>
-	<attnum name="rolling resistance" val="0.05"/>
+	<attnum name="friction"           val="1.1"/>
+	<attnum name="rolling resistance" val="0.02"/>
 
-	<attnum name="roughness" val="0.08"/>
-	<attnum name="roughness wavelength" val="6.0"/>
+	<attnum name="roughness" val="0.0"/>
+	<attnum name="roughness wavelength" val="1.0"/>
     </section>
     <section name="dirt-side">
 	<attnum name="color R1" val="0.3"/>
@@ -76,11 +76,11 @@ the Free Software Foundation; either version 2 of the License, or
 	<attstr name="bump name" val="dirt-bump.png"/>
 	<attnum name="bump size" val="2.0" unit="m"/>
 
-	<attnum name="friction"           val="0.85"/>
-	<attnum name="rolling resistance" val="0.005"/>
+	<attnum name="friction"           val="1.1"/>
+	<attnum name="rolling resistance" val="0.02"/>
 
-	<attnum name="roughness" val="0.05"/>
-	<attnum name="roughness wavelength" val="6.0"/>
+	<attnum name="roughness" val="0.0"/>
+	<attnum name="roughness wavelength" val="1.0"/>
     </section>
     <section name="dirt-grass">
 	<attnum name="color R1" val="0.3"/>
@@ -97,8 +97,8 @@ the Free Software Foundation; either version 2 of the License, or
 	<attstr name="bump name" val="dirt-bump.png"/>
 	<attnum name="bump size" val="2.0" unit="m"/>
 
-	<attnum name="friction"           val="0.65"/>
-	<attnum name="rolling resistance" val="0.005"/>
+	<attnum name="friction"           val="1.1"/>
+	<attnum name="rolling resistance" val="0.02"/>
 
 	<attnum name="roughness" val="0.08"/>
 	<attnum name="roughness wavelength" val="6.0"/>
@@ -120,8 +120,8 @@ the Free Software Foundation; either version 2 of the License, or
 	<attstr name="bump name" val="dirt-bump.png"/>
 	<attnum name="bump size" val="2.0" unit="m"/>
 
-	<attnum name="friction"           val="0.85"/>
-	<attnum name="rolling resistance" val="0.005"/>
+	<attnum name="friction"           val="1.1"/>
+	<attnum name="rolling resistance" val="0.02"/>
 
 	<attnum name="roughness" val="0.05"/>
 	<attnum name="roughness wavelength" val="6.0"/>
@@ -141,11 +141,11 @@ the Free Software Foundation; either version 2 of the License, or
 	<attstr name="bump name" val=""/>
 	<attnum name="bump size" val="2.0" unit="m"/>
 
-	<attnum name="friction"           val="0.95"/>
-	<attnum name="rolling resistance" val="0.001"/>
+	<attnum name="friction"           val="1.1"/>
+	<attnum name="rolling resistance" val="0.01"/>
 
-	<attnum name="roughness" val="0.02"/>
-	<attnum name="roughness wavelength" val="0.25"/>
+	<attnum name="roughness" val="0.00"/>
+	<attnum name="roughness wavelength" val="1.0"/>
     </section>
     <section name="barrier-rusty">
       <attnum name="color R1" val="1.0"/>
