@@ -144,9 +144,9 @@ void CRecordCam::updateSpeed(tCarElt *pCar)
   speed[1] =pCar->pub.DynGCg.vel.y;
   speed[2] =pCar->pub.DynGCg.vel.z;
 
-  mGameData.Speed = (pCar->_speed_x * 3.6f);
+  mGameData.Speed = pCar->_speed_x;
 
-  Speed = (int)mGameData.Speed;
+  Speed = (int)(pCar->_speed_x * 3.6f);
 }
 
 static void calcStreetDescription(StreetDescription_t * pStreet, int Lanes)
@@ -326,17 +326,40 @@ static void calcObstacleDistances(StreetDescription_t * pStreet, tCarElt *pCurre
   }
 }
 
+static bool isSegmentStraight(tTrackSeg * pSegment)
+{
+  if (pSegment->type == TR_STR)
+  {
+    return true;
+  }
+  else if (pSegment->radius > 100)
+  {
+    return true;
+  }
+
+  return false;
+}
+
 void CRecordCam::updateLabelsFast(tCarElt *pCar)
 {
   mLabelData.Fast = 0.0;
 
-  if (pCar->pub.trkPos.seg->type == TR_STR)
+  if (isSegmentStraight(pCar->pub.trkPos.seg))
   {
-    tdble StraightLength = -pCar->pub.trkPos.toStart;
+    tdble StraightLength = 0;
+
+    if (pCar->pub.trkPos.type == TR_STR)
+    {
+      StraightLength -= pCar->pub.trkPos.toStart;
+    }
+    else
+    {
+      StraightLength -= -pCar->pub.trkPos.toStart * pCar->pub.trkPos.seg->radius;
+    }
 
     tTrackSeg * pSegment = pCar->pub.trkPos.seg;
 
-    while (pSegment->type == TR_STR)
+    while (isSegmentStraight(pSegment))
     {
       StraightLength += pSegment->length;
       pSegment = pSegment->next;
@@ -510,28 +533,32 @@ void CRecordCam::updateLabels(tCarElt *pCar, tSituation *pSituation)
   updateOnLaneMarkingSystem(pCar);
 }
 
-
 void CRecordCam::update(tCarElt *pCar, tSituation *pSituation)
 {
   updateGameData(pCar, pSituation);
   updateLabels(pCar, pSituation);
 }
 
-void CRecordCam::storeImage(int X, int Y, int Height, int Width)
+void CRecordCam::storeImage(int X, int Y, int Height, int Width, tCarElt *pCar)
 {
   assert(mpSharedMemory);
 
-  mpSharedMemory->waitOnRead();
-
   Data_t * const pMemory = mpSharedMemory->getAddress();
   assert(pMemory);
+
+  pCar->RemoteControl.IsControlling = pMemory->Control.IsControlling;
+  if (pMemory->Control.IsControlling)
+  {
+    pCar->RemoteControl.pSteering     = &(pMemory->Control.Steering);
+    pCar->RemoteControl.pAccelerating = &(pMemory->Control.Accelerating);
+    pCar->RemoteControl.pBreaking     = &(pMemory->Control.Breaking);
+  }
 
   int EffectiveHeight = Height - Y;
   int EffectiveWidth = Width - X;
 
   assert(EffectiveHeight <= mMaxHeight);
   assert(EffectiveWidth <= mMaxWidth);
-
 
   pMemory->Image.ImageHeight = EffectiveHeight;
   pMemory->Image.ImageWidth = EffectiveWidth;
@@ -540,7 +567,17 @@ void CRecordCam::storeImage(int X, int Y, int Height, int Width)
   memcpy(&(pMemory->Labels), &mLabelData, sizeof(mLabelData));
   memcpy(&(pMemory->Game), &mGameData, sizeof(mGameData));
 
+  pCar->RemoteControl.IsControlling = pMemory->Control.IsControlling;
+  if (pCar->RemoteControl.IsControlling == 0)
+  {
+    pMemory->Control.Steering     = pCar->ctrl.steer;
+    pMemory->Control.Accelerating = pCar->ctrl.accelCmd;
+    pMemory->Control.Breaking     = pCar->ctrl.brakeCmd;
+  }
+
   mpSharedMemory->indicateWrite();
+  mpSharedMemory->waitOnRead();
+
 }
 
 void CRecordCam::renderImage(tCarElt *pCar, tSituation * pSituation, uint64_t FrameNumber)
@@ -559,5 +596,5 @@ void CRecordCam::renderImage(tCarElt *pCar, tSituation * pSituation, uint64_t Fr
 void CRecordCam::doRender(tCarElt *pCar, tSituation * pSituation)
 {
   update(pCar, pSituation);
-  storeImage(mScreenX, mScreenY, mMaxHeight, mMaxWidth);
+  storeImage(mScreenX, mScreenY, mMaxHeight, mMaxWidth, pCar);
 }

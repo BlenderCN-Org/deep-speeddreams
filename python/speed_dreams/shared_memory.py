@@ -26,6 +26,7 @@ class CSharedMemory():
 
   def __del__(self):
     self.Data.Sync.IsPauseOn = 0
+    self.Data.Control.IsControlling = 0
 
 
   def setSyncMode(self, IsPauseOn = True):

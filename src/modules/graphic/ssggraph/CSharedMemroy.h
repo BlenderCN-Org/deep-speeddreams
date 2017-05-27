@@ -162,6 +162,23 @@ typedef struct
 } Game_t;
 
 
+/// @brief Driving commands for the car.
+typedef struct
+{
+  /// @brief Indicates if the car is driven by the game (0) or by the network (1).
+  uint8_t IsControlling;
+
+  /// @brief The steering command.
+  float Steering;
+
+  /// @brief The accelerating command.
+  float Accelerating;
+
+  /// @brief The breaking command.
+  float Breaking;
+} Control_t;
+
+
 /// @brief The overall memory structure.
 typedef struct
 {
@@ -176,6 +193,9 @@ typedef struct
 
   /// @brief Additional information about the game situation.
   Game_t Game;
+
+  /// @brief Driving commands for the car.
+  Control_t Control;
 } Data_t;
 
 

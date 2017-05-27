@@ -95,12 +95,30 @@ class Game_t(ctypes.Structure):
     return String
 
 
+class Control_t(ctypes.Structure):
+  _fields_ = [
+    ('IsControlling', ctypes.c_uint8),
+    ('Steering', ctypes.c_float),
+    ('Accelerating', ctypes.c_float),
+    ('Breaking', ctypes.c_float),
+  ]
+
+  def __str__(self):
+    String = ""
+    String += "IsControlling={}\n".format(self.IsControlling)
+    String += "Steering={}\n".format(self.Steering)
+    String += "Accelerating={}\n".format(self.Accelerating)
+    String += "Breaking={}\n".format(self.Breaking)
+    return String
+
+
 class Data_t(ctypes.Structure):
   _fields_ = [
     ('Sync', Sync_t),
     ('Image', Image_t),
     ('Labels', Labels_t),
     ('Game', Game_t),
+    ('Control', Control_t),
   ]
 
   def __str__(self):
@@ -109,6 +127,7 @@ class Data_t(ctypes.Structure):
     String += addStringPrefix("Image.", str(self.Image))
     String += addStringPrefix("Labels.", str(self.Labels))
     String += addStringPrefix("Game.", str(self.Game))
+    String += addStringPrefix("Control.", str(self.Control))
     return String
 
 

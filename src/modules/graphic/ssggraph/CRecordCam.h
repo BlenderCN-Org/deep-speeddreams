@@ -77,7 +77,7 @@ class CRecordCam : public cGrCarCamMirror
     virtual void renderImage(tCarElt *pCar, tSituation * pSituation, uint64_t FrameNumber);
 
   protected:
-    virtual void storeImage(int X, int Y, int Height, int Width);
+    virtual void storeImage(int X, int Y, int Height, int Width, tCarElt *pCar);
     virtual void doRender(tCarElt *pCar, tSituation * pSituation);
 
     void updateGameData(tCarElt *pCar, tSituation *pSituation);
@@ -98,8 +98,8 @@ class CRecordCam : public cGrCarCamMirror
     int mMaxWidth;
     CSharedMemory * mpSharedMemory;
     double mLastTime;
-    Game_t   mGameData;
-    Labels_t mLabelData;
+    Game_t    mGameData;
+    Labels_t  mLabelData;
     bool mIsFirstUpdate;
     StreetDescription_t mStreet;
 };

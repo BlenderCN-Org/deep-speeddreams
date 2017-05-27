@@ -114,6 +114,7 @@ CRecordRenderCam::CRecordRenderCam(cGrScreen * pMyScreen,
     CRecordCam(pMyScreen, ID, DrawCurr, DrawBG, MyFovY, MyFovYMin, MyFovYMax, MyFNear, MyFFar, MyFogStart, MyFogEnd)
 {
   bool SetupSucessful = setupOpenGLFunctions();
+  mpCurrentCar = NULL;
 
   assert(SetupSucessful);
 
@@ -215,7 +216,7 @@ void CRecordRenderCam::beforeDraw (void)
 
 void CRecordRenderCam::afterDraw (void)
 {
-  storeImage(0, 0, RECORD_IMAGE_HEIGHT, RECORD_IMAGE_WIDTH);
+  storeImage(0, 0, RECORD_IMAGE_HEIGHT, RECORD_IMAGE_WIDTH, mpCurrentCar);
 
   glBindFramebuffer(GL_FRAMEBUFFER, 0);
   glPopAttrib();
@@ -223,5 +224,7 @@ void CRecordRenderCam::afterDraw (void)
 
 void CRecordRenderCam::doRender(tCarElt *pCar, tSituation * pSituation)
 {
+  mpCurrentCar = pCar;
   mpScreen->camDraw(pSituation);
+  mpCurrentCar = NULL;
 }

@@ -59,6 +59,7 @@ class CRecordRenderCam : public CRecordCam
     GLuint mFramebufferName;
     GLuint mColorBuffer;
     GLuint mDepthBuffer;
+    tCarElt *mpCurrentCar;
 };
 
 
