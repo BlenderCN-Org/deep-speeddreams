@@ -41,6 +41,7 @@
 
 #include <boost/functional/hash.hpp>
 #include <raceman.h>
+#include <tgf.h>
 
 #include "robottools.h"
 
@@ -265,6 +266,44 @@ static int getLaneOfCar(tCarElt const * const pCar, StreetDescription_t const * 
   return pStreet->Lanes+1;
 }
 
+static int getLeftLaneOfCar(tCarElt const * const pCar, StreetDescription_t const * const pStreet)
+{
+  tdble const DistanceToStreetMiddle = -pCar->pub.trkPos.toMiddle - pCar->info.dimension.y/2;
+
+  for(int i = 0; i < pStreet->Lanes; i++)
+  {
+    if (DistanceToStreetMiddle < pStreet->pLane[i].LaneStartFromMiddle)
+    {
+      return i-1;
+    }
+    else if (DistanceToStreetMiddle < pStreet->pLane[i].LaneEndFromMiddle)
+    {
+      return i;
+    }
+  }
+
+  return pStreet->Lanes+1;
+}
+
+static int getRightLaneOfCar(tCarElt const * const pCar, StreetDescription_t const * const pStreet)
+{
+  tdble const DistanceToStreetMiddle = -pCar->pub.trkPos.toMiddle + pCar->info.dimension.y/2;
+
+  for(int i = 0; i < pStreet->Lanes; i++)
+  {
+    if (DistanceToStreetMiddle < pStreet->pLane[i].LaneStartFromMiddle)
+    {
+      return i-1;
+    }
+    else if (DistanceToStreetMiddle < pStreet->pLane[i].LaneEndFromMiddle)
+    {
+      return i;
+    }
+  }
+
+  return pStreet->Lanes+1;
+}
+
 static tdble getDistanceFromStart(tCarElt const * pCar)
 {
   tdble const DistanceOfSegmentFromStart = pCar->pub.trkPos.seg->lgfromstart;
@@ -312,13 +351,24 @@ static void calcObstacleDistances(StreetDescription_t * pStreet, tCarElt *pCurre
 
       if (Distance >= 0.0 && Distance <= sMaxObstacleDist)
       {
-        int const CarLane = getLaneOfCar(pCar, pStreet);
+        int const LeftCarLane = getLeftLaneOfCar(pCar, pStreet);
+        int const RightCarLane = getRightLaneOfCar(pCar, pStreet);
 
-        if (CarLane >= 0 && CarLane < pStreet->Lanes)
+        assert(LeftCarLane <= RightCarLane);
+
+        if (LeftCarLane >= 0 && LeftCarLane < pStreet->Lanes)
         {
-          if (pStreet->pLane[CarLane].ObstacleDistance > Distance)
+          if (pStreet->pLane[LeftCarLane].ObstacleDistance > Distance)
           {
-            pStreet->pLane[CarLane].ObstacleDistance = Distance;
+            pStreet->pLane[LeftCarLane].ObstacleDistance = Distance;
+          }
+        }
+
+        if (RightCarLane >= 0 && RightCarLane < pStreet->Lanes && LeftCarLane != RightCarLane)
+        {
+          if (pStreet->pLane[RightCarLane].ObstacleDistance > Distance)
+          {
+            pStreet->pLane[RightCarLane].ObstacleDistance = Distance;
           }
         }
       }
