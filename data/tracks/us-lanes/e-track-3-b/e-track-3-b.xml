@@ -17,7 +17,7 @@
 <!ENTITY default-surfaces SYSTEM "../../../data/tracks/surfaces.xml">
 ]>
 
-<params name="chenyi-E-Track 3" type="trackdef" mode="m">
+<params name="e-Track 3" type="trackdef" mode="m">
 
 	<section name="Surfaces">
 		&default-surfaces;
