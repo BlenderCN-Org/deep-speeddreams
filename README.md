@@ -20,6 +20,7 @@ If you are simply looking for the original SpeedDreams project, please visit htt
     * [Shared-Memory](https://bitbucket.org/Netzeband/deep-speeddreams/wiki/Camera#markdown-header-shared-memory)
 * [Accessing the Output with Python](https://bitbucket.org/Netzeband/deep-speeddreams/wiki/RecordInPython)
 * [Label-Description](https://bitbucket.org/Netzeband/deep-speeddreams/wiki/LabelDescription)
+* [Tracks](https://bitbucket.org/Netzeband/deep-speeddreams/wiki/Tracks)
 
 ## Licence
 

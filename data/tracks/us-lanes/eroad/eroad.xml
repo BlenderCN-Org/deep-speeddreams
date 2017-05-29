@@ -21,7 +21,7 @@
 <params name="chenyi-eroad" type="trackdef" mode="m">
 
 	<section name="Header">
-		<attstr name="name"        val="E-Road (3 lanes)"/>
+		<attstr name="name"        val="E-Road (3 lanes, br.)"/>
 		<attstr name="category"    val="us-lanes"/>
 		<attnum name="version"     val="4"/>
 		<attstr name="author"      val="E. Espie, B. Wymann"/>

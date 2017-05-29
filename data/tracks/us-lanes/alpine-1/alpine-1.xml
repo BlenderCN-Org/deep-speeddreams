@@ -22,7 +22,7 @@
 	
 	<!-- Header -->
 	<section name="Header">
-		<attstr name="name" val="Alpine 1 (2 lanes)"/>
+		<attstr name="name" val="Alpine 1 (2 lanes, br.)"/>
 		<attstr name="category" val="us-lanes"/>
 		<attnum name="version" val="4"/>
 		<attstr name="author" val="E. Espie"/>

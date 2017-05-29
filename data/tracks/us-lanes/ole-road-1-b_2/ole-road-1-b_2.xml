@@ -210,7 +210,7 @@
 	</section>  <!-- Objects -->
 	
 	<section name="Header">
-		<attstr name="name"        val="Olethros Road 1 (2 lanes, br.)"/>
+		<attstr name="name"        val="Olethros 1 (2 lanes, br.)"/>
 		<attstr name="category"    val="us-lanes"/>
 		<attnum name="version"     val="4"/>
 		<attstr name="author"      val="C. Dimitrakakis"/>
