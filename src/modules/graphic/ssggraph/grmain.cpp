@@ -679,7 +679,7 @@ initCars(tSituation *s)
 	// Pre-assign each human driver (if any) to a different screen
 	// (set him as the "current driver" for this screen).
 	if (grNbSuggestedScreens < GR_NB_MAX_SCREEN
-		&& elt->_driverType == RM_DRV_HUMAN && !elt->_networkPlayer) 
+		&& ((elt->_driverType == RM_DRV_HUMAN && !elt->_networkPlayer) || ( strcmp(elt->_name, "Deep Driver") == 0)))
 	{
 	    grScreens[grNbSuggestedScreens]->setCurrentCar(elt);
 		GfLogTrace("Screen #%d : Assigned to %s\n", grNbSuggestedScreens, elt->_name);
