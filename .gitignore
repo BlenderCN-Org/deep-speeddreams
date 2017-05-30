@@ -2,3 +2,6 @@
 build
 install
 /python/speed_dreams/__pycache__/*.pyc
+workspace.xml
+misc.xml
+tasks.xml
