@@ -2,6 +2,7 @@ import mmap
 import ctypes
 import numpy as np
 import cv2
+import math
 
 from .data_types import Data_t, RECORD_MEMORY_NAME, RECORD_IMAGE_CHANNELS
 
@@ -53,13 +54,34 @@ class CSharedMemory():
       else:
         self.Data.Sync.IsPauseOn = 0
 
-      Width = self.Data.Image.ImageWidth
-      Height = self.Data.Image.ImageHeight
+      Width       = self.Data.Image.ImageWidth
+      Height      = self.Data.Image.ImageHeight
+
       Image = np.fromstring(self.Data.Image.Data, np.uint8, Width * Height * self.TARGET_IMAGE_CHANNELS)
       Image = Image.reshape(Height, Width, self.TARGET_IMAGE_CHANNELS)
 
-      if Width != self._TargetResolution[0] or Height != self._TargetResolution[1]:
-        Image = cv2.resize(Image, (self._TargetResolution[0], self._TargetResolution[1]))
+      AspectRatio = Width / Height
+      TargetWidth = int(self._TargetResolution[1] * AspectRatio)
+
+      if TargetWidth >= self._TargetResolution[0]:
+        if Width != TargetWidth or Height != self._TargetResolution[1]:
+          Image = cv2.resize(Image, (TargetWidth, self._TargetResolution[1]))
+
+        if TargetWidth != self._TargetResolution[0]:
+          XStart = int(TargetWidth/2 - self._TargetResolution[0]/2)
+          XStop  = int(TargetWidth/2 + self._TargetResolution[0]/2)
+          Image = Image[:, XStart:XStop]
+
+      else:
+        TargetHeight = int(self._TargetResolution[0]/AspectRatio)
+
+        if Width != self._TargetResolution[0] or Height != TargetHeight:
+          Image = cv2.resize(Image, (self._TargetResolution[1], TargetHeight))
+
+          if TargetHeight != self._TargetResolution[1]:
+            YStart = int(TargetHeight/2 - self._TargetResolution[1]/2)
+            YStop  = int(TargetHeight/2 + self._TargetResolution[1]/2)
+            Image = Image[YStart:YStop, :]
 
       self._RawImage = Image
       self._Image = cv2.flip(Image, 0)
