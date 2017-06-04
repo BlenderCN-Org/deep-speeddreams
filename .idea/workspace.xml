@@ -5,12 +5,11 @@
       <config projectName="speed-dreams-2" targetName="tgfclient" />
       <config projectName="speed-dreams-2" targetName="math" />
       <config projectName="speed-dreams-2" targetName="usr" />
-      <config projectName="speed-dreams-2" targetName="genparoptv1" />
       <config projectName="speed-dreams-2" targetName="tgf" />
       <config projectName="speed-dreams-2" targetName="rootdoc" />
       <config projectName="speed-dreams-2" targetName="simuv3" />
       <config projectName="speed-dreams-2" targetName="human" />
-      <config projectName="speed-dreams-2" targetName="simuv2.1" />
+      <config projectName="speed-dreams-2" targetName="shadow" />
       <config projectName="speed-dreams-2" targetName="tracks_xml" />
       <config projectName="speed-dreams-2" targetName="sd2-trackgen" />
       <config projectName="speed-dreams-2" targetName="speed-dreams-2" />
@@ -30,25 +29,26 @@
       <config projectName="speed-dreams-2" targetName="raceman" />
       <config projectName="speed-dreams-2" targetName="robottools" />
       <config projectName="speed-dreams-2" targetName="interfaces" />
-      <config projectName="speed-dreams-2" targetName="standardgame" />
+      <config projectName="speed-dreams-2" targetName="genparoptv1" />
       <config projectName="speed-dreams-2" targetName="snddefault" />
       <config projectName="speed-dreams-2" targetName="networking" />
       <config projectName="speed-dreams-2" targetName="install_speed-dreams-2" />
       <config projectName="speed-dreams-2" targetName="PACKAGE_SRC" />
-      <config projectName="speed-dreams-2" targetName="settings_versions" />
+      <config projectName="speed-dreams-2" targetName="standardgame" />
       <config projectName="speed-dreams-2" targetName="tgfdata" />
       <config projectName="speed-dreams-2" targetName="shaders" />
-      <config projectName="speed-dreams-2" targetName="UNINSTALL" />
+      <config projectName="speed-dreams-2" targetName="simuv2.1" />
       <config projectName="speed-dreams-2" targetName="legacymenu" />
       <config projectName="speed-dreams-2" targetName="osggraph" />
       <config projectName="speed-dreams-2" targetName="learning" />
       <config projectName="speed-dreams-2" targetName="sd2-accc" />
-      <config projectName="speed-dreams-2" targetName="sd2-menuview" />
+      <config projectName="speed-dreams-2" targetName="UNINSTALL" />
       <config projectName="speed-dreams-2" targetName="simuv4" />
       <config projectName="speed-dreams-2" targetName="DeepDriver" />
       <config projectName="speed-dreams-2" targetName="LaneDriver" />
-      <config projectName="speed-dreams-2" targetName="shadow" />
       <config projectName="speed-dreams-2" targetName="simplix" />
+      <config projectName="speed-dreams-2" targetName="settings_versions" />
+      <config projectName="speed-dreams-2" targetName="sd2-menuview" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -61,7 +61,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9761ed18-0676-4744-81f8-8805a908d55c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modules/graphic/ssggraph/grmain.cpp" afterPath="$PROJECT_DIR$/src/modules/graphic/ssggraph/grmain.cpp" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/build/win64-vc2015/debug/" />
@@ -76,105 +75,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="grscreen.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grscreen.cpp">
+      <file leaf-file-name="CRecordCam.cpp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="74">
-              <caret line="575" column="19" lean-forward="true" selection-start-line="575" selection-start-column="19" selection-end-line="575" selection-end-column="19" />
-              <folding>
-                <marker date="1496144006359" expanded="true" signature="3899:4076" ph="{...}" />
-                <marker date="1496144006359" expanded="true" signature="15430:16546" ph="{...}" />
-                <marker date="1496144006359" expanded="true" signature="16580:16659" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="grmain.cpp" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grmain.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="683" column="0" lean-forward="false" selection-start-line="683" selection-start-column="0" selection-end-line="683" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="raceresultsmenus.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/modules/userinterface/legacymenu/racescreens/raceresultsmenus.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="283">
-              <caret line="699" column="10" lean-forward="false" selection-start-line="699" selection-start-column="10" selection-end-line="699" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="raceinit.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/modules/racing/standardgame/raceinit.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="853" column="7" lean-forward="true" selection-start-line="853" selection-start-column="7" selection-end-line="853" selection-end-column="7" />
-              <folding>
-                <marker date="1496143995095" expanded="true" signature="26303:34865" ph="{...}" />
-                <marker date="1496143995095" expanded="false" signature="31219:32399" ph="..." />
-                <marker date="1496143995095" expanded="false" signature="32647:33643" ph="..." />
-                <marker date="1496143995095" expanded="false" signature="33674:34330" ph="..." />
-                <marker date="1496143995095" expanded="true" signature="34892:35204" ph="{...}" />
-                <marker date="1496143995095" expanded="false" signature="35071:35175" ph="..." />
-                <marker date="1496143995095" expanded="true" signature="35237:35961" ph="{...}" />
-                <marker date="1496143995095" expanded="true" signature="36118:36452" ph="{...}" />
-                <marker date="1496143995095" expanded="true" signature="36558:36986" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="raceinit.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/modules/racing/genparoptv1/raceinit.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="657">
-              <caret line="831" column="29" lean-forward="false" selection-start-line="831" selection-start-column="24" selection-end-line="831" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OsgView.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/modules/graphic/osggraph/Viewer/OsgView.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="283">
-              <caret line="85" column="40" lean-forward="true" selection-start-line="85" selection-start-column="31" selection-end-line="85" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="racemain.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/modules/racing/standardgame/racemain.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="683" column="45" lean-forward="true" selection-start-line="683" selection-start-column="45" selection-end-line="683" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="grcam.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grcam.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="589">
-              <caret line="1785" column="14" lean-forward="false" selection-start-line="1785" selection-start-column="14" selection-end-line="1785" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="grmain.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grmain.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="509">
-              <caret line="85" column="8" lean-forward="false" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="8" />
+            <state relative-caret-position="211">
+              <caret line="547" column="5" lean-forward="true" selection-start-line="547" selection-start-column="5" selection-end-line="547" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -274,10 +179,10 @@
         <option value="$PROJECT_DIR$/src/drivers/LaneDriver/CLaneDriver.cpp" />
         <option value="$PROJECT_DIR$/src/drivers/LaneDriver/LaneDriver.cpp" />
         <option value="$PROJECT_DIR$/src/drivers/DeepDriver/CDeepDriver.cpp" />
-        <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.cpp" />
         <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/grscreen.cpp" />
         <option value="$PROJECT_DIR$/src/modules/racing/standardgame/raceinit.cpp" />
         <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/grmain.cpp" />
+        <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.cpp" />
       </list>
     </option>
   </component>
@@ -340,6 +245,21 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="modules" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="speed-dreams-2" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+              <item name="graphic" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="speed-dreams-2" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="modules" type="462c0819:PsiDirectoryNode" />
+              <item name="graphic" type="462c0819:PsiDirectoryNode" />
+              <item name="ssggraph" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -797,29 +717,30 @@
       <workItem from="1495993850656" duration="2237000" />
       <workItem from="1496134873862" duration="41000" />
       <workItem from="1496134977199" duration="8966000" />
+      <workItem from="1496388999210" duration="603000" />
+      <workItem from="1496587073454" duration="526000" />
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="202684000" />
+    <option name="totallyTimeSpent" value="203813000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="0" />
     <editor active="true" />
     <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15117188" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32693782" sideWeight="0.4984375" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30321592" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.503125" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32693782" sideWeight="0.496875" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15117188" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32693782" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -827,6 +748,7 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32693782" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1001,7 +923,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1009,7 +930,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
           <caret line="45" column="62" lean-forward="false" selection-start-line="45" selection-start-column="62" selection-end-line="45" selection-end-column="62" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1017,7 +937,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="765">
           <caret line="45" column="33" lean-forward="false" selection-start-line="45" selection-start-column="33" selection-end-line="45" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1025,7 +944,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5083">
           <caret line="299" column="10" lean-forward="false" selection-start-line="299" selection-start-column="10" selection-end-line="299" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1033,7 +951,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2074">
           <caret line="122" column="0" lean-forward="false" selection-start-line="122" selection-start-column="0" selection-end-line="122" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1055,17 +972,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2873">
           <caret line="169" column="35" lean-forward="false" selection-start-line="169" selection-start-column="23" selection-end-line="169" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="264" column="0" lean-forward="true" selection-start-line="264" selection-start-column="0" selection-end-line="264" selection-end-column="0" />
-          <folding>
-            <element signature="e#936#954#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1073,7 +979,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-102">
           <caret line="252" column="14" lean-forward="true" selection-start-line="252" selection-start-column="14" selection-end-line="252" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1081,7 +986,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="283">
           <caret line="246" column="0" lean-forward="false" selection-start-line="246" selection-start-column="0" selection-end-line="246" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1089,7 +993,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="487">
           <caret line="229" column="38" lean-forward="false" selection-start-line="229" selection-start-column="26" selection-end-line="229" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1097,7 +1000,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="436">
           <caret line="848" column="51" lean-forward="false" selection-start-line="848" selection-start-column="51" selection-end-line="848" selection-end-column="51" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1105,7 +1007,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="436">
           <caret line="106" column="88" lean-forward="false" selection-start-line="106" selection-start-column="88" selection-end-line="106" selection-end-column="88" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1113,7 +1014,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
           <caret line="43" column="40" lean-forward="false" selection-start-line="43" selection-start-column="19" selection-end-line="43" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1121,7 +1021,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="502">
           <caret line="120" column="19" lean-forward="false" selection-start-line="120" selection-start-column="8" selection-end-line="120" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1129,7 +1028,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
           <caret line="351" column="49" lean-forward="true" selection-start-line="351" selection-start-column="41" selection-end-line="351" selection-end-column="55" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1137,13 +1035,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="283">
           <caret line="425" column="31" lean-forward="false" selection-start-line="425" selection-start-column="31" selection-end-line="425" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grmain.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="509">
+        <state relative-caret-position="1445">
           <caret line="85" column="8" lean-forward="false" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="8" />
           <folding />
         </state>
@@ -1151,7 +1048,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/modules/racing/genparoptv1/raceinit.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="657">
+        <state relative-caret-position="14127">
           <caret line="831" column="29" lean-forward="false" selection-start-line="831" selection-start-column="24" selection-end-line="831" selection-end-column="29" />
           <folding />
         </state>
@@ -1159,8 +1056,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/modules/graphic/osggraph/Viewer/OsgView.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="85" column="40" lean-forward="true" selection-start-line="85" selection-start-column="31" selection-end-line="85" selection-end-column="43" />
+        <state relative-caret-position="1445">
+          <caret line="85" column="40" lean-forward="false" selection-start-line="85" selection-start-column="31" selection-end-line="85" selection-end-column="43" />
           <folding />
         </state>
       </provider>
@@ -1169,13 +1066,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="283">
           <caret line="277" column="8" lean-forward="false" selection-start-line="277" selection-start-column="8" selection-end-line="277" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grcam.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
+        <state relative-caret-position="30345">
           <caret line="1785" column="14" lean-forward="false" selection-start-line="1785" selection-start-column="14" selection-end-line="1785" selection-end-column="14" />
           <folding />
         </state>
@@ -1183,8 +1079,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/modules/racing/standardgame/racemain.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="683" column="45" lean-forward="true" selection-start-line="683" selection-start-column="45" selection-end-line="683" selection-end-column="45" />
+        <state relative-caret-position="11611">
+          <caret line="683" column="45" lean-forward="false" selection-start-line="683" selection-start-column="45" selection-end-line="683" selection-end-column="45" />
           <folding />
         </state>
       </provider>
@@ -1193,22 +1089,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="577">
           <caret line="114" column="8" lean-forward="false" selection-start-line="114" selection-start-column="8" selection-end-line="114" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/modules/userinterface/legacymenu/racescreens/raceresultsmenus.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="699" column="10" lean-forward="false" selection-start-line="699" selection-start-column="10" selection-end-line="699" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/modules/racing/standardgame/raceinit.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="853" column="7" lean-forward="true" selection-start-line="853" selection-start-column="7" selection-end-line="853" selection-end-column="7" />
+        <state relative-caret-position="14501">
+          <caret line="853" column="7" lean-forward="false" selection-start-line="853" selection-start-column="7" selection-end-line="853" selection-end-column="7" />
           <folding>
             <marker date="1496143995095" expanded="true" signature="26303:34865" ph="{...}" />
             <marker date="1496143995095" expanded="false" signature="31219:32399" ph="..." />
@@ -1223,10 +1110,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grmain.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="683" column="0" lean-forward="false" selection-start-line="683" selection-start-column="0" selection-end-line="683" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/modules/userinterface/legacymenu/racescreens/raceresultsmenus.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1241">
+          <caret line="699" column="10" lean-forward="false" selection-start-line="699" selection-start-column="10" selection-end-line="699" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grscreen.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="74">
-          <caret line="575" column="19" lean-forward="true" selection-start-line="575" selection-start-column="19" selection-end-line="575" selection-end-column="19" />
+        <state relative-caret-position="1241">
+          <caret line="575" column="19" lean-forward="false" selection-start-line="575" selection-start-column="19" selection-end-line="575" selection-end-column="19" />
           <folding>
             <marker date="1496144006359" expanded="true" signature="3899:4076" ph="{...}" />
             <marker date="1496144006359" expanded="true" signature="15430:16546" ph="{...}" />
@@ -1235,10 +1138,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grmain.cpp">
+    <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="683" column="0" lean-forward="false" selection-start-line="683" selection-start-column="0" selection-end-line="683" selection-end-column="0" />
+        <state relative-caret-position="211">
+          <caret line="547" column="5" lean-forward="true" selection-start-line="547" selection-start-column="5" selection-end-line="547" selection-end-column="5" />
           <folding />
         </state>
       </provider>
