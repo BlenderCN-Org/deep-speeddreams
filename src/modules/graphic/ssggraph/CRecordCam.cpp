@@ -69,7 +69,7 @@ static tdble const sMinR  = 3;
 static tdble const sMaxR  = 5;
 static tdble const sInvalidR = 7;
 static tdble const sMaxObstacleDist = 60.0;
-static tdble const sInvalidDist = 90;
+static tdble const sInvalidDist = 75;
 
 CRecordCam::CRecordCam(cGrScreen * pMyScreen,
                              int ID,

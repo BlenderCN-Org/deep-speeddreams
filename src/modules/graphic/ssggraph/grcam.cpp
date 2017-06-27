@@ -123,6 +123,8 @@ void cGrPerspCamera::setProjection(void)
     // we're only interested in half the viewing angle.
 
     float fovx = atan(getAspectRatio() / spanaspect * tan(fovy * M_PI / 360.0)) * 360.0 / M_PI;
+    //float fovx = atan(screen->getViewRatio() * tan(fovy * M_PI / 360.0)) * 360.0 / M_PI;
+    //printf("\n\n******* FOVx: %f, FOVy: %f\n\n", fovx, fovy);
     grContext.setFOV(fovx, fovy);
     grContext.setNearFar(fnear, ffar);
 
@@ -1950,7 +1952,7 @@ grCamCreateSceneCameraList(class cGrScreen *myscreen, tGrCamHead *cams,
 				      0,	/* drawCurr */
 				      1,	/* drawBG  */
 				      67.5,	/* fovy */
-				      10.0,	/* fovymin */
+				      50.0,	/* fovymin */
 				      95.0,	/* fovymax */
 				      0.3,	/* near */
 				      fixedFar ? fixedFar : 600.0 * fovFactor,	/* far */
