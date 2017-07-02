@@ -43,9 +43,38 @@ static default_random_engine RandomGenerator(RealRandomDevice());
 
 static int getRandomLane(int Lanes)
 {
-  uniform_int_distribution<int> UniformDistribution(1, Lanes);
+  uniform_int_distribution<int> UniformDistribution(1, 100);
+  int const Value = UniformDistribution(RandomGenerator);
 
-  return UniformDistribution(RandomGenerator);
+  if (Lanes == 2)
+  {
+    int const PreferedLaneProbability = 60;
+
+    return (Value <= PreferedLaneProbability) ? 2 : 1;
+  }
+  else if (Lanes == 3)
+  {
+    int const PreferedLaneProbability = 50;
+    int const NormalLaneProbability = 100 - PreferedLaneProbability;
+
+    if (Value <= PreferedLaneProbability)
+    {
+      return 2;
+    }
+    else
+    {
+      if ((Value - PreferedLaneProbability) <= NormalLaneProbability/2)
+      {
+        return 1;
+      }
+      else
+      {
+        return 3;
+      }
+    }
+  }
+
+  return Lanes;
 }
 
 CLaneDriver::CLaneDriver(char const * pName, char const * pDescription, float MaxSpeed, float MinSpeed)
