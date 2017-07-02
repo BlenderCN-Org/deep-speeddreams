@@ -5,12 +5,11 @@
       <config projectName="speed-dreams-2" targetName="tgfclient" />
       <config projectName="speed-dreams-2" targetName="math" />
       <config projectName="speed-dreams-2" targetName="usr" />
-      <config projectName="speed-dreams-2" targetName="genparoptv1" />
       <config projectName="speed-dreams-2" targetName="tgf" />
+      <config projectName="speed-dreams-2" targetName="simplix" />
       <config projectName="speed-dreams-2" targetName="rootdoc" />
-      <config projectName="speed-dreams-2" targetName="simuv3" />
+      <config projectName="speed-dreams-2" targetName="osggraph" />
       <config projectName="speed-dreams-2" targetName="human" />
-      <config projectName="speed-dreams-2" targetName="simuv2.1" />
       <config projectName="speed-dreams-2" targetName="tracks_xml" />
       <config projectName="speed-dreams-2" targetName="sd2-trackgen" />
       <config projectName="speed-dreams-2" targetName="speed-dreams-2" />
@@ -26,29 +25,30 @@
       <config projectName="speed-dreams-2" targetName="networkhuman" />
       <config projectName="speed-dreams-2" targetName="ssggraph" />
       <config projectName="speed-dreams-2" targetName="dandroid" />
+      <config projectName="speed-dreams-2" targetName="DeepDriver" />
       <config projectName="speed-dreams-2" targetName="xmlversion" />
       <config projectName="speed-dreams-2" targetName="raceman" />
       <config projectName="speed-dreams-2" targetName="robottools" />
       <config projectName="speed-dreams-2" targetName="interfaces" />
-      <config projectName="speed-dreams-2" targetName="standardgame" />
+      <config projectName="speed-dreams-2" targetName="genparoptv1" />
       <config projectName="speed-dreams-2" targetName="snddefault" />
       <config projectName="speed-dreams-2" targetName="networking" />
       <config projectName="speed-dreams-2" targetName="install_speed-dreams-2" />
       <config projectName="speed-dreams-2" targetName="PACKAGE_SRC" />
-      <config projectName="speed-dreams-2" targetName="settings_versions" />
+      <config projectName="speed-dreams-2" targetName="standardgame" />
       <config projectName="speed-dreams-2" targetName="tgfdata" />
-      <config projectName="speed-dreams-2" targetName="shaders" />
-      <config projectName="speed-dreams-2" targetName="UNINSTALL" />
+      <config projectName="speed-dreams-2" targetName="simuv2.1" />
       <config projectName="speed-dreams-2" targetName="legacymenu" />
-      <config projectName="speed-dreams-2" targetName="osggraph" />
+      <config projectName="speed-dreams-2" targetName="shaders" />
       <config projectName="speed-dreams-2" targetName="learning" />
       <config projectName="speed-dreams-2" targetName="sd2-accc" />
-      <config projectName="speed-dreams-2" targetName="sd2-menuview" />
+      <config projectName="speed-dreams-2" targetName="UNINSTALL" />
       <config projectName="speed-dreams-2" targetName="simuv4" />
-      <config projectName="speed-dreams-2" targetName="DeepDriver" />
+      <config projectName="speed-dreams-2" targetName="simuv3" />
       <config projectName="speed-dreams-2" targetName="LaneDriver" />
       <config projectName="speed-dreams-2" targetName="shadow" />
-      <config projectName="speed-dreams-2" targetName="simplix" />
+      <config projectName="speed-dreams-2" targetName="settings_versions" />
+      <config projectName="speed-dreams-2" targetName="sd2-menuview" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -61,9 +61,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9761ed18-0676-4744-81f8-8805a908d55c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/data/config/graph.xml" afterPath="$PROJECT_DIR$/data/config/graph.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.cpp" afterPath="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.cpp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/modules/graphic/ssggraph/grcam.cpp" afterPath="$PROJECT_DIR$/src/modules/graphic/ssggraph/grcam.cpp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/drivers/LaneDriver/LaneDriver.cpp" afterPath="$PROJECT_DIR$/src/drivers/LaneDriver/LaneDriver.cpp" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/build/win64-vc2015/debug/" />
@@ -78,51 +76,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CRecordCam.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.cpp">
+      <file leaf-file-name="CLaneDriver.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/drivers/LaneDriver/CLaneDriver.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1190">
-              <caret line="70" column="43" lean-forward="false" selection-start-line="70" selection-start-column="43" selection-end-line="70" selection-end-column="43" />
+            <state relative-caret-position="986">
+              <caret line="65" column="70" lean-forward="false" selection-start-line="65" selection-start-column="70" selection-end-line="65" selection-end-column="70" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="grcam.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grcam.h">
+      <file leaf-file-name="LaneDriver.cpp" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/drivers/LaneDriver/LaneDriver.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3315">
-              <caret line="195" column="40" lean-forward="false" selection-start-line="195" selection-start-column="40" selection-end-line="195" selection-end-column="40" />
+            <state relative-caret-position="527">
+              <caret line="45" column="33" lean-forward="false" selection-start-line="45" selection-start-column="33" selection-end-line="45" selection-end-column="33" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="grcam.cpp" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grcam.cpp">
+      <file leaf-file-name="CLaneDriver.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/drivers/LaneDriver/CLaneDriver.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
-              <caret line="126" column="63" lean-forward="false" selection-start-line="126" selection-start-column="63" selection-end-line="126" selection-end-column="63" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="grscreen.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grscreen.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1173">
-              <caret line="69" column="20" lean-forward="false" selection-start-line="69" selection-start-column="16" selection-end-line="69" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="grmain.cpp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grmain.cpp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8976">
-              <caret line="528" column="76" lean-forward="false" selection-start-line="528" selection-start-column="76" selection-end-line="528" selection-end-column="76" />
+            <state relative-caret-position="-1054">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -218,14 +196,14 @@
         <option value="$PROJECT_DIR$/src/modules/racing/genparoptv1/raceinit.cpp" />
         <option value="$PROJECT_DIR$/src/interfaces/car.h" />
         <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.h" />
-        <option value="$PROJECT_DIR$/src/drivers/LaneDriver/CLaneDriver.cpp" />
-        <option value="$PROJECT_DIR$/src/drivers/LaneDriver/LaneDriver.cpp" />
         <option value="$PROJECT_DIR$/src/drivers/DeepDriver/CDeepDriver.cpp" />
         <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/grscreen.cpp" />
         <option value="$PROJECT_DIR$/src/modules/racing/standardgame/raceinit.cpp" />
         <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/grmain.cpp" />
         <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.cpp" />
         <option value="$PROJECT_DIR$/src/modules/graphic/ssggraph/grcam.cpp" />
+        <option value="$PROJECT_DIR$/src/drivers/LaneDriver/CLaneDriver.cpp" />
+        <option value="$PROJECT_DIR$/src/drivers/LaneDriver/LaneDriver.cpp" />
       </list>
     </option>
   </component>
@@ -275,6 +253,19 @@
               <item name="speed-dreams-2" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="speed-dreams-2" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="drivers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="speed-dreams-2" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="drivers" type="462c0819:PsiDirectoryNode" />
+              <item name="LaneDriver" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="speed-dreams-2" type="dad4c3:CidrFilesViewHelper$MyProjectTreeStructure$1" />
@@ -763,13 +754,14 @@
       <workItem from="1496587073454" duration="526000" />
       <workItem from="1498550701306" duration="6571000" />
       <workItem from="1498558952734" duration="7000" />
-      <workItem from="1498570731752" duration="49000" />
+      <workItem from="1498570731752" duration="177000" />
+      <workItem from="1498985446827" duration="2728000" />
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="210440000" />
+    <option name="totallyTimeSpent" value="213296000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
@@ -777,7 +769,7 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14648438" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32668713" sideWeight="0.4984375" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32668713" sideWeight="0.4984375" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3029141" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.503125" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32693782" sideWeight="0.496875" order="2" side_tool="false" content_ui="tabs" />
@@ -940,27 +932,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1564">
           <caret line="92" column="0" lean-forward="false" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/drivers/LaneDriver/CLaneDriver.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/drivers/LaneDriver/CLaneDriver.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="45" column="62" lean-forward="false" selection-start-line="45" selection-start-column="62" selection-end-line="45" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/drivers/LaneDriver/LaneDriver.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="45" column="33" lean-forward="false" selection-start-line="45" selection-start-column="33" selection-end-line="45" selection-end-column="33" />
         </state>
       </provider>
     </entry>
@@ -1127,7 +1098,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/CRecordCam.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1190">
+        <state relative-caret-position="0">
           <caret line="70" column="43" lean-forward="false" selection-start-line="70" selection-start-column="43" selection-end-line="70" selection-end-column="43" />
           <folding />
         </state>
@@ -1137,14 +1108,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="283">
           <caret line="2427" column="7" lean-forward="false" selection-start-line="2427" selection-start-column="7" selection-end-line="2427" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grcam.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3315">
-          <caret line="195" column="40" lean-forward="false" selection-start-line="195" selection-start-column="40" selection-end-line="195" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1168,6 +1131,38 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
           <caret line="126" column="63" lean-forward="false" selection-start-line="126" selection-start-column="63" selection-end-line="126" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/modules/graphic/ssggraph/grcam.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1242">
+          <caret line="195" column="40" lean-forward="false" selection-start-line="195" selection-start-column="40" selection-end-line="195" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/drivers/LaneDriver/CLaneDriver.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1054">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/drivers/LaneDriver/CLaneDriver.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="986">
+          <caret line="65" column="70" lean-forward="false" selection-start-line="65" selection-start-column="70" selection-end-line="65" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/drivers/LaneDriver/LaneDriver.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="45" column="33" lean-forward="false" selection-start-line="45" selection-start-column="33" selection-end-line="45" selection-end-column="33" />
           <folding />
         </state>
       </provider>

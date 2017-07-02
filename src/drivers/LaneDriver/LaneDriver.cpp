@@ -43,7 +43,7 @@
 
 static tTrack	*curTrack;
 
-static float const sMaxSpeed = 52;
+static float const sMaxSpeed = 43;
 static float const sMinSpeed = 25;
 static int const sNumberOfDrivers = 30;
 static CLaneDriver * spDriver[sNumberOfDrivers];
