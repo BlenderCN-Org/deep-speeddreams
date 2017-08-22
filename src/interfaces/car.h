@@ -29,6 +29,7 @@
 #ifndef __CARV1_H__
 #define __CARV1_H__
 
+#include <stdint.h>
 #include <track.h>
 #include <plib/sg.h>
 

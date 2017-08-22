@@ -40,6 +40,8 @@ SET(SSGGRAPH_SOURCES grMoonpos.cpp
 
 SET(SSGGRAPH_OTHER_SOURCES )
 
+set (CMAKE_CXX_STANDARD 11)
+
 ADD_INTERFACE_INCLUDEDIR()
 ADD_SDLIB_INCLUDEDIR(portability math tgf tgfclient robottools)
 

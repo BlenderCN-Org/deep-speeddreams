@@ -23,7 +23,7 @@
  * @author Andre Netzeband
  * @date 12.05.2017
  *
- * @brief TODO
+ * @brief A system independent wrapper for the shared-memory usage.
  *
  */
 
@@ -34,7 +34,11 @@
 
 using namespace boost::interprocess;
 
-typedef windows_shared_memory Memory_t;
+#if defined(_WIN32)
+typedef boost::interprocess::windows_shared_memory Memory_t;
+#else
+typedef boost::interprocess::shared_memory_object Memory_t;
+#endif
 typedef mapped_region Region_t;
 
 CSharedMemory::CSharedMemory():
@@ -42,11 +46,25 @@ CSharedMemory::CSharedMemory():
   mpRegion(NULL),
   mWriteNumber(0)
 {
+#if defined(_WIN32)
+
   mpMemory = new Memory_t(open_or_create, "DeepDrivingMemory", read_write, sizeof(Data_t));
   assert(mpMemory);
 
   mpRegion = new Region_t(*mpMemory, read_write);
   assert(mpRegion);
+
+#else // Linux
+
+  mpMemory = new Memory_t(open_or_create, "DeepDrivingMemory", read_write);
+  assert(mpMemory);
+
+  mpMemory->truncate(sizeof(Data_t));
+
+  mpRegion = new Region_t(*mpMemory, read_write);
+  assert(mpRegion);
+
+#endif
 
   memset(getAddress(), 0, sizeof(Data_t));
 }

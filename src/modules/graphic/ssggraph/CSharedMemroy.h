@@ -34,12 +34,16 @@
 
 #if defined(_WIN32)
 #include <boost/interprocess/windows_shared_memory.hpp>
+#else
+#include <boost/interprocess/shared_memory_object.hpp>
 #endif
 
 #include <boost/interprocess/mapped_region.hpp>
 
 #if defined(_WIN32)
 typedef boost::interprocess::windows_shared_memory Memory_t;
+#else
+typedef boost::interprocess::shared_memory_object Memory_t;
 #endif
 typedef boost::interprocess::mapped_region Region_t;
 

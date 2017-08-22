@@ -9,6 +9,8 @@ SET(ROBOT_SOURCES
         CDeepDriver.h
         )
 
+set (CMAKE_CXX_STANDARD 11)
+
 ADD_SDLIB_INCLUDEDIR(robottools tgfclient)
 
 ROBOT_MODULE(NAME ${ROBOT_NAME} VERSION 1.0.0 SOVERSION 1.0.0

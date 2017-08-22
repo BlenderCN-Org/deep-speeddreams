@@ -35,6 +35,7 @@
 
 #include <GL/glext.h>
 
+#if defined(_WIN32)
 /// the following definitions are taken from: https://searchcode.com/codesearch/view/8069990/
 /// this code is published by Gregor Kalinik under GPL license
 typedef void (APIENTRY *glGenFramebuffers_t) (GLsizei n, const GLuint *);
@@ -62,9 +63,11 @@ static glRenderbufferStorage_t     glRenderbufferStorage     = (glRenderbufferSt
 static glFramebufferRenderbuffer_t glFramebufferRenderbuffer = (glFramebufferRenderbuffer_t)wglGetProcAddress("glFramebufferRenderbuffer");
 static glDrawBuffers_t             glDrawBuffers             = (glDrawBuffers_t)wglGetProcAddress("glDrawBuffers");
 static glCheckFramebufferStatus_t  glCheckFramebufferStatus  = (glCheckFramebufferStatus_t)wglGetProcAddress("glCheckFramebufferStatus");
+#endif
 
 static bool setupOpenGLFunctions()
 {
+#if defined(_WIN32)
   glGenFramebuffers         = (glGenFramebuffers_t)wglGetProcAddress("glGenFramebuffers");
   printf("Found function glGenFramebuffers: %d\n", glGenFramebuffers != NULL);
   glDeleteFramebuffers      = (glDeleteFramebuffers_t)wglGetProcAddress("glDeleteFramebuffers");
@@ -98,6 +101,8 @@ static bool setupOpenGLFunctions()
          glFramebufferRenderbuffer &&
          glDrawBuffers &&
          glCheckFramebufferStatus;
+#endif
+  return true;
 }
 
 CRecordRenderCam::CRecordRenderCam(cGrScreen * pMyScreen,

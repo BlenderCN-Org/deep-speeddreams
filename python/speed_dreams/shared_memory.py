@@ -3,6 +3,7 @@ import ctypes
 import numpy as np
 import cv2
 import math
+import os
 
 from .data_types import Data_t, RECORD_MEMORY_NAME, RECORD_IMAGE_CHANNELS
 
@@ -19,7 +20,20 @@ class CSharedMemory():
     """
     self._IsPauseOn = False
     self._TargetResolution = TargetResolution
-    self._SharedMemory = mmap.mmap(-1, ctypes.sizeof(Data_t), RECORD_MEMORY_NAME)
+
+    Size = ctypes.sizeof(Data_t)
+    self._SharedMemoryFile = None
+
+    if os.name == "nt":
+        self._SharedMemory = mmap.mmap(-1, Size, RECORD_MEMORY_NAME)
+
+    else:
+        Filename = os.path.join("/", "dev", "shm", RECORD_MEMORY_NAME)
+        self._SharedMemoryFile = open(Filename, "w+b")
+        self._SharedMemoryFile.write(b"\0"*Size)
+        self._SharedMemoryFile.flush();
+        self._SharedMemory = mmap.mmap(self._SharedMemoryFile.fileno(), Size)
+
     self._Data = Data_t.from_buffer(self._SharedMemory)
     self._Image = np.empty(shape=TargetResolution + [self.TARGET_IMAGE_CHANNELS])
     self._RawImage = np.empty(shape=TargetResolution + [self.TARGET_IMAGE_CHANNELS])
@@ -28,6 +42,9 @@ class CSharedMemory():
   def __del__(self):
     self.Data.Sync.IsPauseOn = 0
     self.Data.Control.IsControlling = 0
+
+    if self._SharedMemoryFile is not None:
+      self._SharedMemoryFile.close()
 
 
   def setSyncMode(self, IsPauseOn = True):
