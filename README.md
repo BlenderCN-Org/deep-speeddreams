@@ -2,7 +2,7 @@
 
 ## Intention
 
-This is a fork of the SpeedDreams project (version 2.2.1) which works together with the DeepDriving implementation from the repository **ToDo: Add Link, if finished**. It allows to control a robot-car in this game by calculating 14 driving indicators out of the front-camera picture. 
+This is a fork of the SpeedDreams project (version 2.2.1) which works together with the DeepDriving implementation from the repository [DeepDriving for Tensorflow](https://bitbucket.org/Netzeband/deepdriving). It allows to control a robot-car in this game by calculating 14 driving indicators out of the front-camera picture. 
 
 The original DeepDriving implementation is a project from the princeton university (http://deepdriving.cs.princeton.edu/).
 

@@ -6,10 +6,10 @@
       <config projectName="speed-dreams-2" targetName="math" />
       <config projectName="speed-dreams-2" targetName="usr" />
       <config projectName="speed-dreams-2" targetName="tgf" />
-      <config projectName="speed-dreams-2" targetName="simplix" />
       <config projectName="speed-dreams-2" targetName="rootdoc" />
-      <config projectName="speed-dreams-2" targetName="osggraph" />
+      <config projectName="speed-dreams-2" targetName="simuv3" />
       <config projectName="speed-dreams-2" targetName="human" />
+      <config projectName="speed-dreams-2" targetName="shadow" />
       <config projectName="speed-dreams-2" targetName="tracks_xml" />
       <config projectName="speed-dreams-2" targetName="sd2-trackgen" />
       <config projectName="speed-dreams-2" targetName="speed-dreams-2" />
@@ -25,7 +25,6 @@
       <config projectName="speed-dreams-2" targetName="networkhuman" />
       <config projectName="speed-dreams-2" targetName="ssggraph" />
       <config projectName="speed-dreams-2" targetName="dandroid" />
-      <config projectName="speed-dreams-2" targetName="DeepDriver" />
       <config projectName="speed-dreams-2" targetName="xmlversion" />
       <config projectName="speed-dreams-2" targetName="raceman" />
       <config projectName="speed-dreams-2" targetName="robottools" />
@@ -37,16 +36,17 @@
       <config projectName="speed-dreams-2" targetName="PACKAGE_SRC" />
       <config projectName="speed-dreams-2" targetName="standardgame" />
       <config projectName="speed-dreams-2" targetName="tgfdata" />
+      <config projectName="speed-dreams-2" targetName="shaders" />
       <config projectName="speed-dreams-2" targetName="simuv2.1" />
       <config projectName="speed-dreams-2" targetName="legacymenu" />
-      <config projectName="speed-dreams-2" targetName="shaders" />
+      <config projectName="speed-dreams-2" targetName="osggraph" />
       <config projectName="speed-dreams-2" targetName="learning" />
       <config projectName="speed-dreams-2" targetName="sd2-accc" />
       <config projectName="speed-dreams-2" targetName="UNINSTALL" />
       <config projectName="speed-dreams-2" targetName="simuv4" />
-      <config projectName="speed-dreams-2" targetName="simuv3" />
+      <config projectName="speed-dreams-2" targetName="DeepDriver" />
       <config projectName="speed-dreams-2" targetName="LaneDriver" />
-      <config projectName="speed-dreams-2" targetName="shadow" />
+      <config projectName="speed-dreams-2" targetName="simplix" />
       <config projectName="speed-dreams-2" targetName="settings_versions" />
       <config projectName="speed-dreams-2" targetName="sd2-menuview" />
     </generated>
@@ -59,10 +59,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9761ed18-0676-4744-81f8-8805a908d55c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/drivers/LaneDriver/LaneDriver.cpp" afterPath="$PROJECT_DIR$/src/drivers/LaneDriver/LaneDriver.cpp" />
-    </list>
+    <list default="true" id="9761ed18-0676-4744-81f8-8805a908d55c" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="$PROJECT_DIR$/build/win64-vc2015/debug/" />
     <ignored path="$PROJECT_DIR$/build/win64-vc2017/debug/" />
@@ -79,7 +76,7 @@
       <file leaf-file-name="CLaneDriver.cpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/drivers/LaneDriver/CLaneDriver.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="986">
+            <state relative-caret-position="1105">
               <caret line="65" column="70" lean-forward="false" selection-start-line="65" selection-start-column="70" selection-end-line="65" selection-end-column="70" />
               <folding />
             </state>
@@ -99,7 +96,7 @@
       <file leaf-file-name="CLaneDriver.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/drivers/LaneDriver/CLaneDriver.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1054">
+            <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -756,12 +753,13 @@
       <workItem from="1498558952734" duration="7000" />
       <workItem from="1498570731752" duration="177000" />
       <workItem from="1498985446827" duration="2728000" />
+      <workItem from="1499786155882" duration="44000" />
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="213296000" />
+    <option name="totallyTimeSpent" value="213340000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
@@ -769,17 +767,17 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14648438" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32668713" sideWeight="0.4984375" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3029141" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924962" sideWeight="0.503125" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32693782" sideWeight="0.496875" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32693782" sideWeight="0.496875" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32668713" sideWeight="0.4984375" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1100,7 +1098,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="70" column="43" lean-forward="false" selection-start-line="70" selection-start-column="43" selection-end-line="70" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1115,7 +1112,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1173">
           <caret line="69" column="20" lean-forward="false" selection-start-line="69" selection-start-column="16" selection-end-line="69" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1123,7 +1119,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8976">
           <caret line="528" column="76" lean-forward="false" selection-start-line="528" selection-start-column="76" selection-end-line="528" selection-end-column="76" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1131,7 +1126,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
           <caret line="126" column="63" lean-forward="false" selection-start-line="126" selection-start-column="63" selection-end-line="126" selection-end-column="63" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1139,13 +1133,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1242">
           <caret line="195" column="40" lean-forward="false" selection-start-line="195" selection-start-column="40" selection-end-line="195" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/drivers/LaneDriver/CLaneDriver.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1054">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -1153,7 +1146,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/drivers/LaneDriver/CLaneDriver.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="986">
+        <state relative-caret-position="1105">
           <caret line="65" column="70" lean-forward="false" selection-start-line="65" selection-start-column="70" selection-end-line="65" selection-end-column="70" />
           <folding />
         </state>
